@@ -30,3 +30,6 @@ bool bQuestTeleport = FALSE;
 unsigned int dwQuestTeleportKey = VK_F2;
 
 bool bCriticalChance = FALSE;
+
+bool bChestTeleport = FALSE;
+unsigned int dwChestTeleportKey = VK_F4;

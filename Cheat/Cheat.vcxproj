@@ -147,17 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imconfig.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_internal.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_dx11.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_win32.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imstb_rectpack.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imstb_textedit.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imstb_truetype.h" />
     <ClInclude Include="auto_talk.h" />
     <ClInclude Include="battle_speed.h" />
     <ClInclude Include="cheats.h" />
+    <ClInclude Include="chest_teleport.h" />
     <ClInclude Include="dump_enemies.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="esp.h" />
@@ -165,6 +158,14 @@
     <ClInclude Include="fov.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hooks.h" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\impl\imgui_impl_dx11.h" />
+    <ClInclude Include="imgui\impl\imgui_impl_win32.h" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="inputs.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="menu.h" />
@@ -176,15 +177,10 @@
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_draw.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_tables.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_dx11.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_win32.cpp" />
     <ClCompile Include="auto_talk.cpp" />
     <ClCompile Include="battle_speed.cpp" />
     <ClCompile Include="cheats.cpp" />
+    <ClCompile Include="chest_teleport.cpp" />
     <ClCompile Include="dump_enemies.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="esp.cpp" />
@@ -192,6 +188,12 @@
     <ClCompile Include="fov.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hooks.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="imgui\impl\imgui_impl_dx11.cpp" />
+    <ClCompile Include="imgui\impl\imgui_impl_win32.cpp" />
     <ClCompile Include="inputs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />

@@ -31,3 +31,6 @@ extern bool bQuestTeleport;
 extern unsigned int dwQuestTeleportKey;
 
 extern bool bCriticalChance;
+
+extern bool bChestTeleport;
+extern unsigned int dwChestTeleportKey;

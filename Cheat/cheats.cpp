@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "chest_teleport.h"
 #include "quest_teleport.h"
 #include "auto_talk.h"
 #include "pve_statistics.h"
@@ -28,6 +29,7 @@ namespace Cheats
 
 	VOID RenderWorldTab()
 	{
+		ChestTeleport::Render();
 		QuestTeleport::Render();
 		AutoTalk::Render();
 		DumpEnemies::Render();
@@ -53,6 +55,7 @@ namespace Cheats
 		//if (RPG::Client::GlobalVars->s_LoadingManager)
 		//	return;
 
+		ChestTeleport::Update();
 		QuestTeleport::Update();
 		AutoTalk::Update();
 		PveStatistics::Update();
@@ -67,6 +70,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		ChestTeleport::Start();
 		QuestTeleport::Start();
 		AutoTalk::Start();
 		PveStatistics::Start();

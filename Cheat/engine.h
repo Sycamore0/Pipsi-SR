@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <math.h>
 
 #define FN(n, t, p, a) t(*n)p = ((t(*)p)(a))
 #define SC(n, a) n* n##Data = (n*)(a)
@@ -7,7 +8,7 @@
 
 static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 
-inline static SD(MaxTimeScale, float, il2cpp_base + 0x697EF90);
+inline static SD(lpMaxTimeScale, float, il2cpp_base + 0x697EF90);
 
 struct Vector3
 {
@@ -30,6 +31,14 @@ struct Vector3
     {
         return { x * other, y * other, z * other };
     }
+
+    float distance(const Vector3& other) const
+    {
+        float dx = x - other.x;
+        float dy = y - other.y;
+        float dz = z - other.z;
+        return sqrtf(dx * dx + dy * dy + dz * dz);
+    }
 };
 
 namespace System
@@ -42,6 +51,30 @@ namespace System
 
         inline static FN(Create, void*, (const char* str), il2cpp_base + 0x2B27C0);
     };
+
+    namespace Collections
+    {
+        namespace Generic
+        {
+            struct Array
+            {
+                void* klass;
+                void* monitor;
+                void* bounds;
+                size_t max_length;
+                void* vector[32];
+            };
+
+            struct List {
+                char _[0x10]; // 0x0
+                Array* items; // 0x0
+                long size; // 0x0
+                long version; // 0x0
+                void* syncRoot; // 0x0
+            };
+
+        }
+    }
 }
 
 namespace UnityEngine
@@ -105,7 +138,7 @@ namespace RPG
 	namespace GameCore
 	{
         struct PVEGameStatistics {
-            char _[0x10];
+            char _[0x10]; // 0x0
             void* battleScoringList; // 0x10
             void* battleAchievementList; // 0x18
             void* battleRaidTargetList; // 0x20
@@ -143,8 +176,101 @@ namespace RPG
 
 		struct GameEntity
 		{
+            char _[0x10]; // 0x0
+            void* TickLodTemplate; // 0x10
+            void* _TickLodProxy; // 0x18
+            System::String* _Name; // 0x20
+            void* OnStageStateChange; // 0x28
+            void* OnTeamChange; // 0x30
+            void* TimeScaleStack; // 0x38
+            void* HoyoTagContainer; // 0x40
+            void* DisposeCallback; // 0x48
+            void* _OwnerWorldRef; // 0x50
+            void* _ComponentList; // 0x58
+            void* _TickComponentList; // 0x60
+            void* _LateUpdateComponentList; // 0x68
+            void* _ComponentArrayRef; // 0x70
+            void* _ComponentArray; // 0x78
+            void* _UnstageReasonKey; // 0x80
+            void* _DestroyWaitList; // 0x88
+            void* _UnityGO; // 0x90
+            void* _ComponentDelayedTickDataList; // 0x98
+            void* _ComponentDelayedLateUpdateDataList; // 0xA0
+            void* _CurTickListRef; // 0xA8
+            char __[0x8]; // 0xB0
+            unsigned long long _LastTickFrame; // 0xB8
+            float _LastTickTime; // 0xC0
+            float _TickLodBoundSize; // 0xC4
+            float _MaxTickDistance; // 0xC8
+            unsigned long ForceIgnoreTickLodBistSet; // 0xCC
+            unsigned long _TickDelayFrameCount; // 0xD0
+            unsigned long _RuntimeID; // 0xD4
+            int _EntityType; // 0xD8
+            int _CampID; // 0xDC
+            int _ObjectFeature; // 0xE0
+            int _AliveState; // 0xE4
+            int _Team; // 0xE8
+            unsigned long _ServerEntityID; // 0xEC
+            unsigned long _GroupID; // 0xF0
+            unsigned long _GroupEntityID; // 0xF4
+            bool _Tickable; // 0xF8
+            bool _IsLoaded; // 0xF9
+            bool _ForceIgnoreTickLod; // 0xFA
+            bool _ShouldLateUpdate; // 0xFB
+            bool HasDisposed; // 0xFC
+            bool Disposing; // 0xFD
+            bool _IsStoryMode; // 0xFE
+            bool KillImmediately; // 0xFF
+            bool _IsHero; // 0x100
+            bool _IsFakeAvatar; // 0x101
+            bool _Visible; // 0x102
+            bool _IsOnStage; // 0x103
+
             inline static FN(get_UnityGO, void*, (void* _this), il2cpp_base + 0x3EBE430);
 		};
+
+        struct GameWorld {
+            char _[0x10]; // 0x0
+            void* _EntityTickList; // 0x10
+            void* _TickedEntityListPerFrame; // 0x18
+            void* _GlobalTimeScaleDatas; // 0x20
+            void* _BattleInstanceRef; // 0x28
+            void* _BattleModeRef; // 0x30
+            void* LogicRandom; // 0x38
+            void* _ParamRegister; // 0x40
+            void* NewEntityCallback; // 0x48
+            void* EntityBeforeDyingCallback; // 0x50
+            void* EntityDiedCallback; // 0x58
+            void* EntityReviveCallback; // 0x60
+            void* EntityWillDestroyCallback; // 0x68
+            void* MonoEffectManagerRef; // 0x70
+            void* _TimeScaleStack; // 0x78
+            void* _EntityManager; // 0x80
+            void* _EventManager; // 0x88
+            System::Collections::Generic::List* _EntityList; // 0x90
+            void* _DyingEntityList; // 0x98
+            void* _DeferDeleteEntityList; // 0xA0
+            void* _EnterDyingEntityList; // 0xA8
+            void* _LevelAreaManager; // 0xB0
+            void* _PrefabGameObjectMap; // 0xB8
+            void* _Modules; // 0xC0
+            void* _NeedTickModules; // 0xC8
+            void* _NeedLateUpdateModules; // 0xD0
+            float _BalanceTickDurationTime; // 0xD8
+            float _UnscaledDeltaTime; // 0xDC
+            unsigned long _IDFactory; // 0xE0
+            unsigned long _IDFactory_ClientOnly; // 0xE4
+            unsigned long _IDFactory_Battle; // 0xE8
+            long _NextTickDeferDeleteCount; // 0xEC
+            bool _IsBattleGameWorld; // 0xF0
+            bool _IsPause; // 0xF1
+            bool _IsInTick; // 0xF2
+            bool _IsDisposing; // 0xF3
+        };
+
+        struct EntityManager {
+            inline static FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), il2cpp_base + 0x391C080);
+        };
 
 		struct AdventureStatic
 		{

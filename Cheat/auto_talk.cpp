@@ -38,14 +38,14 @@ namespace AutoTalk
 
 				if (lpSimpleTalk)
 				{
-					*MaxTimeScale = flAutoTalkSpeed + 0.1f;
+					*lpMaxTimeScale = flAutoTalkSpeed + 0.1f;
 					UnityEngine::Time::set_timeScale(flAutoTalkSpeed);
 
 					return;
 				}
 			}
 
-			*MaxTimeScale = 1.1f;
+			*lpMaxTimeScale = 1.1f;
 			UnityEngine::Time::set_timeScale(1.f);
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER)
@@ -58,6 +58,6 @@ namespace AutoTalk
 	{
 		DWORD dwOldProtect = 0;
 		
-		VirtualProtect(MaxTimeScale, sizeof(MaxTimeScale), PAGE_READWRITE, &dwOldProtect);
+		VirtualProtect(lpMaxTimeScale, sizeof(*lpMaxTimeScale), PAGE_READWRITE, &dwOldProtect);
 	}
 }
