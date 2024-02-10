@@ -19,7 +19,8 @@
 
 #### World
 
-- Quest Teleport (hold : `F1`)
+- Chest Teleport (hold : `F4`)
+- Quest Teleport (hold : `F2`)
 - Talk Speed
 - Dump Enemies
 
