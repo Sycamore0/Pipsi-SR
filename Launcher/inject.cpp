@@ -124,7 +124,7 @@ bool ManualMapDll(HANDLE hProc, BYTE* pSrcData, SIZE_T FileSize, bool SEHExcepti
 		DWORD exitcode = 0;
 		GetExitCodeProcess(hProc, &exitcode);
 		if (exitcode != STILL_ACTIVE) {
-			printf("Process crashed, exit code: %d\n", exitcode);
+			printf("Process crashed, exit code: 0x%X\n", exitcode);
 			return false;
 		}
 

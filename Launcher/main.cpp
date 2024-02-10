@@ -36,6 +36,8 @@ BOOL LoadFile(LPCSTR lpFileName, PCHAR* lpBuffer, PDWORD lpSize)
 
 BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 {
+	printf("Injecting bypass..\n");
+
 	PCHAR lpBypassDll = NULL;
 	DWORD dwBypassSize = 0;
 
@@ -47,15 +49,26 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 	}
 
 	if (!ManualMapDll(hProcess, (PBYTE)lpBypassDll, dwBypassSize))
+	{
+		printf("failed to inject bypass\n");
+
+		delete[] lpBypassDll;
+
 		return FALSE;
+	}
+		
 
 	delete[] lpBypassDll;
+
+	printf("Bypass successfully injected!\n");
 
 	return TRUE;
 }
 
 BOOL InjectCheat(HANDLE hProcess)
 {
+	printf("Injecting bypass..\n");
+
 	PCHAR lpCheatDll = NULL;
 	DWORD dwCheatSize = 0;
 
@@ -67,9 +80,15 @@ BOOL InjectCheat(HANDLE hProcess)
 	}
 
 	if (!ManualMapDll(hProcess, (PBYTE)lpCheatDll, dwCheatSize))
+	{
+		delete[] lpCheatDll;
+
 		return FALSE;
+	}
 
 	delete[] lpCheatDll;
+
+	printf("Bypass successfully injected!\n");
 
 	return TRUE;
 }
@@ -102,7 +121,12 @@ int main()
 	if (!CreateProcessA(NULL, lpExecutablePath, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &StartupInfo, &ProcessInfo))
 		return -1;
 
-	InjectBypass(ProcessInfo.hProcess, ProcessInfo.hThread);
+	if (!InjectBypass(ProcessInfo.hProcess, ProcessInfo.hThread))
+	{
+		TerminateProcess(ProcessInfo.hProcess, 0);
+
+		return -1;
+	}
 
 	ResumeThread(ProcessInfo.hThread);
 
@@ -111,12 +135,14 @@ int main()
 	while ((hWnd = FindWindowA("UnityWndClass", NULL)) == NULL)
 		Sleep(1000);
 	
-	Sleep(10000);
+	Sleep(15000);
 
 	InjectCheat(ProcessInfo.hProcess);
 
 	CloseHandle(ProcessInfo.hProcess);
 	CloseHandle(ProcessInfo.hThread);
+
+	system("pause");
 
 	return 0;
 }

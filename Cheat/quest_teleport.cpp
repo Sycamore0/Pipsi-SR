@@ -20,24 +20,7 @@ namespace QuestTeleport
 			return lpResult;
 
 		if (Inputs::GetState(dwQuestTeleportKey, INPUT_TYPE_HOLD))
-		{
-			PVOID lpLocalPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
-
-			if (lpLocalPlayer)
-			{
-				PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpLocalPlayer);
-
-				if (lpGameObject)
-				{
-					PVOID lpTransform = UnityEngine::GameObject::get_transform(lpGameObject);
-
-					if (lpTransform)
-					{
-						UnityEngine::Transform::set_position_Injected(lpTransform, lpResult);
-					}
-				}
-			}
-		}
+			Engine::PlayerTeleport(lpResult);
 
 		return lpResult;
 	}

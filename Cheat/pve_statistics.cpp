@@ -12,12 +12,10 @@ namespace PveStatistics
 {
 	void Render()
 	{
-
 	}
 
 	void Update()
 	{
-
 	}
 
 	void Start()

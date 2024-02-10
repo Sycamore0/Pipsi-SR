@@ -12,43 +12,6 @@
 
 namespace ChestTeleport
 {
-	static bool GetPosition(void* lpEntity, void* lpPosition)
-	{
-		PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpEntity);
-
-		if (!lpGameObject)
-			return false;
-
-		PVOID lpTransform = UnityEngine::GameObject::get_transform(lpGameObject);
-
-		if (!lpTransform)
-			return false;
-
-		UnityEngine::Transform::get_position_Injected(lpTransform, lpPosition);
-
-		return true;
-	}
-
-	static void Teleport(void* lpPosition)
-	{
-		PVOID lpPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
-
-		if (!lpPlayer)
-			return;
-
-		PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpPlayer);
-
-		if (!lpGameObject)
-			return;
-
-		PVOID lpTransform = UnityEngine::GameObject::get_transform(lpGameObject);
-
-		if (!lpTransform)
-			return;
-
-		UnityEngine::Transform::set_position_Injected(lpTransform, lpPosition);
-	}
-
 	static bool IsUnlockedChest(const wchar_t* lpEntityName) { 			
 		// || wcsstr(lpEntityName, L"PROP_32") != NULL
 		return (wcsstr(lpEntityName, L"PROP_10-") != NULL
@@ -102,11 +65,11 @@ namespace ChestTeleport
 				
 				Vector3 Position = {};
 
-				if (GetPosition(lpEntity, &Position))
+				if (Engine::GetEntityPosition(lpEntity, &Position))
 				{
 					// printf("%ws, %i %i %i %i\n", lpEntity->_Name->m_firstChar, lpEntity->_Tickable, lpEntity->_IsLoaded, lpEntity->_Visible, lpEntity->KillImmediately);
 
-					Teleport(&Position);
+					Engine::PlayerTeleport(&Position);
 
 					return;
 				}
@@ -124,9 +87,9 @@ namespace ChestTeleport
 
 				Vector3 Position = {};
 
-				if (GetPosition(lpEntity, &Position))
+				if (Engine::GetEntityPosition(lpEntity, &Position))
 				{
-					Teleport(&Position);
+					Engine::PlayerTeleport(&Position);
 
 					return;
 				}

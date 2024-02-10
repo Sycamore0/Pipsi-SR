@@ -15,13 +15,9 @@ namespace Fov
 		FLOAT flValue;
 
 		if (bFov)
-		{
 			flValue = flFov;
-		}
 		else
-		{
 			flValue = value;
-		}
 
 		return CALL_ORIGIN(set_fieldOfViewHandler, _this, flValue);
 	}

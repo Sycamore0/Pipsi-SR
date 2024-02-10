@@ -266,15 +266,23 @@ namespace RPG
             bool _IsPause; // 0xF1
             bool _IsInTick; // 0xF2
             bool _IsDisposing; // 0xF3
+
+            inline static FN(get_BattleInstanceRef, void*, (void* _this), il2cpp_base + 0xC1C400);
         };
 
         struct EntityManager {
             inline static FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), il2cpp_base + 0x391C080);
         };
+        
+
+        struct BattleInstance
+        {
+            inline static FN(get_TurnBasedGameModeRef, void*, (void* _this), il2cpp_base + 0x35F3770);
+        };
 
 		struct AdventureStatic
 		{
-			inline static FN(GetMainWorld, void*, (), il2cpp_base + 0x390E8C0);
+			inline static FN(GetMainWorld, RPG::GameCore::GameWorld*, (), il2cpp_base + 0x390E8C0);
 
 			inline static FN(GetEntityManager, void*, (), il2cpp_base + 0x390D280);
 
@@ -308,6 +316,8 @@ namespace RPG
 
 		struct TurnBasedGameMode
 		{
+            inline static FN(get_IsInBattle, bool, (void* _this), il2cpp_base + 0x3F24D20);
+
 			inline static FN(get_AutoBattle, bool, (void* _this), il2cpp_base + 0x3F249B0);
 		};
 
@@ -321,4 +331,11 @@ namespace RPG
             inline static FN(GetTargetPos, void*, (void* _this, void* _res), il2cpp_base + 0x3B6B130);
         };
     }
+}
+
+namespace Engine
+{
+    bool GetEntityPosition(void* lpEntity, void* lpPosition);
+
+    void PlayerTeleport(void* lpPosition);
 }
