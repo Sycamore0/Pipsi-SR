@@ -11,7 +11,7 @@
 
 #### Player
 
-- Noclip (toggle : V)
+- Noclip (toggle : `V`)
 
 #### Battle
 
@@ -19,7 +19,7 @@
 
 #### World
 
-- Quest Teleport
+- Quest Teleport (hold : `F1`)
 - Talk Speed
 - Dump Enemies
 
