@@ -16,33 +16,35 @@ namespace BattleSpeed
 
 		if (bBattleSpeed)
 		{
-			__try
-			{
-				RPG::GameCore::GameWorld* lpMainWorld = RPG::GameCore::AdventureStatic::GetMainWorld();
+			flValue = flBattleSpeed;
 
-				if (!lpMainWorld)
-					return;
+			//__try
+			//{
+				//RPG::GameCore::GameWorld* lpMainWorld = RPG::GameCore::AdventureStatic::GetMainWorld();
 
-				PVOID lpBattleInstance = RPG::GameCore::GameWorld::get_BattleInstanceRef(lpMainWorld);
+				//if (!lpMainWorld)
+				//	return;
 
-				if (lpBattleInstance)
-					return;
+				//PVOID lpBattleInstance = RPG::GameCore::GameWorld::get_BattleInstanceRef(lpMainWorld);
 
-				PVOID lpTurnBasedGameMode = RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
+				//if (lpBattleInstance)
+				//	return;
 
-				if (!lpTurnBasedGameMode)
-					return;
+				//PVOID lpTurnBasedGameMode = RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
 
-				if (RPG::Client::TurnBasedGameMode::get_IsInBattle(lpTurnBasedGameMode))
-					flValue = flBattleSpeed;
+				//if (!lpTurnBasedGameMode)
+				//	return;
 
-			}
-			__except (EXCEPTION_EXECUTE_HANDLER)
-			{
-				printf("ChestTeleport::Update(), exception 0x%X\n", GetExceptionCode());
+				//if (RPG::Client::TurnBasedGameMode::get_IsInBattle(lpTurnBasedGameMode))
+					// flValue = flBattleSpeed;
 
-				flValue = value;
-			}
+			//}
+			//__except (EXCEPTION_EXECUTE_HANDLER)
+			//{
+			//	printf("ChestTeleport::Update(), exception 0x%X\n", GetExceptionCode());
+
+			//	flValue = value;
+			//}
 		}
 
 		return CALL_ORIGIN(set_speedHandler, _this, flValue);
