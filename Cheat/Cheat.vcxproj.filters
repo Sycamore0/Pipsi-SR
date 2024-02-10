@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="user">
+      <UniqueIdentifier>{9b20d078-1a4f-4201-bd25-76585a9426a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="other">
+      <UniqueIdentifier>{87256dcb-6188-403c-b340-0811e04903ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="features">
+      <UniqueIdentifier>{ba8dbc95-1c63-4e74-84d2-e13fe964c82f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="render.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="cheats.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="hooks.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="inputs.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="auto_talk.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="battle_speed.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="dump_enemies.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="esp.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="force_autobattle.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="fov.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="noclip.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="peeking.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="pve_statistics.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="quest_teleport.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imconfig.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_internal.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imstb_rectpack.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imstb_textedit.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imstb_truetype.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_dx11.h">
+      <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_win32.h">
+      <Filter>other</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cheats.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="inputs.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="auto_talk.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="battle_speed.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="dump_enemies.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="esp.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="force_autobattle.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="fov.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="noclip.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="peeking.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="pve_statistics.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="quest_teleport.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_draw.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_tables.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\imgui_widgets.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_dx11.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Desktop\Projects\new_template\imgui\impl\imgui_impl_win32.cpp">
+      <Filter>other</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
