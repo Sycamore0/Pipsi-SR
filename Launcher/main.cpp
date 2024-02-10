@@ -51,6 +51,7 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 	if (!ManualMapDll(hProcess, (PBYTE)lpBypassDll, dwBypassSize))
 	{
 		printf("failed to inject bypass\n");
+		system("pause");
 
 		delete[] lpBypassDll;
 
@@ -67,7 +68,7 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 
 BOOL InjectCheat(HANDLE hProcess)
 {
-	printf("Injecting bypass..\n");
+	printf("Injecting cheat..\n");
 
 	PCHAR lpCheatDll = NULL;
 	DWORD dwCheatSize = 0;
@@ -81,6 +82,9 @@ BOOL InjectCheat(HANDLE hProcess)
 
 	if (!ManualMapDll(hProcess, (PBYTE)lpCheatDll, dwCheatSize))
 	{
+		printf("failed to inject cheat\n");
+		system("pause");
+
 		delete[] lpCheatDll;
 
 		return FALSE;
@@ -88,7 +92,7 @@ BOOL InjectCheat(HANDLE hProcess)
 
 	delete[] lpCheatDll;
 
-	printf("Bypass successfully injected!\n");
+	printf("Cheat successfully injected!\n");
 
 	return TRUE;
 }
