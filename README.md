@@ -11,7 +11,7 @@
 
 #### Player
 
-- Noclip
+- Noclip (toggle : V)
 
 #### Battle
 
