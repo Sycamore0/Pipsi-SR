@@ -25,6 +25,7 @@ namespace Inputs
 
 	LPCSTR GetName(UINT uId);
 	BOOL GetState(UINT uId, INT iType);
+	WPARAM GetLastInput();
 
 	VOID SetToggleState(UINT uId, BOOL bValue);
 	VOID SetWaitInput(WPARAM wValue);

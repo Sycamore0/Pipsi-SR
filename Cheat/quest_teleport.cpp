@@ -31,6 +31,10 @@ namespace QuestTeleport
 
 		ImGui::Checkbox("Enable", &bQuestTeleport);
 
+		ImGui::SameLine();
+
+		ImGui::Hotkey(&dwQuestTeleportKey);
+
 		ImGui::EndGroupPanel();
 	}
 

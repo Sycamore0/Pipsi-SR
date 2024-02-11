@@ -75,6 +75,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="noclip.h" />
+    <ClInclude Include="open_menu.h" />
     <ClInclude Include="peeking.h" />
     <ClInclude Include="pve_statistics.h" />
     <ClInclude Include="quest_teleport.h" />
@@ -103,6 +104,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="noclip.cpp" />
+    <ClCompile Include="open_menu.cpp" />
     <ClCompile Include="peeking.cpp" />
     <ClCompile Include="pve_statistics.cpp" />
     <ClCompile Include="quest_teleport.cpp" />

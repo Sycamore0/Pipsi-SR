@@ -15,4 +15,6 @@ namespace ImGui
 
 	bool BeginGroupPanel(const char* label, bool node = false, const ImVec2& size = ImVec2(-1.0f, 0.0f));
 	void EndGroupPanel();
+
+	void Hotkey(unsigned int* lpValue);
 }

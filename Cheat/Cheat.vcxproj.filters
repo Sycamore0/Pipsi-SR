@@ -96,6 +96,9 @@
     <ClInclude Include="imgui\impl\imgui_impl_win32.h">
       <Filter>other</Filter>
     </ClInclude>
+    <ClInclude Include="open_menu.h">
+      <Filter>features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cheats.cpp">
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="imgui\impl\imgui_impl_win32.cpp">
       <Filter>other</Filter>
+    </ClCompile>
+    <ClCompile Include="open_menu.cpp">
+      <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

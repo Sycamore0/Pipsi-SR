@@ -3,7 +3,6 @@
 namespace Inputs
 {
 	std::map<WPARAM, INPUT_> mCache = {
-		{ VK_LBUTTON, { "LBUTTON" } },
 		{ VK_RBUTTON, { "RBUTTON" } },
 		{ VK_MBUTTON, { "MBUTTON" } },
 		{ VK_XBUTTON1, { "XBUTTON1" } },
@@ -234,6 +233,9 @@ namespace Inputs
 
 	BOOL GetState(UINT uId, INT iType)
 	{
+		if (uId == 0xFFFFFFFF || uId == 0)
+			return TRUE;
+
 		if (mCache.count(uId) == 0)
 			return FALSE;
 
@@ -249,6 +251,11 @@ namespace Inputs
 		return FALSE;
 	}
 
+	WPARAM GetLastInput()
+	{
+		return wWaitInput;
+	}
+
 	VOID SetToggleState(UINT uId, BOOL bValue)
 	{
 		if (mCache.count(uId) == 0)
@@ -261,4 +268,6 @@ namespace Inputs
 	{
 		wWaitInput = wValue;
 	}
+
+
 }

@@ -17,7 +17,6 @@ LRESULT WndProcHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	Inputs::OnWindowMessage(uMsg, wParam, lParam);
 
 	bMenu = Inputs::GetState(dwMenuKey, INPUT_TYPE_TOGGLE);
-	bNoclip = Inputs::GetState(dwNoclipKey, INPUT_TYPE_TOGGLE);
 
 	if (bMenu)
 	{

@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "open_menu.h"
 #include "chest_teleport.h"
 #include "quest_teleport.h"
 #include "auto_talk.h"
@@ -44,7 +45,7 @@ namespace Cheats
 
 	VOID RenderMiscTab()
 	{
-
+		OpenMenu::Render();
 	}
 
 	VOID Update()
@@ -54,7 +55,7 @@ namespace Cheats
 
 		//if (RPG::Client::GlobalVars->s_LoadingManager)
 		//	return;
-
+		OpenMenu::Update();
 		ChestTeleport::Update();
 		QuestTeleport::Update();
 		AutoTalk::Update();
@@ -70,6 +71,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		OpenMenu::Start();
 		ChestTeleport::Start();
 		QuestTeleport::Start();
 		AutoTalk::Start();

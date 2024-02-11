@@ -31,6 +31,10 @@ namespace ChestTeleport
 
 		ImGui::Checkbox("Enable", &bChestTeleport);
 
+		ImGui::SameLine();
+
+		ImGui::Hotkey(&dwChestTeleportKey);
+
 		ImGui::EndGroupPanel();
 	}
 

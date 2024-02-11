@@ -15,10 +15,11 @@ namespace Noclip
 	{
 		ImGui::BeginGroupPanel("Noclip");
 
-		if (ImGui::Checkbox("Enable", &bNoclip))
-		{
-			Inputs::SetToggleState(dwNoclipKey, bNoclip);
-		}
+		ImGui::Checkbox("Enable", &bNoclip);
+
+		ImGui::SameLine();
+
+		ImGui::Hotkey(&dwNoclipKey);
 
 		if (bNoclip)
 		{
@@ -30,7 +31,7 @@ namespace Noclip
 
 	void Update()
 	{
-		if (!bNoclip)
+		if (!bNoclip || !Inputs::GetState(dwNoclipKey, INPUT_TYPE_TOGGLE))
 			return;
 
 		PVOID lpLocalPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();

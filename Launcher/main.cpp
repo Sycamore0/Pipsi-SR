@@ -134,11 +134,14 @@ int main()
 
 	ResumeThread(ProcessInfo.hThread);
 
+	printf("waiting for the game to initialize..\n");
+
 	HWND hWnd = NULL;
 
 	while ((hWnd = FindWindowA("UnityWndClass", NULL)) == NULL)
 		Sleep(1000);
 	
+
 	Sleep(15000);
 
 	InjectCheat(ProcessInfo.hProcess);

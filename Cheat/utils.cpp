@@ -1,5 +1,7 @@
 #include "utils.h"
 
+#include "inputs.h"
+
 #include "imgui.h"
 
 namespace ImGui
@@ -213,5 +215,37 @@ namespace ImGui
 		ImGui::Dummy(ImVec2(0.0f, 0.0f));
 
 		ImGui::PopID();
+	}
+
+	void Hotkey(unsigned int* lpValue)
+	{
+		LPCSTR lpText = "KEY";
+
+		if (*lpValue == 0xFFFFFFFF)
+		{
+			WPARAM wLastInput = Inputs::GetLastInput();
+
+			if (wLastInput == NULL)
+				lpText = "...";
+			else
+			{
+				if (wLastInput == VK_ESCAPE)
+					*lpValue = 0;
+				else
+					*lpValue = (DWORD)wLastInput;
+			}
+		}
+
+		if (*lpValue != 0 && *lpValue != 0xFFFFFFFF)
+		{
+			lpText = Inputs::GetName(*lpValue);
+		}
+
+		if (ImGui::Button(lpText))
+		{
+			*lpValue = 0xFFFFFFFF;
+
+			Inputs::SetWaitInput(NULL);
+		}
 	}
 }
