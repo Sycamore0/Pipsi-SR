@@ -9,6 +9,7 @@
 static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 
 inline static SD(lpMaxTimeScale, float, il2cpp_base + 0x697EF90);
+inline static SD(lpGlobalVars, void**, il2cpp_base + 0x8889A80);
 
 struct Vector3
 {
@@ -309,6 +310,39 @@ namespace RPG
 
 	namespace Client
 	{
+        enum GamePhaseType {
+            GamePhaseType_Unknow = 0x0,
+            GamePhaseType_ClientStartup = 0x1,
+            GamePhaseType_DevClientStartup = 0x2,
+            GamePhaseType_GameDev = 0x3,
+            GamePhaseType_VersionUpdate = 0x4,
+            GamePhaseType_EnterGame = 0x5,
+            GamePhaseType_InitGame = 0x6,
+            GamePhaseType_SelectServer = 0x7,
+            GamePhaseType_SDKLogin = 0x8,
+            GamePhaseType_LoginWait = 0x9,
+            GamePhaseType_FullPackageDownload = 0xA,
+            GamePhaseType_PreDownload = 0xB,
+            GamePhaseType_VersionUpdateCheck = 0xC,
+            GamePhaseType_Adventure = 0xD,
+            GamePhaseType_BattleLineup = 0xE,
+            GamePhaseType_QABattleLineup = 0xF,
+            GamePhaseType_Battle = 0x10,
+            GamePhaseType_BattleNew = 0x11,
+            GamePhaseType_Replay = 0x12,
+            GamePhaseType_DevLevel = 0x13,
+            GamePhaseType_RenderTest = 0x14,
+            GamePhaseType_StoryTest = 0x15,
+            GamePhaseType_AdventureMapTest = 0x16,
+            GamePhaseType_AssetMemStatisticsTest = 0x17,
+            GamePhaseType_Empty = 0x18,
+        };
+
+        struct GamePhaseManager
+        {
+            inline static FN(get_CurrentGamePhaseType, int, (void* _this), il2cpp_base + 0xC55540);
+        };
+
         struct AdventureModule
 		{
 			inline static FN(OnCmdSceneCastSkillScRsp, void, (unsigned short cmd, void* rspObject), il2cpp_base + 0x37452A0);
@@ -336,6 +370,8 @@ namespace RPG
 namespace Engine
 {
     bool GetEntityPosition(void* lpEntity, void* lpPosition);
+    int GetPhaseType();
 
     void PlayerTeleport(void* lpPosition);
+    
 }

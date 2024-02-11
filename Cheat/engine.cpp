@@ -19,6 +19,16 @@ namespace Engine
 		return true;
 	}
 
+	int GetPhaseType()
+	{
+		PVOID lpPhaseManager = *(PVOID*)((PBYTE)(*lpGlobalVars) + 0x1D4B0); // GamePhaseManager offset
+
+		if (!lpPhaseManager)
+			return 0;
+
+		return RPG::Client::GamePhaseManager::get_CurrentGamePhaseType(lpPhaseManager);
+	}
+
 	void PlayerTeleport(void* lpPosition)
 	{
 		PVOID lpPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();

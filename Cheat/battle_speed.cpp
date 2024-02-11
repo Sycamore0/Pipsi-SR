@@ -16,35 +16,17 @@ namespace BattleSpeed
 
 		if (bBattleSpeed)
 		{
-			flValue = flBattleSpeed;
-
-			//__try
-			//{
-				//RPG::GameCore::GameWorld* lpMainWorld = RPG::GameCore::AdventureStatic::GetMainWorld();
-
-				//if (!lpMainWorld)
-				//	return;
-
-				//PVOID lpBattleInstance = RPG::GameCore::GameWorld::get_BattleInstanceRef(lpMainWorld);
-
-				//if (lpBattleInstance)
-				//	return;
-
-				//PVOID lpTurnBasedGameMode = RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
-
-				//if (!lpTurnBasedGameMode)
-				//	return;
-
-				//if (RPG::Client::TurnBasedGameMode::get_IsInBattle(lpTurnBasedGameMode))
-					// flValue = flBattleSpeed;
-
-			//}
-			//__except (EXCEPTION_EXECUTE_HANDLER)
-			//{
-			//	printf("ChestTeleport::Update(), exception 0x%X\n", GetExceptionCode());
-
-			//	flValue = value;
-			//}
+			switch (Engine::GetPhaseType())
+			{
+			case RPG::Client::GamePhaseType_BattleLineup:
+			case RPG::Client::GamePhaseType_QABattleLineup:
+			case RPG::Client::GamePhaseType_Battle:
+			case RPG::Client::GamePhaseType_BattleNew:
+				flValue = flBattleSpeed;
+				break;
+			default:
+				break;
+			}
 		}
 
 		return CALL_ORIGIN(set_speedHandler, _this, flValue);
