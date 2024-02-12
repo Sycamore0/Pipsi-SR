@@ -20,8 +20,17 @@ namespace QuestTeleport
 			return lpResult;
 
 		if (Inputs::GetState(dwQuestTeleportKey, INPUT_TYPE_HOLD))
-			Engine::PlayerTeleport(lpResult);
-
+		{
+			__try
+			{
+				Engine::PlayerTeleport(lpResult);
+			}
+			__except (EXCEPTION_EXECUTE_HANDLER)
+			{
+				printf("QuestTeleport::GetTargetPosHandler(), exception 0x%X\n", GetExceptionCode());
+			}
+		}
+		
 		return lpResult;
 	}
 

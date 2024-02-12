@@ -16,9 +16,9 @@ BOOL APIENTRY DllMain(HMODULE hinstDll, DWORD fdwReason, LPVOID lpReserved)
 	if (fdwReason != DLL_PROCESS_ATTACH)
 		return FALSE;
 
-	AllocConsole();
-	freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
-	freopen_s((FILE**)stderr, "CONOUT$", "w", stderr);
+	//AllocConsole();
+	//freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
+	//freopen_s((FILE**)stderr, "CONOUT$", "w", stderr);
 
 	CreateThread(NULL, 0, ThreadProcHandler, hinstDll, 0, NULL);
 

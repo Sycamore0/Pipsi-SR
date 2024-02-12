@@ -50,7 +50,7 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 
 	if (!ManualMapDll(hProcess, (PBYTE)lpBypassDll, dwBypassSize))
 	{
-		printf("failed to inject bypass\n");
+		printf("Failed to inject bypass\n");
 		system("pause");
 
 		delete[] lpBypassDll;
@@ -82,7 +82,7 @@ BOOL InjectCheat(HANDLE hProcess)
 
 	if (!ManualMapDll(hProcess, (PBYTE)lpCheatDll, dwCheatSize))
 	{
-		printf("failed to inject cheat\n");
+		printf("Failed to inject cheat\n");
 		system("pause");
 
 		delete[] lpCheatDll;
@@ -134,7 +134,7 @@ int main()
 
 	ResumeThread(ProcessInfo.hThread);
 
-	printf("waiting for the game to initialize..\n");
+	printf("Waiting for the game to initialize..\n");
 
 	HWND hWnd = NULL;
 

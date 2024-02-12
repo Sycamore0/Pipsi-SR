@@ -34,48 +34,55 @@ namespace Noclip
 		if (!bNoclip || !Inputs::GetState(dwNoclipKey, INPUT_TYPE_TOGGLE))
 			return;
 
-		PVOID lpLocalPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
-
-		if (!lpLocalPlayer)
-			return;
-
-		PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpLocalPlayer);
-
-		if (!lpGameObject)
-			return;
-
-		PVOID lpTransform = UnityEngine::GameObject::get_transform(lpGameObject);
-
-		if (!lpTransform)
-			return;
-
-		Vector3 Position = {};
-		Vector3 Direction = {};
-
-		UnityEngine::Transform::get_position_Injected(lpTransform, &Position);
-
-
-		if (Inputs::GetState('W', INPUT_TYPE_HOLD)
-			|| Inputs::GetState('A', INPUT_TYPE_HOLD)
-			|| Inputs::GetState('S', INPUT_TYPE_HOLD)
-			|| Inputs::GetState('D', INPUT_TYPE_HOLD))
+		__try
 		{
-			UnityEngine::Transform::get_forward(&Direction, lpTransform);
-		}
-		
-		if (Inputs::GetState(VK_SPACE, INPUT_TYPE_HOLD))
-			UnityEngine::Transform::get_up(&Direction, lpTransform);
+			PVOID lpLocalPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
 
-		if (Inputs::GetState(VK_SHIFT, INPUT_TYPE_HOLD))
+			if (!lpLocalPlayer)
+				return;
+
+			PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpLocalPlayer);
+
+			if (!lpGameObject)
+				return;
+
+			PVOID lpTransform = UnityEngine::GameObject::get_transform(lpGameObject);
+
+			if (!lpTransform)
+				return;
+
+			Vector3 Position = {};
+			Vector3 Direction = {};
+
+			UnityEngine::Transform::get_position_Injected(lpTransform, &Position);
+
+
+			if (Inputs::GetState('W', INPUT_TYPE_HOLD)
+				|| Inputs::GetState('A', INPUT_TYPE_HOLD)
+				|| Inputs::GetState('S', INPUT_TYPE_HOLD)
+				|| Inputs::GetState('D', INPUT_TYPE_HOLD))
+			{
+				UnityEngine::Transform::get_forward(&Direction, lpTransform);
+			}
+
+			if (Inputs::GetState(VK_SPACE, INPUT_TYPE_HOLD))
+				UnityEngine::Transform::get_up(&Direction, lpTransform);
+
+			if (Inputs::GetState(VK_SHIFT, INPUT_TYPE_HOLD))
+			{
+				UnityEngine::Transform::get_up(&Direction, lpTransform);
+
+				Direction = -Direction;
+			}
+
+			Position += Direction * flNoclipSpeed * UnityEngine::Time::get_deltaTime();
+
+			UnityEngine::Transform::set_position_Injected(lpTransform, &Position);
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
-			UnityEngine::Transform::get_up(&Direction, lpTransform);
-
-			Direction = -Direction;
+			printf("Noclip::Update(), exception 0x%X\n", GetExceptionCode());
 		}
-
-		Position += Direction * flNoclipSpeed * UnityEngine::Time::get_deltaTime();
-
-		UnityEngine::Transform::set_position_Injected(lpTransform, &Position);
 	}
 
 	void Start()

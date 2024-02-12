@@ -131,7 +131,7 @@ namespace Inputs
 			wWaitInput = wParam;
 	}
 
-	VOID OnMouseMessage(UINT uMsg, WPARAM wParam, WPARAM lParam)
+	VOID OnMouseMessage(UINT uMsg, WPARAM wParam)
 	{
 		UINT uState = 0;
 		WPARAM wKey = 0;
@@ -210,7 +210,7 @@ namespace Inputs
 		case WM_RBUTTONUP:
 		case WM_LBUTTONUP:
 		case WM_XBUTTONUP:
-			OnMouseMessage(uMsg, wParam, lParam);
+			OnMouseMessage(uMsg, wParam);
 			break;
 		case WM_KEYDOWN:
 		case WM_KEYUP:
