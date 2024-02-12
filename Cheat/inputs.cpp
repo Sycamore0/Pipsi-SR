@@ -131,7 +131,7 @@ namespace Inputs
 			wWaitInput = wParam;
 	}
 
-	VOID OnMouseMessage(UINT uMsg, WPARAM wParam)
+	VOID OnMouseMessage(UINT uMsg, WPARAM wParam, WPARAM lParam)
 	{
 		UINT uState = 0;
 		WPARAM wKey = 0;
@@ -159,7 +159,7 @@ namespace Inputs
 		case WM_XBUTTONUP:
 		case WM_XBUTTONDBLCLK:
 			uState = uMsg == WM_XBUTTONUP ? WM_KEYUP : WM_KEYDOWN;
-			wKey = wParam == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2;
+			wKey = GET_XBUTTON_WPARAM(wParam) == XBUTTON1 ? VK_XBUTTON1 : VK_XBUTTON2;
 			break;
 		default:
 			return;
@@ -210,7 +210,7 @@ namespace Inputs
 		case WM_RBUTTONUP:
 		case WM_LBUTTONUP:
 		case WM_XBUTTONUP:
-			OnMouseMessage(uMsg, wParam);
+			OnMouseMessage(uMsg, wParam, lParam);
 			break;
 		case WM_KEYDOWN:
 		case WM_KEYUP:
