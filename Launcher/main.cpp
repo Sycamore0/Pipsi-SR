@@ -5,10 +5,10 @@
 BOOL LoadFile(LPCSTR lpFileName, PCHAR* lpBuffer, PDWORD lpSize)
 {
 	HANDLE hFile = CreateFileA(lpFileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	
+
 	if (hFile == INVALID_HANDLE_VALUE || hFile == NULL)
 		return FALSE;
-	
+
 	DWORD dwFileSize = GetFileSize(hFile, NULL);
 
 	if (dwFileSize == INVALID_FILE_SIZE)
@@ -22,7 +22,7 @@ BOOL LoadFile(LPCSTR lpFileName, PCHAR* lpBuffer, PDWORD lpSize)
 
 	if (!ReadFile(hFile, *lpBuffer, dwFileSize, lpSize, NULL))
 	{
-		delete[] *lpBuffer;
+		delete[] * lpBuffer;
 
 		CloseHandle(hFile);
 
@@ -58,7 +58,7 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 
 		return FALSE;
 	}
-		
+
 
 	delete[] lpBypassDll;
 
@@ -144,10 +144,10 @@ int main()
 
 	while ((hWnd = FindWindowA("UnityWndClass", NULL)) == NULL)
 		Sleep(1000);
-	
+
 	Sleep(15000);
 
-	if(!InjectCheat(ProcessInfo.hProcess))
+	if (!InjectCheat(ProcessInfo.hProcess))
 	{
 		TerminateProcess(ProcessInfo.hProcess, 0);
 

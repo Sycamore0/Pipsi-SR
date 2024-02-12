@@ -35,14 +35,21 @@ namespace ChestTeleport
 
 		if (bChestTeleport && Inputs::GetState(dwChestTeleportKey, INPUT_TYPE_HOLD))
 		{
-			switch (RPG::GameCore::PropComponent::get_PropState(_this))
+			__try
 			{
-			case RPG::GameCore::PropState_ChestClosed:
-			case RPG::GameCore::PropState_ChestLocked:
-				OnChestComponent(_this);
-				break;
-			default:
-				break;
+				switch (RPG::GameCore::PropComponent::get_PropState(_this))
+				{
+				case RPG::GameCore::PropState_ChestClosed:
+				case RPG::GameCore::PropState_ChestLocked:
+					OnChestComponent(_this);
+					break;
+				default:
+					break;
+				}
+			}
+			__except (EXCEPTION_EXECUTE_HANDLER)
+			{
+				printf("ChestTeleport::TickHandler(), exception 0x%X\n", GetExceptionCode());
 			}
 		}
 	}

@@ -16,16 +16,25 @@ namespace BattleSpeed
 
 		if (bBattleSpeed)
 		{
-			switch (Engine::GetPhaseType())
+			__try
 			{
-			case RPG::Client::GamePhaseType_BattleLineup:
-			case RPG::Client::GamePhaseType_QABattleLineup:
-			case RPG::Client::GamePhaseType_Battle:
-			case RPG::Client::GamePhaseType_BattleNew:
-				flValue = flBattleSpeed;
-				break;
-			default:
-				break;
+				switch (Engine::GetPhaseType())
+				{
+				case RPG::Client::GamePhaseType_BattleLineup:
+				case RPG::Client::GamePhaseType_QABattleLineup:
+				case RPG::Client::GamePhaseType_Battle:
+				case RPG::Client::GamePhaseType_BattleNew:
+					flValue = flBattleSpeed;
+					break;
+				default:
+					break;
+				}
+			}
+			__except (EXCEPTION_EXECUTE_HANDLER)
+			{
+				printf("BattleSpeed::set_speedHandler(), exception 0x%X\n", GetExceptionCode());
+
+				flValue = value;
 			}
 		}
 
