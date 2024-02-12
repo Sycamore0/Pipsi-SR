@@ -43,6 +43,8 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 
 	if (!LoadFile("Bypass.dll", &lpBypassDll, &dwBypassSize))
 	{
+		printf("Unable to load/find Bypass.dll\n");
+
 		delete[] lpBypassDll;
 
 		return FALSE;
@@ -51,7 +53,6 @@ BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
 	if (!ManualMapDll(hProcess, (PBYTE)lpBypassDll, dwBypassSize))
 	{
 		printf("Failed to inject bypass\n");
-		system("pause");
 
 		delete[] lpBypassDll;
 
@@ -75,6 +76,8 @@ BOOL InjectCheat(HANDLE hProcess)
 
 	if (!LoadFile("Cheat.dll", &lpCheatDll, &dwCheatSize))
 	{
+		printf("Unable to load/find Cheat.dll\n");
+
 		delete[] lpCheatDll;
 
 		return FALSE;
@@ -83,7 +86,6 @@ BOOL InjectCheat(HANDLE hProcess)
 	if (!ManualMapDll(hProcess, (PBYTE)lpCheatDll, dwCheatSize))
 	{
 		printf("Failed to inject cheat\n");
-		system("pause");
 
 		delete[] lpCheatDll;
 
@@ -129,6 +131,8 @@ int main()
 	{
 		TerminateProcess(ProcessInfo.hProcess, 0);
 
+		system("pause");
+
 		return -1;
 	}
 
@@ -141,10 +145,16 @@ int main()
 	while ((hWnd = FindWindowA("UnityWndClass", NULL)) == NULL)
 		Sleep(1000);
 	
-
 	Sleep(15000);
 
-	InjectCheat(ProcessInfo.hProcess);
+	if(!InjectCheat(ProcessInfo.hProcess))
+	{
+		TerminateProcess(ProcessInfo.hProcess, 0);
+
+		system("pause");
+
+		return -1;
+	}
 
 	CloseHandle(ProcessInfo.hProcess);
 	CloseHandle(ProcessInfo.hThread);
