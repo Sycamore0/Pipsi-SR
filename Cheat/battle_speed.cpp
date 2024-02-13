@@ -49,7 +49,11 @@ namespace BattleSpeed
 
 		if (bBattleSpeed)
 		{
+			ImGui::Indent();
+
 			ImGui::SliderFloat("Value", &flBattleSpeed, 0.1f, 50.f, "%.1f");
+
+			ImGui::Unindent();
 		}
 
 		ImGui::EndGroupPanel();

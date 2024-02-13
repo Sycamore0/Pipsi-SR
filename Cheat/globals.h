@@ -11,6 +11,11 @@ extern unsigned int dwNoclipKey;
 extern float flNoclipSpeed;
 
 extern bool bEsp;
+extern float flEspDistance;
+extern bool bEspMonster;
+extern bool bEspNpc;
+extern bool bEspProp;
+extern bool bEspMission;
 
 extern bool bForceAutoBattle;
 

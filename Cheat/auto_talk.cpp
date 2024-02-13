@@ -20,7 +20,11 @@ namespace AutoTalk
 
 		if (bAutoTalk)
 		{
+			ImGui::Indent();
+
 			ImGui::SliderFloat("Speed", &flAutoTalkSpeed, 0.1f, 20.f, "%.1f");
+
+			ImGui::Unindent();
 		}
 
 		ImGui::EndGroupPanel();

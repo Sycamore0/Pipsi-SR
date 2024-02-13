@@ -30,7 +30,11 @@ namespace Fov
 
 		if (bFov)
 		{
+			ImGui::Indent();
+			
 			ImGui::SliderFloat("Value", &flFov, 1.f, 359.f, "%.1f");
+
+			ImGui::Unindent();
 		}
 
 		ImGui::EndGroupPanel();

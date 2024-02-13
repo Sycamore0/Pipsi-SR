@@ -37,6 +37,56 @@ namespace Engine
 		return lpPropManager->PropEntityList;
 	}
 
+	bool GetResolutionScale(Vector2* lpResolutionScale)
+	{
+		PVOID lpMainCamera = UnityEngine::Camera::get_main();
+
+		if (!lpMainCamera)
+			return FALSE;
+
+		DWORD dwPixelWidth = UnityEngine::Camera::get_pixelWidth(lpMainCamera);
+		DWORD dwPixelHeight = UnityEngine::Camera::get_pixelHeight(lpMainCamera);
+
+		if (!dwPixelWidth || !dwPixelHeight)
+			return FALSE;
+
+		DWORD dwScreenWidth = UnityEngine::Screen::get_width();
+		DWORD dwScreenHeight = UnityEngine::Screen::get_height();
+
+		if (dwScreenWidth == 0 || dwScreenHeight == 0)
+			return FALSE;
+
+		ZeroMemory(lpResolutionScale, sizeof(*lpResolutionScale));
+
+		if (dwPixelWidth != dwScreenWidth && dwPixelHeight != dwScreenHeight)
+		{
+			lpResolutionScale->x = (FLOAT)dwPixelWidth / (FLOAT)dwScreenWidth;
+			lpResolutionScale->y = (FLOAT)dwPixelHeight / (FLOAT)dwScreenHeight;
+		}
+
+		return TRUE;
+	}
+
+	bool GetScreenPosition(Vector2* lpResolutionScale, void* lpWorldPosition, Vector3* lpRet)
+	{
+		PVOID lpMainCamera = UnityEngine::Camera::get_main();
+
+		if (!lpMainCamera)
+			return FALSE;
+
+		UnityEngine::Camera::WorldToScreenPoint(lpRet, lpMainCamera, lpWorldPosition);
+
+		if (lpResolutionScale->x != 0)
+		{
+			lpRet->x *= lpResolutionScale->x;
+			lpRet->y *= lpResolutionScale->y;
+		}
+
+		lpRet->y = UnityEngine::Screen::get_height() - lpRet->y;
+
+		return TRUE;
+	}
+
 	bool GetEntityPosition(void* lpEntity, void* lpPosition)
 	{
 		PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpEntity);
@@ -64,6 +114,16 @@ namespace Engine
 		return RPG::Client::GamePhaseManager::get_CurrentGamePhaseType(lpPhaseManager);
 	}
 
+	void* GetTransform(void* lpEntity)
+	{
+		PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpEntity);
+
+		if (!lpGameObject)
+			return NULL;
+
+		return UnityEngine::GameObject::get_transform(lpGameObject);
+	}
+
 	void PlayerTeleport(void* lpPosition)
 	{
 		PVOID lpPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
@@ -71,12 +131,7 @@ namespace Engine
 		if (!lpPlayer)
 			return;
 
-		PVOID lpGameObject = RPG::GameCore::GameEntity::get_UnityGO(lpPlayer);
-
-		if (!lpGameObject)
-			return;
-
-		PVOID lpTransform = UnityEngine::GameObject::get_transform(lpGameObject);
+		PVOID lpTransform = Engine::GetTransform(lpPlayer);
 
 		if (!lpTransform)
 			return;

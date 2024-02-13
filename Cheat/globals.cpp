@@ -10,6 +10,11 @@ unsigned int dwNoclipKey = 0;
 float flNoclipSpeed = 1.f;
 
 bool bEsp = FALSE;
+float flEspDistance = 50.f;
+bool bEspMonster = FALSE;
+bool bEspNpc = FALSE;
+bool bEspProp = FALSE;
+bool bEspMission = FALSE;
 
 bool bForceAutoBattle = FALSE;
 

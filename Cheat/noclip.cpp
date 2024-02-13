@@ -23,7 +23,11 @@ namespace Noclip
 
 		if (bNoclip)
 		{
+			ImGui::Indent();
+			
 			ImGui::SliderFloat("Speed", &flNoclipSpeed, 0.01f, 100.f, "%.2f");
+
+			ImGui::Unindent();
 		}
 
 		ImGui::EndGroupPanel();
@@ -55,7 +59,6 @@ namespace Noclip
 			Vector3 Direction = {};
 
 			UnityEngine::Transform::get_position_Injected(lpTransform, &Position);
-
 
 			if (Inputs::GetState('W', INPUT_TYPE_HOLD)
 				|| Inputs::GetState('A', INPUT_TYPE_HOLD)
