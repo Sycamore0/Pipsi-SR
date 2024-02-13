@@ -26,6 +26,7 @@
 
 #### Visuals
 
+- Esp
 - Fov changer
 - Peeking
 
