@@ -30,7 +30,7 @@ extern bool bBattleSpeed;
 extern float flBattleSpeed;
 
 extern bool bAutoTalk;
-extern float flAutoTalkSpeed;
+extern bool bAutoTalkDisableDelay;
 
 extern bool bQuestTeleport;
 extern unsigned int dwQuestTeleportKey;

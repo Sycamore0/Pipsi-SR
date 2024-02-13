@@ -10,6 +10,18 @@
 
 namespace PveStatistics
 {
+	RPG::GameCore::PVEGameStatistics* BuildPVEStatisticsHandler(void* _this)
+	{
+		RPG::GameCore::PVEGameStatistics* lpResult = CALL_ORIGIN(BuildPVEStatisticsHandler, _this);
+
+		if (lpResult)
+		{
+			lpResult->costTime *= 2;
+		}
+
+		return lpResult;
+	}
+
 	void Render()
 	{
 	}
@@ -20,6 +32,6 @@ namespace PveStatistics
 
 	void Start()
 	{
-		// CreateHook(RPG::GameCore::PVEGameStatistics::BuildPVEStatistics, BuildPVEStatisticsHandler);
+		CreateHook(RPG::GameCore::PVEGameStatistics::BuildPVEStatistics, BuildPVEStatisticsHandler);
 	}
 }

@@ -29,7 +29,7 @@ bool bBattleSpeed = FALSE;
 float flBattleSpeed = 2.f;
 
 bool bAutoTalk = FALSE;
-float flAutoTalkSpeed = 2.f;
+bool bAutoTalkDisableDelay = FALSE;
 
 bool bQuestTeleport = FALSE;
 unsigned int dwQuestTeleportKey = 0;

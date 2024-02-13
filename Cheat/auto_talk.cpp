@@ -10,7 +10,25 @@
 
 namespace AutoTalk
 {
-	// to do: find gameobject "SkipBtn" and set_active(true) 
+	static long _g_get_ForceToNextTimeHandler(__int64 L)
+	{
+		if (!bAutoTalk)
+			return CALL_ORIGIN(_g_get_ForceToNextTimeHandler, L);
+
+		XLua::LuaDLL::Lua::lua::pushnumber(L, 0.000001f);
+
+		return 1;
+	}
+
+	static long _g_get_ProtectTimeHandler(__int64 L)
+	{
+		if (!bAutoTalkDisableDelay)
+			return CALL_ORIGIN(_g_get_ProtectTimeHandler, L);
+
+		XLua::LuaDLL::Lua::lua::pushnumber(L, 0.f);
+
+		return 1;
+	}
 
 	void Render()
 	{
@@ -22,7 +40,7 @@ namespace AutoTalk
 		{
 			ImGui::Indent();
 
-			ImGui::SliderFloat("Speed", &flAutoTalkSpeed, 0.1f, 20.f, "%.1f");
+			ImGui::Checkbox("Disable Delay", &bAutoTalkDisableDelay);
 
 			ImGui::Unindent();
 		}
@@ -32,36 +50,12 @@ namespace AutoTalk
 
 	void Update()
 	{
-		__try
-		{
-			if (bAutoTalk)
-			{
-				PVOID lpTalkString = System::String::Create("/UIRoot/Page/TalkDialog(Clone)/TalkContainer/SimpleTalk");
 
-				PVOID lpSimpleTalk = UnityEngine::GameObject::Find(lpTalkString);
-
-				if (lpSimpleTalk)
-				{
-					*lpMaxTimeScale = flAutoTalkSpeed + 0.1f;
-					UnityEngine::Time::set_timeScale(flAutoTalkSpeed);
-
-					return;
-				}
-			}
-
-			*lpMaxTimeScale = 1.1f;
-			UnityEngine::Time::set_timeScale(1.f);
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER)
-		{
-			printf("AutoTalk::Update(), exception 0x%X\n", GetExceptionCode());
-		}
 	}
 
 	void Start()
 	{
-		DWORD dwOldProtect = 0;
-		
-		VirtualProtect(lpMaxTimeScale, sizeof(*lpMaxTimeScale), PAGE_READWRITE, &dwOldProtect);
+		CreateHook(XLua::CSObjectWrap::RPGGameCoreSimpleTalkInfoWrap::_g_get_ForceToNextTime, _g_get_ForceToNextTimeHandler);
+		CreateHook(XLua::CSObjectWrap::RPGGameCoreSimpleTalkInfoWrap::_g_get_ProtectTime, _g_get_ProtectTimeHandler);
 	}
 }

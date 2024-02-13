@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 #include <windows.h>
 #include <math.h>
 
@@ -249,7 +249,7 @@ namespace RPG
 			int battleEndReason; // 0xD0
 			int mechanismBarState; // 0xD4
 
-			inline static FN(BuildPVEStatistics, void*, (void* _this), il2cpp_base + 0x3C7DAF0);
+			inline static FN(BuildPVEStatistics, RPG::GameCore::PVEGameStatistics*, (void* _this), il2cpp_base + 0x3C7DAF0);
 		};
 
 		struct GameEntity {
@@ -462,6 +462,33 @@ namespace RPG
 		struct MapProp {
 			inline static FN(get_MapPropDef, void*, (void* _this), il2cpp_base + 0x33314C0);
 			inline static FN(get_Position, void*, (void* _this), il2cpp_base + 0x18FF580);
+		};
+
+		struct UIStringUtil {
+			inline static FN(GetSimpleTalkTextIntervalTime, float, (long charCount, void* languageMark), il2cpp_base + 0x3E6DBC0);
+		};
+
+	}
+}
+
+namespace XLua
+{
+	namespace LuaDLL
+	{
+		namespace Lua
+		{
+			struct lua {
+				inline static FN(pushnumber, void, (__int64 L, double number), il2cpp_base + 0x1B9B1A0);
+			};
+		}
+	}
+
+	namespace CSObjectWrap
+	{
+		struct RPGGameCoreSimpleTalkInfoWrap {
+			inline static FN(_g_get_ForceToNextTime, long, (__int64 L), il2cpp_base + 0x55B7A90);
+			inline static FN(_g_get_TextSpeed, long, (__int64 L), il2cpp_base + 0x55B7D30);
+			inline static FN(_g_get_ProtectTime, long, (__int64 L), il2cpp_base + 0x55B7B70);
 		};
 	}
 }

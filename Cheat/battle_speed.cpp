@@ -51,7 +51,11 @@ namespace BattleSpeed
 		{
 			ImGui::Indent();
 
-			ImGui::SliderFloat("Value", &flBattleSpeed, 0.1f, 50.f, "%.1f");
+			ImGui::SliderFloat("Value", &flBattleSpeed, 0.1f, 25.f, "%.1f");
+
+			ImGui::SameLine();
+
+			ImGui::HelpMarker("Recommended value: 3 - 15.");
 
 			ImGui::Unindent();
 		}

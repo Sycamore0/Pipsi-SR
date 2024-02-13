@@ -19,7 +19,7 @@ namespace OpenMenu
 
 		ImGui::SameLine();
 
-		ImGui::HelpMarker("Hotkey for open menu");
+		ImGui::HelpMarker("Hotkey for open menu.");
 
 		ImGui::EndGroupPanel();
 	}
