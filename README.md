@@ -21,7 +21,8 @@
 
 - Chest Teleport
 - Quest Teleport
-- Talk Speed
+- Auto-Talk
+- Disable Talk Delay
 - Dump Enemies
 
 #### Visuals
@@ -33,7 +34,7 @@
 <h1 align="center">Demo</h1>
 
 <p align="center">
-  <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://i.imgur.com/Tog8uiI.png">
+  <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://i.imgur.com/I0k8vLz.png">
 </p>
 
 <h1 align="center">Only Global Game Version Supported</h1>
