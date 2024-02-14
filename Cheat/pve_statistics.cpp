@@ -16,7 +16,7 @@ namespace PveStatistics
 
 		if (lpResult)
 		{
-			lpResult->costTime *= 2;
+			lpResult->costTime *= flBattleSpeed;
 		}
 
 		return lpResult;

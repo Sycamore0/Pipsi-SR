@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "skip_cutscene.h"
 #include "open_menu.h"
 #include "chest_teleport.h"
 #include "quest_teleport.h"
@@ -30,6 +31,7 @@ namespace Cheats
 
 	VOID RenderWorldTab()
 	{
+		SkipCutscene::Render();
 		ChestTeleport::Render();
 		QuestTeleport::Render();
 		AutoTalk::Render();
@@ -55,6 +57,7 @@ namespace Cheats
 
 		//if (RPG::Client::GlobalVars->s_LoadingManager)
 		//	return;
+		SkipCutscene::Update();
 		OpenMenu::Update();
 		ChestTeleport::Update();
 		QuestTeleport::Update();
@@ -71,6 +74,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		SkipCutscene::Start();
 		OpenMenu::Start();
 		ChestTeleport::Start();
 		QuestTeleport::Start();

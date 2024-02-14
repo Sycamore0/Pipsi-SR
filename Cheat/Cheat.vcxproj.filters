@@ -99,6 +99,9 @@
     <ClInclude Include="open_menu.h">
       <Filter>features</Filter>
     </ClInclude>
+    <ClInclude Include="skip_cutscene.h">
+      <Filter>features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cheats.cpp">
@@ -180,6 +183,9 @@
       <Filter>other</Filter>
     </ClCompile>
     <ClCompile Include="open_menu.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="skip_cutscene.cpp">
       <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>

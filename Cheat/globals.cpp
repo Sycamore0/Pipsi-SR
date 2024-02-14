@@ -38,3 +38,5 @@ bool bCriticalChance = FALSE;
 
 bool bChestTeleport = FALSE;
 unsigned int dwChestTeleportKey = 0;
+
+bool bSkipCutscene = FALSE;
