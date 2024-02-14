@@ -1,3 +1,11 @@
+<p align="center">
+  <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://i.imgur.com/I0k8vLz.png">
+</p>
+
+<p align="center">
+ <a href="https://discord.gg/tPKFCs4VbB"><img src="https://img.shields.io/discord/1207191906958975006?label=Discord&logo=discord&style=for-the-badge&color=blue"></a>
+</p>
+
 <h1 align="center">Getting Started</h1>
 
 ### Usage
@@ -30,11 +38,5 @@
 - Esp
 - Fov changer
 - Peeking
-
-<h1 align="center">Demo</h1>
-
-<p align="center">
-  <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://i.imgur.com/I0k8vLz.png">
-</p>
 
 <h1 align="center">Only Global Game Version Supported</h1>
