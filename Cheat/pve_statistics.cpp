@@ -16,7 +16,17 @@ namespace PveStatistics
 
 		if (lpResult)
 		{
-			lpResult->costTime *= flBattleSpeed;
+			printf("Statistics->totalDelayCumulate: %f\n", lpResult->totalDelayCumulate);
+			printf("Statistics->costTime: %f\n", lpResult->costTime);
+
+			if (bBattleSpeed && flBattleSpeed > 2.f)
+			{
+				if (lpResult->totalDelayCumulate > lpResult->costTime)
+				{
+					lpResult->costTime = lpResult->totalDelayCumulate
+						+ fmod((lpResult->totalDelayCumulate + lpResult->costTime) * 2.f, lpResult->totalDelayCumulate * 2.f);
+				}
+			}
 		}
 
 		return lpResult;
