@@ -36,14 +36,14 @@
 
 #### Visuals
 
-- FPS Indicator
-- FPS Unlocker
 - Esp
 - Fov Changer
 - Peeking
 
 #### Misc
 
+- FPS Indicator
+- FPS Unlocker
 - Load Config
 - Save Config
 
