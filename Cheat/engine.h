@@ -147,13 +147,68 @@ namespace UnityEngine
 	struct Animator {
 		inline static FN(set_speed, void, (void* _this, float value), ANIMATOR_SET_SPEED);
 	};
+	
+	struct Animation {
+		inline static FN(get_clip, void*, (void* _this), il2cpp_base + 0x272ABB0);
+
+		inline static FN(Play_1, bool, (void* _this), il2cpp_base + 0x272AB40);
+
+		inline static FN(Play_2, bool, (void* _this, int mode), il2cpp_base + 0x272AB50);
+
+		inline static FN(Play_3, bool, (void* _this, void* animation, int mode), il2cpp_base + 0x272AB20);
+
+		inline static FN(Play_4, bool, (void* _this, void* animation), il2cpp_base + 0x272AB30);
+	};
+	
+	struct AnimationClip {
+		inline static FN(get_length, float, (void* _this), il2cpp_base + 0x2727C70);
+	};
+
+	struct AnimationCurve {
+		inline static FN(get_length, long, (void* _this), il2cpp_base + 0x27F7C10);
+	};
+
+	struct AnimationState {
+		inline static FN(set_speed, void, (void* _this, float value), il2cpp_base + 0x272A7B0);
+		inline static FN(set_normalizedSpeed, void, (void* _this, float value), il2cpp_base + 0x272A790);
+	};
+
+	struct Application {
+		inline static FN(set_targetFrameRate, void, (int value), il2cpp_base + 0x28800B0);
+	};
 }
+
+struct _EIELKABBJGE {
+	char _[0x10]; // 0x0
+	void* DLLBGIIIMJO; // 0x10
+	long DFLHDLFDPPL; // 0x18
+	float KBMEIHPEOBI; // 0x1C
+};
+
+struct _CJPMFGOOLKO {
+	char _[0x10]; // 0x0
+	_EIELKABBJGE* CELDMFBOAPJ; // 0x10
+	_EIELKABBJGE* DDDMHOACNPH; // 0x18
+	void* PNEOJNECPMA; // 0x20
+	void* GDCEFFKJICD; // 0x28
+	void* GCCEDLGPFDI; // 0x30
+	bool LHNPPKGFBFH; // 0x38
+};
 
 namespace RPG
 {
 	namespace GameCore
 	{
-		enum RPG_GameCore_EntityType {
+		enum TeamType {
+			TeamType_TeamUnknow = 0x0,
+			TeamType_TeamLight = 0x1,
+			TeamType_TeamDark = 0x2,
+			TeamType_TeamNeutral = 0x3,
+			TeamType_TeamNPC = 0x4,
+			TeamType_Count = 0x5,
+		};
+
+		enum EntityType {
 			EntityType_None = 0x0,
 			EntityType_Avatar = 0x1,
 			EntityType_Monster = 0x2,
@@ -258,8 +313,34 @@ namespace RPG
 			unsigned long totalSkillPerformTime; // 0xCC
 			int battleEndReason; // 0xD0
 			int mechanismBarState; // 0xD4
+		};
 
-			inline static FN(BuildPVEStatistics, RPG::GameCore::PVEGameStatistics*, (void* _this), BUILDPVESTATISTICS_BUILDPVESTATISTICS);
+		struct StatisticsComponent {
+			char _[0x10]; // 0x0
+			void* _OwnerEntity; // 0x10
+			void* _LightTeamStt; // 0x18
+			void* _MonsterStt; // 0x20
+			void* _BattleEventStt; // 0x28
+			void* _TurnSttList; // 0x30
+			void* _CharacterDeathStt; // 0x38
+			void* _AvatarTurnBPChain; // 0x40
+			void* _monsterPhaseChangeInfos; // 0x48
+			void* _AvatarInitialProperty; // 0x50
+			void* _CustomValues; // 0x58
+			void* _LastTurnAvatarPropertySnapshot; // 0x60
+			void* _StatisticSnapShot; // 0x68
+			void* _StatisticEvents; // 0x70
+			void* _actionBarEvents; // 0x78
+			void* _CustomStringHashSet; // 0x80
+			unsigned long _totalBattleRounds; // 0x88
+			unsigned long _totalBattleTurns; // 0x8C
+			unsigned long _totalAutoTurns; // 0x90
+			unsigned long _totalAvatarTurns; // 0x94
+			unsigned long _totalMonsterTurns; // 0x98
+			float _turnSkillPerformTime; // 0x9C
+			float _totalSkillPerformTime; // 0xA0
+
+			inline static FN(BuildPVEStatistics, RPG::GameCore::PVEGameStatistics*, (RPG::GameCore::StatisticsComponent* _this), BUILDPVESTATISTICS_BUILDPVESTATISTICS);
 		};
 
 		struct GameEntity {
@@ -314,6 +395,7 @@ namespace RPG
 			bool IsOnStage; // 0x103
 
 			inline static FN(get_UnityGO, void*, (void* _this), GAMEENTITY_GET_UNITYGO);
+			inline static FN(get_Team, int, (void* _this), il2cpp_base + 0x3EBE250);
 		};
 
 		struct GameWorld {
@@ -387,6 +469,14 @@ namespace RPG
 
 			inline static FN(get_OwnerEntity, void*, (void* _this), PROPCOMPONENT_GET_OWNERENTITY);
 			inline static FN(get_PropState, int, (void* _this), PROPCOMPONENT_GET_PROPSTATE);
+		};
+
+		struct TurnBasedGameMode {
+			inline static FN(GetCurrenTurnActionEntity, void*, (void* _this), il2cpp_base + 0x3F13620);
+		};
+
+		struct BattleInstance {
+			inline static FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), il2cpp_base + 0x35F3770);
 		};
 	}
 
@@ -462,7 +552,10 @@ namespace RPG
 			inline static FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), il2cpp_base + 0x38EA6F0);
 		};
 
-
+		struct NetworkManager
+		{
+			inline static FN(NNHJJEODNNM, void, (void* _this, void* AKDCMCOCOAK, void* EGJIEDMPAHC, int MPFGJDMBCMH, unsigned long HGBNPHKHDFI, unsigned long LAPIOCAAOLL, unsigned long KINGCCKOHGH, bool KAHAFDPHHJE), il2cpp_base + 0x37F5300);
+		};
 	}
 }
 
@@ -487,11 +580,19 @@ namespace XLua
 	}
 }
 
+
+struct CJPMFGOOLKO
+{
+	inline static FN(DPKCLBMCOAK, void, (unsigned long HGBNPHKHDFI, unsigned long LAPIOCAAOLL), il2cpp_base + 0x30E2990);
+};
+
 namespace Engine
 {
 	System::Collections::Generic::List* GetWorldEntityList();
 	System::Collections::Generic::List* GetMapPropList();
 	System::Collections::Generic::List* GetPropEntityList();
+
+	void* GetTurnBasedGameMode();
 
 	bool GetResolutionScale(Vector2* lpResolutionScale);
 	bool GetScreenPosition(Vector2* lpResolutionScale, void* lpWorldPosition, Vector3* lpRet);

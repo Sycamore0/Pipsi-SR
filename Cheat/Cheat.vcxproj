@@ -56,11 +56,13 @@
     <ClInclude Include="battle_speed.h" />
     <ClInclude Include="cheats.h" />
     <ClInclude Include="chest_teleport.h" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="dump_enemies.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="esp.h" />
     <ClInclude Include="force_autobattle.h" />
     <ClInclude Include="fov.h" />
+    <ClInclude Include="fps.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hooks.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -88,11 +90,13 @@
     <ClCompile Include="battle_speed.cpp" />
     <ClCompile Include="cheats.cpp" />
     <ClCompile Include="chest_teleport.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="dump_enemies.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="esp.cpp" />
     <ClCompile Include="force_autobattle.cpp" />
     <ClCompile Include="fov.cpp" />
+    <ClCompile Include="fps.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hooks.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />

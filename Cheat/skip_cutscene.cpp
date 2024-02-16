@@ -12,7 +12,7 @@ namespace SkipCutscene
 {
 	void _OnTickHandler(RPG::Client::ManaVideoPageContext* _this, float deltaSecond)
 	{
-		if (bSkipCutscene && _this)
+		if (Options.bSkipCutscene && _this)
 		{
 			_this->_canSkip = TRUE;
 		}
@@ -24,18 +24,11 @@ namespace SkipCutscene
 	{
 		ImGui::BeginGroupPanel("Skip Cutscene");
 
-		ImGui::Checkbox("Enable", &bSkipCutscene);
+		ImGui::Checkbox("Enable", &Options.bSkipCutscene);
 
 		ImGui::SameLine();
 
 		ImGui::HelpMarker("Unlocks the game skip button (work only with video cutscene).");
-
-		//if (bSkipCutscene)
-		//{
-		//	ImGui::Indent();
-
-		//	ImGui::Unindent();
-		//}
 
 		ImGui::EndGroupPanel();
 	}

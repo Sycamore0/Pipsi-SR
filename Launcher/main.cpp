@@ -101,9 +101,16 @@ BOOL InjectCheat(HANDLE hProcess)
 
 int main()
 {
+	CHAR lpCurrentDirectory[MAX_PATH];
+	GetCurrentDirectoryA(MAX_PATH, lpCurrentDirectory);
+
+	std::string ConfigFilePath = lpCurrentDirectory;
+
+	ConfigFilePath += CONFIG_NAME;
+
 	CHAR lpExecutablePath[MAX_PATH] = { 0 };
 
-	DWORD dwBytesRead = GetPrivateProfileStringA("Paths", "ExecutablePath", "", lpExecutablePath, sizeof(lpExecutablePath), CONFIG_NAME);
+	DWORD dwBytesRead = GetPrivateProfileStringA("Paths", "ExecutablePath", "", lpExecutablePath, sizeof(lpExecutablePath), ConfigFilePath.c_str());
 
 	if (dwBytesRead == 0)
 	{
@@ -118,7 +125,9 @@ int main()
 		if (!GetOpenFileNameA(&OpenFileName))
 			return -1;
 
-		WritePrivateProfileStringA("Paths", "ExecutablePath", lpExecutablePath, CONFIG_NAME);
+		WritePrivateProfileStringA("Paths", "ExecutablePath", lpExecutablePath, ConfigFilePath.c_str());
+
+		SetCurrentDirectoryA(lpCurrentDirectory);
 	}
 
 	STARTUPINFOA StartupInfo = { sizeof(StartupInfo) };

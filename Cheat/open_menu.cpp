@@ -15,7 +15,7 @@ namespace OpenMenu
 	{
 		ImGui::BeginGroupPanel("Open Menu");
 
-		ImGui::Hotkey(&dwMenuKey);
+		ImGui::Hotkey(&Options.dwMenuKey);
 
 		ImGui::SameLine();
 

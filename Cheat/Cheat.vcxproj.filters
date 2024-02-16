@@ -102,6 +102,12 @@
     <ClInclude Include="skip_cutscene.h">
       <Filter>features</Filter>
     </ClInclude>
+    <ClInclude Include="fps.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cheats.cpp">
@@ -186,6 +192,12 @@
       <Filter>features</Filter>
     </ClCompile>
     <ClCompile Include="skip_cutscene.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="fps.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
       <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>

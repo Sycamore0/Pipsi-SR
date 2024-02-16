@@ -15,17 +15,17 @@ namespace Noclip
 	{
 		ImGui::BeginGroupPanel("Noclip");
 
-		ImGui::Checkbox("Enable", &bNoclip);
+		ImGui::Checkbox("Enable", &Options.bNoclip);
 
 		ImGui::SameLine();
 
-		ImGui::Hotkey(&dwNoclipKey);
+		ImGui::Hotkey(&Options.dwNoclipKey);
 
-		if (bNoclip)
+		if (Options.bNoclip)
 		{
 			ImGui::Indent();
 			
-			ImGui::SliderFloat("Speed", &flNoclipSpeed, 0.01f, 100.f, "%.2f");
+			ImGui::SliderFloat("Speed", &Options.flNoclipSpeed, 0.01f, 100.f, "%.2f");
 
 			ImGui::Unindent();
 		}
@@ -35,7 +35,7 @@ namespace Noclip
 
 	void Update()
 	{
-		if (!bNoclip || !Inputs::GetState(dwNoclipKey, INPUT_TYPE_TOGGLE))
+		if (!Options.bNoclip || !Inputs::GetState(Options.dwNoclipKey, INPUT_TYPE_TOGGLE))
 			return;
 
 		__try
@@ -78,7 +78,7 @@ namespace Noclip
 				Direction = -Direction;
 			}
 
-			Position += Direction * flNoclipSpeed * UnityEngine::Time::get_deltaTime();
+			Position += Direction * Options.flNoclipSpeed * UnityEngine::Time::get_deltaTime();
 
 			UnityEngine::Transform::set_position_Injected(lpTransform, &Position);
 		}

@@ -37,6 +37,26 @@ namespace Engine
 		return lpPropManager->PropEntityList;
 	}
 
+	void* GetTurnBasedGameMode()
+	{
+		PVOID lpEntityManager = RPG::GameCore::AdventureStatic::GetEntityManager();
+
+		if (!lpEntityManager)
+			return NULL;
+
+		RPG::GameCore::GameWorld* lpWorld = RPG::GameCore::EntityManager::get_OwnerWorldRef(lpEntityManager);
+
+		if (!lpWorld)
+			return NULL;
+
+		PVOID lpBattleInstance = lpWorld->_BattleInstanceRef;
+
+		if (!lpBattleInstance)
+			return NULL;
+
+		return RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
+	}
+
 	bool GetResolutionScale(Vector2* lpResolutionScale)
 	{
 		PVOID lpMainCamera = UnityEngine::Camera::get_main();

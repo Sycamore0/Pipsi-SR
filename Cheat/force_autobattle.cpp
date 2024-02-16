@@ -10,21 +10,8 @@
 
 namespace ForceAutoBattle
 {
-	static bool get_AutoBattleHandler(void* _this)
-	{
-		if (bForceAutoBattle)
-			return TRUE;
-
-		return CALL_ORIGIN(get_AutoBattleHandler, _this);
-	}
-
 	void Render()
 	{
-		//ImGui::BeginGroupPanel("Force Auto-Battle");
-
-		//ImGui::Checkbox("Enable", &bForceAutoBattle);
-
-		//ImGui::EndGroupPanel();
 	}
 
 	void Update()
@@ -33,7 +20,5 @@ namespace ForceAutoBattle
 
 	void Start()
 	{
-		// detected ):
-		// CreateHook(RPG::Client::TurnBasedGameMode::get_AutoBattle, get_AutoBattleHandler);
 	}
 }

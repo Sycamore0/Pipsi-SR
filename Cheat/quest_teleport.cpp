@@ -16,10 +16,10 @@ namespace QuestTeleport
 	{
 		void* lpResult = CALL_ORIGIN(GetTargetPosHandler, _this, _res);
 
-		if (!lpResult || !bQuestTeleport)
+		if (!lpResult || !Options.bQuestTeleport)
 			return lpResult;
 
-		if (Inputs::GetState(dwQuestTeleportKey, INPUT_TYPE_HOLD))
+		if (Inputs::GetState(Options.dwQuestTeleportKey, INPUT_TYPE_HOLD))
 		{
 			__try
 			{
@@ -38,11 +38,11 @@ namespace QuestTeleport
 	{
 		ImGui::BeginGroupPanel("Quest Teleport");
 
-		ImGui::Checkbox("Enable", &bQuestTeleport);
+		ImGui::Checkbox("Enable", &Options.bQuestTeleport);
 
 		ImGui::SameLine();
 
-		ImGui::Hotkey(&dwQuestTeleportKey);
+		ImGui::Hotkey(&Options.dwQuestTeleportKey);
 
 		ImGui::EndGroupPanel();
 	}

@@ -3,41 +3,45 @@
 
 extern WNDPROC lpWndProc;
 
-extern bool bMenu;
-extern unsigned int dwMenuKey;
+struct OPTIONS
+{
+	bool bMenu;
+	unsigned int dwMenuKey;
 
-extern bool bNoclip;
-extern unsigned int dwNoclipKey;
-extern float flNoclipSpeed;
+	bool bNoclip;
+	unsigned int dwNoclipKey;
+	float flNoclipSpeed;
 
-extern bool bEsp;
-extern float flEspDistance;
-extern bool bEspMonster;
-extern bool bEspNpc;
-extern bool bEspProp;
-extern bool bEspMission;
+	bool bEsp;
+	float flEspDistance;
+	bool bEspMonster;
+	bool bEspNpc;
+	bool bEspProp;
+	bool bEspMission;
 
-extern bool bForceAutoBattle;
+	bool bDumpEnemies;
 
-extern bool bDumpEnemies;
+	bool bPeeking;
 
-extern bool bPeeking;
+	bool bFov;
+	float flFov;
 
-extern bool bFov;
-extern float flFov;
+	bool bBattleSpeed;
+	float flBattleSpeed;
 
-extern bool bBattleSpeed;
-extern float flBattleSpeed;
+	bool bAutoTalk;
+	bool bAutoTalkDisableDelay;
 
-extern bool bAutoTalk;
-extern bool bAutoTalkDisableDelay;
+	bool bQuestTeleport;
+	unsigned int dwQuestTeleportKey;
 
-extern bool bQuestTeleport;
-extern unsigned int dwQuestTeleportKey;
+	bool bChestTeleport;
+	unsigned int dwChestTeleportKey;
 
-extern bool bCriticalChance;
+	bool bSkipCutscene;
 
-extern bool bChestTeleport;
-extern unsigned int dwChestTeleportKey;
+	bool bFpsIndicator;
+	int iFpsValue;
+};
 
-extern bool bSkipCutscene;
+extern OPTIONS Options;

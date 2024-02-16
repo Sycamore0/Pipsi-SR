@@ -16,9 +16,9 @@ LRESULT WndProcHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	Inputs::OnWindowMessage(uMsg, wParam, lParam);
 
-	bMenu = Inputs::GetState(dwMenuKey, INPUT_TYPE_TOGGLE);
+	Options.bMenu = Inputs::GetState(Options.dwMenuKey, INPUT_TYPE_TOGGLE);
 
-	if (bMenu)
+	if (Options.bMenu)
 	{
 		ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam);
 
@@ -75,9 +75,9 @@ BOOL RenderTabs()
 
 BOOL RenderHandler(PVOID lpRenderParameter)
 {
-	if (bMenu)
+	if (Options.bMenu)
 	{
-		ImGui::Begin(__DATE__);
+		ImGui::Begin("Pipsi-SR | " __DATE__);
 
 		RenderTabs();
 

@@ -2,41 +2,31 @@
 
 WNDPROC lpWndProc = NULL;
 
-bool bMenu = FALSE;
-unsigned int dwMenuKey = VK_INSERT;
-
-bool bNoclip = FALSE;
-unsigned int dwNoclipKey = 0;
-float flNoclipSpeed = 1.f;
-
-bool bEsp = FALSE;
-float flEspDistance = 50.f;
-bool bEspMonster = FALSE;
-bool bEspNpc = FALSE;
-bool bEspProp = FALSE;
-bool bEspMission = FALSE;
-
-bool bForceAutoBattle = FALSE;
-
-bool bDumpEnemies = FALSE;
-
-bool bPeeking = FALSE;
-
-bool bFov = FALSE;
-float flFov = 100.f;
-
-bool bBattleSpeed = FALSE;
-float flBattleSpeed = 2.f;
-
-bool bAutoTalk = FALSE;
-bool bAutoTalkDisableDelay = FALSE;
-
-bool bQuestTeleport = FALSE;
-unsigned int dwQuestTeleportKey = 0;
-
-bool bCriticalChance = FALSE;
-
-bool bChestTeleport = FALSE;
-unsigned int dwChestTeleportKey = 0;
-
-bool bSkipCutscene = FALSE;
+OPTIONS Options = {
+	FALSE,
+	VK_INSERT,
+	FALSE,
+	0,
+	1.f,
+	FALSE,
+	50.f,
+	FALSE,
+	FALSE,
+	FALSE,
+	FALSE,
+	FALSE,
+	FALSE,
+	FALSE,
+	100.f,
+	FALSE,
+	2.f,
+	FALSE,
+	FALSE,
+	FALSE,
+	0,
+	FALSE,
+	0,
+	FALSE,
+	TRUE,
+	60,
+};

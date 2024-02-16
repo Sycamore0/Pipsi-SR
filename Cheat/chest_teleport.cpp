@@ -33,7 +33,7 @@ namespace ChestTeleport
 	{
 		CALL_ORIGIN(TickHandler, _this, fElapsedTimeInSec);
 
-		if (bChestTeleport && Inputs::GetState(dwChestTeleportKey, INPUT_TYPE_HOLD))
+		if (Options.bChestTeleport && Inputs::GetState(Options.dwChestTeleportKey, INPUT_TYPE_HOLD))
 		{
 			__try
 			{
@@ -58,11 +58,11 @@ namespace ChestTeleport
 	{
 		ImGui::BeginGroupPanel("Chest Teleport");
 
-		ImGui::Checkbox("Enable", &bChestTeleport);
+		ImGui::Checkbox("Enable", &Options.bChestTeleport);
 
 		ImGui::SameLine();
 
-		ImGui::Hotkey(&dwChestTeleportKey);
+		ImGui::Hotkey(&Options.dwChestTeleportKey);
 
 		ImGui::EndGroupPanel();
 	}

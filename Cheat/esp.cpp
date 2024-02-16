@@ -16,7 +16,7 @@ namespace Esp
 		if (!Engine::GetEntityPosition(lpEntity, &Position))
 			return;
 
-		if (PlayerPosition->Distance(Position) > flEspDistance)
+		if (PlayerPosition->Distance(Position) > Options.flEspDistance)
 			return;
 
 		Vector3 ScreenPosition = {};
@@ -38,18 +38,18 @@ namespace Esp
 	{
 		ImGui::BeginGroupPanel("Esp");
 
-		ImGui::Checkbox("Enable", &bEsp);
+		ImGui::Checkbox("Enable", &Options.bEsp);
 
-		if (bEsp)
+		if (Options.bEsp)
 		{
 			ImGui::Indent();
 
-			ImGui::SliderFloat("Distance", &flEspDistance, 1.f, 300.f, "%.1f");
+			ImGui::SliderFloat("Distance", &Options.flEspDistance, 1.f, 300.f, "%.1f");
 
-			ImGui::Checkbox("Monster", &bEspMonster);
-			ImGui::Checkbox("Npc", &bEspNpc);
-			ImGui::Checkbox("Prop", &bEspProp);
-			ImGui::Checkbox("Mission", &bEspMission);
+			ImGui::Checkbox("Monster", &Options.bEspMonster);
+			ImGui::Checkbox("Npc", &Options.bEspNpc);
+			ImGui::Checkbox("Prop", &Options.bEspProp);
+			ImGui::Checkbox("Mission", &Options.bEspMission);
 
 			ImGui::Unindent();
 		}
@@ -59,7 +59,7 @@ namespace Esp
 
 	void Update()
 	{
-		if (!bEsp || Engine::GetPhaseType() != RPG::Client::GamePhaseType_Adventure)
+		if (!Options.bEsp || Engine::GetPhaseType() != RPG::Client::GamePhaseType_Adventure)
 			return;
 
 		__try
@@ -94,16 +94,16 @@ namespace Esp
 				{
 				case RPG::GameCore::EntityType_Monster:
 				case RPG::GameCore::EntityType_NPCMonster:
-					if (!bEspMonster) continue;
+					if (!Options.bEspMonster) continue;
 					break;
 				case RPG::GameCore::EntityType_NPC:
-					if (!bEspNpc) continue;
+					if (!Options.bEspNpc) continue;
 					break;
 				case RPG::GameCore::EntityType_Prop:
-					if (!bEspProp) continue;
+					if (!Options.bEspProp) continue;
 					break;
 				case RPG::GameCore::EntityType_Mission:
-					if (!bEspMission) continue;
+					if (!Options.bEspMission) continue;
 					break;
 				default:
 					continue;

@@ -1,5 +1,7 @@
 #include "cheats.h"
 
+#include "config.h"
+#include "fps.h"
 #include "skip_cutscene.h"
 #include "open_menu.h"
 #include "chest_teleport.h"
@@ -47,6 +49,8 @@ namespace Cheats
 
 	VOID RenderMiscTab()
 	{
+		Config::Render();
+		Fps::Render();
 		OpenMenu::Render();
 	}
 
@@ -57,6 +61,8 @@ namespace Cheats
 
 		//if (RPG::Client::GlobalVars->s_LoadingManager)
 		//	return;
+		Config::Update();
+		Fps::Update();
 		SkipCutscene::Update();
 		OpenMenu::Update();
 		ChestTeleport::Update();
@@ -74,6 +80,8 @@ namespace Cheats
 
 	VOID Start()
 	{
+		Config::Start();
+		Fps::Start();
 		SkipCutscene::Start();
 		OpenMenu::Start();
 		ChestTeleport::Start();

@@ -12,7 +12,7 @@ namespace Peeking
 {
 	static void* SetElevationDitherAlphaValueHandler(void* _this, float EOBOBKJIJFA)
 	{
-		if (bPeeking)
+		if (Options.bPeeking)
 			return NULL;
 
 		return CALL_ORIGIN(SetElevationDitherAlphaValueHandler, _this, EOBOBKJIJFA);
@@ -22,7 +22,7 @@ namespace Peeking
 	{
 		ImGui::BeginGroupPanel("Peeking");
 
-		ImGui::Checkbox("Enable", &bPeeking);
+		ImGui::Checkbox("Enable", &Options.bPeeking);
 
 		ImGui::EndGroupPanel();
 	}

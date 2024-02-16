@@ -10,23 +10,20 @@
 
 namespace PveStatistics
 {
-	RPG::GameCore::PVEGameStatistics* BuildPVEStatisticsHandler(void* _this)
+	RPG::GameCore::PVEGameStatistics* BuildPVEStatisticsHandler(RPG::GameCore::StatisticsComponent* _this)
 	{
+		if (_this)
+		{
+			printf("StatisticsComponent->_turnSkillPerformTime: %f\n", _this->_turnSkillPerformTime);
+			printf("StatisticsComponent->_totalSkillPerformTime: %f\n", _this->_totalSkillPerformTime);
+		}
+
 		RPG::GameCore::PVEGameStatistics* lpResult = CALL_ORIGIN(BuildPVEStatisticsHandler, _this);
 
 		if (lpResult)
 		{
-			printf("Statistics->totalDelayCumulate: %f\n", lpResult->totalDelayCumulate);
-			printf("Statistics->costTime: %f\n", lpResult->costTime);
-
-			if (bBattleSpeed && flBattleSpeed > 2.f)
-			{
-				if (lpResult->totalDelayCumulate > lpResult->costTime)
-				{
-					lpResult->costTime = lpResult->totalDelayCumulate
-						+ fmod((lpResult->totalDelayCumulate + lpResult->costTime) * 2.f, lpResult->totalDelayCumulate * 2.f);
-				}
-			}
+			printf("StatisticsComponent->totalDelayCumulate: %f\n", lpResult->totalDelayCumulate);
+			printf("StatisticsComponent->costTime: %f\n", lpResult->costTime);
 		}
 
 		return lpResult;
@@ -42,6 +39,6 @@ namespace PveStatistics
 
 	void Start()
 	{
-		CreateHook(RPG::GameCore::PVEGameStatistics::BuildPVEStatistics, BuildPVEStatisticsHandler);
+		// CreateHook(RPG::GameCore::StatisticsComponent::BuildPVEStatistics, BuildPVEStatisticsHandler);
 	}
 }

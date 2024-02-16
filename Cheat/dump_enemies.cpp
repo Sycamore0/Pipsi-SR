@@ -12,7 +12,7 @@ namespace DumpEnemies
 {
 	static void* TickAlertValueHandler(void* _this, float fElapsedTimeInSec, void* target, void* detail)
 	{
-		if (bDumpEnemies)
+		if (Options.bDumpEnemies)
 			return NULL;
 
 		return CALL_ORIGIN(TickAlertValueHandler, _this, fElapsedTimeInSec, target, detail);
@@ -22,7 +22,7 @@ namespace DumpEnemies
 	{
 		ImGui::BeginGroupPanel("Dump Enemies");
 
-		ImGui::Checkbox("Enable", &bDumpEnemies);
+		ImGui::Checkbox("Enable", &Options.bDumpEnemies);
 
 		ImGui::EndGroupPanel();
 	}

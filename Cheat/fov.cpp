@@ -14,8 +14,8 @@ namespace Fov
 	{
 		FLOAT flValue;
 
-		if (bFov)
-			flValue = flFov;
+		if (Options.bFov)
+			flValue = Options.flFov;
 		else
 			flValue = value;
 
@@ -26,13 +26,13 @@ namespace Fov
 	{
 		ImGui::BeginGroupPanel("Fov");
 
-		ImGui::Checkbox("Enable", &bFov);
+		ImGui::Checkbox("Enable", &Options.bFov);
 
-		if (bFov)
+		if (Options.bFov)
 		{
 			ImGui::Indent();
 			
-			ImGui::SliderFloat("Value", &flFov, 1.f, 359.f, "%.1f");
+			ImGui::SliderFloat("Value", &Options.flFov, 1.f, 359.f, "%.1f");
 
 			ImGui::Unindent();
 		}

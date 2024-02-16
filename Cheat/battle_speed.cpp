@@ -8,13 +8,29 @@
 
 #include "imgui_internal.h"
 
+
+
 namespace BattleSpeed
 {
-	void set_speedHandler(void* _this, float value)
+	int iCurrenTurnEntityTeam = 0;
+
+	static void* GetCurrenTurnActionEntityHandler(void* _this)
+	{
+		PVOID lpResult = CALL_ORIGIN(GetCurrenTurnActionEntityHandler, _this);
+
+		if (lpResult)
+		{
+			iCurrenTurnEntityTeam = RPG::GameCore::GameEntity::get_Team(lpResult);
+		}
+
+		return lpResult;
+	}
+
+	static void set_speedHandler(void* _this, float value)
 	{
 		FLOAT flValue = value;
 
-		if (bBattleSpeed)
+		if (Options.bBattleSpeed)
 		{
 			__try
 			{
@@ -24,7 +40,8 @@ namespace BattleSpeed
 				case RPG::Client::GamePhaseType_QABattleLineup:
 				case RPG::Client::GamePhaseType_Battle:
 				case RPG::Client::GamePhaseType_BattleNew:
-					flValue = flBattleSpeed;
+					if (iCurrenTurnEntityTeam == RPG::GameCore::TeamType_TeamDark)
+						flValue = Options.flBattleSpeed;
 					break;
 				default:
 					break;
@@ -45,17 +62,13 @@ namespace BattleSpeed
 	{
 		ImGui::BeginGroupPanel("Battle Speed");
 
-		ImGui::Checkbox("Enable", &bBattleSpeed);
+		ImGui::Checkbox("Enable", &Options.bBattleSpeed);
 
-		if (bBattleSpeed)
+		if (Options.bBattleSpeed)
 		{
 			ImGui::Indent();
 
-			ImGui::SliderFloat("Value", &flBattleSpeed, 0.1f, 25.f, "%.1f");
-
-			ImGui::SameLine();
-
-			ImGui::HelpMarker("Recommended value: 3 - 15.");
+			ImGui::SliderFloat("Value", &Options.flBattleSpeed, 0.1f, 1000.f, "%.1f");
 
 			ImGui::Unindent();
 		}
@@ -70,5 +83,6 @@ namespace BattleSpeed
 	void Start()
 	{
 		CreateHook(UnityEngine::Animator::set_speed, set_speedHandler);
+		CreateHook(RPG::GameCore::TurnBasedGameMode::GetCurrenTurnActionEntity, GetCurrenTurnActionEntityHandler);
 	}
 }
