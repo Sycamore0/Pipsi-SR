@@ -27,6 +27,7 @@
 
 #### World
 
+- Cutscene Skip
 - Chest Teleport
 - Quest Teleport
 - Auto-Talk
@@ -36,7 +37,14 @@
 #### Visuals
 
 - Esp
-- Fov changer
+- Fov Changer
 - Peeking
+
+#### Misc
+
+- FPS Indicator
+- FPS Unlocker
+- Load Config
+- Save Config
 
 <h1 align="center">Only Global Game Version Supported</h1>
