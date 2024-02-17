@@ -32,6 +32,7 @@
 - Quest Teleport
 - Auto-Talk
 - Disable Talk Delay
+- Skip Scenes
 - Dump Enemies
 
 #### Visuals
