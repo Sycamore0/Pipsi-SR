@@ -8,7 +8,7 @@
 
 static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 
-#define GLOBALWARS (il2cpp_base + 0x8889A80)
+#define GLOBALVARS (il2cpp_base + 0x8889A80)
 
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2891420)
 #define SCREEN_GET_WIDTH (il2cpp_base + 0x25A6D30)
@@ -41,7 +41,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define RPGGAMECORESIMPLETALKINFOWRAP_G_GET_FORCETONEXTTIME (il2cpp_base + 0x55B7A90)
 #define RPGGAMECORESIMPLETALKINFOWRAP_G_GET_PROTECTTIME (il2cpp_base + 0x55B7B70)
 
-inline static SD(lpGlobalVars, void**, GLOBALWARS);
+inline static SD(lpGlobalVars, void**, GLOBALVARS);
 
 struct Vector2
 {
@@ -176,6 +176,21 @@ namespace UnityEngine
 	struct Application {
 		inline static FN(set_targetFrameRate, void, (int value), il2cpp_base + 0x28800B0);
 	};
+
+	namespace Timeline
+	{
+		struct TimelineClip {
+			inline static FN(set_duration, void, (void* _this, double value), il2cpp_base + 0x1DDED90);
+		};
+	}
+
+	namespace Playables
+	{
+		struct PlayableGraph {
+			inline static FN(IsPlaying_Injected, bool, (void* _unity_self), il2cpp_base + 0x288F150);
+			inline static FN(IsDone_Injected, bool, (void* _unity_self), il2cpp_base + 0x288F140);
+		};
+	}
 }
 
 struct _EIELKABBJGE {
@@ -585,6 +600,63 @@ struct CJPMFGOOLKO
 {
 	inline static FN(DPKCLBMCOAK, void, (unsigned long HGBNPHKHDFI, unsigned long LAPIOCAAOLL), il2cpp_base + 0x30E2990);
 };
+
+namespace RPGTools
+{
+	namespace Timeline
+	{
+		enum DontHidePanelType {
+			DontHidePanelType_None = 0x0,
+			DontHidePanelType_BGImage = 0x1,
+			DontHidePanelType_SimpleTalk = 0x2,
+			DontHidePanelType_BlackMask = 0x4,
+		};
+
+		struct PlaySimpleTalkClip
+		{
+			char _[0x18];
+			void* TimelineClip; // 0x18
+			bool ShowMouthAssetCheck; // 0x20
+			void* Config; // 0x28
+			bool BlackMask; // 0x30
+			bool HaveProtectTime; // 0x31
+			void* UniqueName; // 0x38
+			bool Use3DVoice; // 0x40
+			bool UseDiscussionMouthTalk; // 0x41
+			void* _template; // 0x48
+			void* MouthInfo; // 0x50
+			float Duration; // 0x58
+			bool AutoEnd; // 0x5C
+			void* _BehaviourRef; // 0x60
+
+			inline static FN(CreatePlayable, void*, (void* _ret, RPGTools::Timeline::PlaySimpleTalkClip* _this, void* FGJHMJAANHJ, void* LGIPCEPICCO), il2cpp_base + 0x3EFF450);
+			inline static FN(get_clipCaps, int, (RPGTools::Timeline::PlaySimpleTalkClip* _this), il2cpp_base + 0x3EFF6F0);
+		};
+
+		struct PlaySimpleTalkMixer
+		{
+			char _[0x10];
+			double _Duration; // 0x10
+			void* _Director; // 0x18
+			System::Collections::Generic::List* _TimelineClips; // 0x20
+			System::Collections::Generic::List* _ClipOrder; // 0x28
+			long _LastClearMarkerClipIndex; // 0x30
+
+			inline static FN(ProcessFrame, void, (RPGTools::Timeline::PlaySimpleTalkMixer* _this, void* LNDPLMAKCIG, void* DFNKMHPFLAJ, void* NCBODICOGDF), il2cpp_base + 0x3E097A0);
+			inline static FN(ALNBNLOFPKK, void, (RPGTools::Timeline::PlaySimpleTalkMixer* _this, void* PDAACGNMFLF), il2cpp_base + 0x3E09020);
+		};
+
+		struct SimpleTalkMarkerClip
+		{
+			char _[0x18];
+			bool HideAll; // 0x18
+			int DontHidePanels; // 0x1C
+			void* _template; // 0x20
+
+			inline static FN(get_clipCaps, int, (RPGTools::Timeline::SimpleTalkMarkerClip* _this), il2cpp_base + 0x3C4B230);
+		};
+	}
+}
 
 namespace Engine
 {

@@ -27,10 +27,12 @@ struct OPTIONS
 	float flFov;
 
 	bool bBattleSpeed;
-	float flBattleSpeed;
+	float flBattleDarkTeamSpeed;
+	float flBattleLightTeamSpeed;
 
 	bool bAutoTalk;
 	bool bAutoTalkDisableDelay;
+	bool bAutoTalkSkipScenes;
 
 	bool bQuestTeleport;
 	unsigned int dwQuestTeleportKey;
@@ -42,6 +44,38 @@ struct OPTIONS
 
 	bool bFpsIndicator;
 	int iFpsValue;
+
+    OPTIONS() :
+        bMenu(FALSE),
+        dwMenuKey(VK_INSERT),
+        bNoclip(FALSE),
+        dwNoclipKey(0),
+        flNoclipSpeed(15.f),
+        bEsp(FALSE),
+        flEspDistance(25.f),
+        bEspMonster(FALSE),
+        bEspNpc(FALSE),
+        bEspProp(FALSE),
+        bEspMission(FALSE),
+        bDumpEnemies(FALSE),
+        bPeeking(FALSE),
+        bFov(FALSE),
+        flFov(100.f),
+        bBattleSpeed(FALSE),
+        flBattleDarkTeamSpeed(5.f),
+        flBattleLightTeamSpeed(2.f),
+        bAutoTalk(FALSE),
+        bAutoTalkDisableDelay(FALSE),
+        bAutoTalkSkipScenes(FALSE),
+        bQuestTeleport(FALSE),
+        dwQuestTeleportKey(0),
+        bChestTeleport(FALSE),
+        dwChestTeleportKey(0),
+        bSkipCutscene(FALSE),
+        bFpsIndicator(TRUE),
+        iFpsValue(60)
+    {
+    }
 };
 
 extern OPTIONS Options;

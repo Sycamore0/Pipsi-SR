@@ -41,7 +41,9 @@ namespace BattleSpeed
 				case RPG::Client::GamePhaseType_Battle:
 				case RPG::Client::GamePhaseType_BattleNew:
 					if (iCurrenTurnEntityTeam == RPG::GameCore::TeamType_TeamDark)
-						flValue = Options.flBattleSpeed;
+						flValue = Options.flBattleDarkTeamSpeed;
+					else if(iCurrenTurnEntityTeam == RPG::GameCore::TeamType_TeamLight)
+						flValue = Options.flBattleLightTeamSpeed;
 					break;
 				default:
 					break;
@@ -68,7 +70,8 @@ namespace BattleSpeed
 		{
 			ImGui::Indent();
 
-			ImGui::SliderFloat("Value", &Options.flBattleSpeed, 0.1f, 1000.f, "%.1f");
+			ImGui::SliderFloat("Dark Team", &Options.flBattleDarkTeamSpeed, 0.1f, 100.f, "%.1f");
+			ImGui::SliderFloat("Light Team", &Options.flBattleLightTeamSpeed, 0.1f, 5.f, "%.1f");
 
 			ImGui::Unindent();
 		}
