@@ -63,7 +63,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define TRANSFORM_GET_POSITION_INJECTED (il2cpp_base + 0x25D7BB0)
 #define TRANSFORM_SET_POSITION_INJECTED (il2cpp_base + 0x25D7FF0)
 #define GAMEOBJECT_GET_TRANSFORM (il2cpp_base + 0x276E270)
-#define ANIMATOR_SET_SPEED (il2cpp_base + 0x272D950)
+#define ANIMATOR_SET_SPEED (il2cpp_base + 0x260CE30)
 #define GAMEENTITY_GET_UNITYGO (il2cpp_base + 0x3B84960)
 #define ENTITYMANAGER_GET_OWNERWORLDREF (il2cpp_base + 0x3878DE0)
 #define ADVENTURESTATIC_GETENTITYMANAGER (il2cpp_base + 0x3869FE0)
