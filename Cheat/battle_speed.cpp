@@ -42,7 +42,7 @@ namespace BattleSpeed
 				case RPG::Client::GamePhaseType_BattleNew:
 					if (iCurrenTurnEntityTeam == RPG::GameCore::TeamType_TeamDark)
 						flValue = Options.flBattleDarkTeamSpeed;
-					else if(iCurrenTurnEntityTeam == RPG::GameCore::TeamType_TeamLight)
+					else if (iCurrenTurnEntityTeam == RPG::GameCore::TeamType_TeamLight)
 						flValue = Options.flBattleLightTeamSpeed;
 					break;
 				default:
