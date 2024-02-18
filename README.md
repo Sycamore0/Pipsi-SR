@@ -1,5 +1,5 @@
 <p align="center">
-  <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://i.imgur.com/I0k8vLz.png">
+  <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://i.imgur.com/JVAenG1.png">
 </p>
 
 <p align="center">
@@ -47,5 +47,3 @@
 - FPS Unlocker
 - Load Config
 - Save Config
-
-<h1 align="center">Only Global Game Version Supported</h1>
