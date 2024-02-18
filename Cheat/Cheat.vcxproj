@@ -83,6 +83,7 @@
     <ClInclude Include="render.h" />
     <ClInclude Include="skip_cutscene.h" />
     <ClInclude Include="unload.h" />
+    <ClInclude Include="unlock_autobattle.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +116,7 @@
     <ClCompile Include="render.cpp" />
     <ClCompile Include="skip_cutscene.cpp" />
     <ClCompile Include="unload.cpp" />
+    <ClCompile Include="unlock_autobattle.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

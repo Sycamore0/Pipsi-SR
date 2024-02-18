@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "unlock_autobattle.h"
 #include "unload.h"
 #include "config.h"
 #include "fps.h"
@@ -27,6 +28,7 @@ namespace Cheats
 
 	VOID RenderBattleTab()
 	{
+		UnlockAutoBattle::Render();
 		ForceAutoBattle::Render();
 		BattleSpeed::Render();
 	}
@@ -57,6 +59,7 @@ namespace Cheats
 
 	VOID Update()
 	{
+		UnlockAutoBattle::Update();
 		Unload::Update();
 		Config::Update();
 		Fps::Update();
@@ -76,6 +79,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		UnlockAutoBattle::Start();
 		Unload::Start();
 		Config::Start();
 		Fps::Start();

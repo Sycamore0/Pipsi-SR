@@ -47,6 +47,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define MANAVIDEOPAGECONTEXT__ONTICK (il2cpp_base + 0x38EA6F0)
 #define GAMEENTITY_GET_TEAM (il2cpp_base + 0x3EBE250)
 #define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x35F3770)
+#define BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE (il2cpp_base + 0x35F22F0)
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F13620)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
@@ -86,6 +87,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define MANAVIDEOPAGECONTEXT__ONTICK (il2cpp_base + 0x37C15E0)
 #define GAMEENTITY_GET_TEAM (il2cpp_base + 0x3B84780)
 #define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x34C88D0)
+#define BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE (il2cpp_base + 0x34C7450)
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F33DA0)
 #endif
 
@@ -428,6 +430,7 @@ namespace RPG
 		
 		struct BattleInstance {
 			inline static FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
+			inline static FN(IsStageForbidAutoBattle, bool, (void* _this), BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE);
 		};
 	}
 

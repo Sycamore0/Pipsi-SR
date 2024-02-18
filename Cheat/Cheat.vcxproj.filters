@@ -108,6 +108,9 @@
     <ClInclude Include="unload.h">
       <Filter>features</Filter>
     </ClInclude>
+    <ClInclude Include="unlock_autobattle.h">
+      <Filter>features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cheats.cpp">
@@ -198,6 +201,9 @@
       <Filter>features</Filter>
     </ClCompile>
     <ClCompile Include="unload.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="unlock_autobattle.cpp">
       <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>

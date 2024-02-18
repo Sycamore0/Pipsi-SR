@@ -46,6 +46,8 @@ struct OPTIONS
 	bool bFpsIndicator;
 	int iFpsValue;
 
+    bool bUnlockAutoBattle;
+
     OPTIONS() :
         bMenu(FALSE),
         dwMenuKey(VK_INSERT),
@@ -74,7 +76,8 @@ struct OPTIONS
         dwChestTeleportKey(0),
         bSkipCutscene(FALSE),
         bFpsIndicator(TRUE),
-        iFpsValue(60)
+        iFpsValue(60),
+        bUnlockAutoBattle(FALSE)
     {
     }
 };
