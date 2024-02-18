@@ -126,7 +126,7 @@ namespace Engine
 
 	int GetPhaseType()
 	{
-		PVOID lpPhaseManager = *(PVOID*)((PBYTE)(*lpGlobalVars) + 0x1D4B0); // GamePhaseManager offset
+		PVOID lpPhaseManager = *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_GAMEPHASEMANAGER_OFFSET);
 
 		if (!lpPhaseManager)
 			return 0;

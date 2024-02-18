@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "unload.h"
 #include "config.h"
 #include "fps.h"
 #include "skip_cutscene.h"
@@ -7,7 +8,6 @@
 #include "chest_teleport.h"
 #include "quest_teleport.h"
 #include "auto_talk.h"
-#include "pve_statistics.h"
 #include "battle_speed.h"
 #include "force_autobattle.h"
 #include "dump_enemies.h"
@@ -49,6 +49,7 @@ namespace Cheats
 
 	VOID RenderMiscTab()
 	{
+		Unload::Render();
 		Config::Render();
 		Fps::Render();
 		OpenMenu::Render();
@@ -56,11 +57,7 @@ namespace Cheats
 
 	VOID Update()
 	{
-		//if (!RPG::Client::GlobalVars->s_MainCamera)
-		//	return;
-
-		//if (RPG::Client::GlobalVars->s_LoadingManager)
-		//	return;
+		Unload::Update();
 		Config::Update();
 		Fps::Update();
 		SkipCutscene::Update();
@@ -68,7 +65,6 @@ namespace Cheats
 		ChestTeleport::Update();
 		QuestTeleport::Update();
 		AutoTalk::Update();
-		PveStatistics::Update();
 		ForceAutoBattle::Update();
 		BattleSpeed::Update();
 		DumpEnemies::Update();
@@ -80,6 +76,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		Unload::Start();
 		Config::Start();
 		Fps::Start();
 		SkipCutscene::Start();
@@ -87,7 +84,6 @@ namespace Cheats
 		ChestTeleport::Start();
 		QuestTeleport::Start();
 		AutoTalk::Start();
-		PveStatistics::Start();
 		ForceAutoBattle::Start();
 		BattleSpeed::Start();
 		DumpEnemies::Start();

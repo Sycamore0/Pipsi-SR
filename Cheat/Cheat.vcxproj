@@ -79,10 +79,10 @@
     <ClInclude Include="noclip.h" />
     <ClInclude Include="open_menu.h" />
     <ClInclude Include="peeking.h" />
-    <ClInclude Include="pve_statistics.h" />
     <ClInclude Include="quest_teleport.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="skip_cutscene.h" />
+    <ClInclude Include="unload.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -111,10 +111,10 @@
     <ClCompile Include="noclip.cpp" />
     <ClCompile Include="open_menu.cpp" />
     <ClCompile Include="peeking.cpp" />
-    <ClCompile Include="pve_statistics.cpp" />
     <ClCompile Include="quest_teleport.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="skip_cutscene.cpp" />
+    <ClCompile Include="unload.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

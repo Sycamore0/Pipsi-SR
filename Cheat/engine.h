@@ -1,30 +1,31 @@
-	#pragma once
+#pragma once
+#define GLOBAL_VERSION 1
+
 #include <windows.h>
 #include <math.h>
 
 #define FN(n, t, p, a) t(*n)p = ((t(*)p)(a))
-#define SC(n, a) n* n##Data = (n*)(a)
 #define SD(n, t, a) t* n = (t*)(a)
 
 static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 
+#ifdef GLOBAL_VERSION
 #define GLOBALVARS (il2cpp_base + 0x8889A80)
-
+#define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2891420)
 #define SCREEN_GET_WIDTH (il2cpp_base + 0x25A6D30)
 #define SCREEN_GET_HEIGHT (il2cpp_base + 0x25A6C90)
 #define CAMERA_GET_MAIN (il2cpp_base + 0x25D0C90)
-#define CAMERA_GET_PIXEL_WIDTH (il2cpp_base + 0x25D0D90)
-#define CAMERA_GET_PIXEL_HEIGHT (il2cpp_base + 0x25D0D40)
-#define CAMERA_SET_FIELD_OF_VIEW (il2cpp_base + 0x25D11D0)
-#define CAMERA_WORLD_TO_SCREEN_POINT (il2cpp_base + 0x25D0850)
+#define CAMERA_GET_PIXELWIDTH (il2cpp_base + 0x25D0D90)
+#define CAMERA_GET_PIXELHEIGHT (il2cpp_base + 0x25D0D40)
+#define CAMERA_SETFIELD_OFVIEW (il2cpp_base + 0x25D11D0)
+#define CAMERA_WORLDTOSCREENPOINT (il2cpp_base + 0x25D0850)
 #define TRANSFORM_GET_UP (il2cpp_base + 0x26F87F0)
 #define TRANSFORM_GET_FORWARD (il2cpp_base + 0x26F8460)
 #define TRANSFORM_GET_POSITION_INJECTED (il2cpp_base + 0x26F86D0)
 #define TRANSFORM_SET_POSITION_INJECTED (il2cpp_base + 0x26F8B10)
 #define GAMEOBJECT_GET_TRANSFORM (il2cpp_base + 0x288ED90)
 #define ANIMATOR_SET_SPEED (il2cpp_base + 0x272D950)
-#define BUILDPVESTATISTICS_BUILDPVESTATISTICS (il2cpp_base + 0x3C7DAF0)
 #define GAMEENTITY_GET_UNITYGO (il2cpp_base + 0x3EBE430)
 #define ENTITYMANAGER_GET_OWNERWORLDREF (il2cpp_base + 0x391C080)
 #define ADVENTURESTATIC_GETENTITYMANAGER (il2cpp_base + 0x390D280)
@@ -34,12 +35,57 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define PROPCOMPONENT_TICK (il2cpp_base + 0x3E824E0)
 #define PROPCOMPONENT_GET_OWNERENTITY (il2cpp_base + 0xE03D30)
 #define PROPCOMPONENT_GET_PROPSTATE (il2cpp_base + 0x3E85EB0)
-#define GAMEPHASEMANAGER_GET_CURRENT_GAME_PHASE_TYPE (il2cpp_base + 0xC55540)
-#define BASESHADERPROPERTYTRANSITION_SET_ELEVATION_DITHER_ALPHA_VALUE (il2cpp_base + 0x33602D0)
-#define ADVENTUREWAYPOINTTARGET_GET_TARGET_POS (il2cpp_base + 0x3B6B130)
+#define GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE (il2cpp_base + 0xC55540)
+#define BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE (il2cpp_base + 0x33602D0)
+#define ADVENTUREWAYPOINTTARGET_GETTARGETPOS (il2cpp_base + 0x3B6B130)
 #define LUA_PUSHNUMBER (il2cpp_base + 0x1B9B1A0)
-#define RPGGAMECORESIMPLETALKINFOWRAP_G_GET_FORCETONEXTTIME (il2cpp_base + 0x55B7A90)
-#define RPGGAMECORESIMPLETALKINFOWRAP_G_GET_PROTECTTIME (il2cpp_base + 0x55B7B70)
+#define RPGGAMECORESIMPLETALKINFOWRAP__G_GET_FORCETONEXTTIME (il2cpp_base + 0x55B7A90)
+#define RPGGAMECORESIMPLETALKINFOWRAP__G_GET_PROTECTTIME (il2cpp_base + 0x55B7B70)
+#define APPLICATION_SET_TARGETFRAMERATE (il2cpp_base + 0x28800B0)
+#define PLAYABLEGRAPH_ISPLAYING_INJECTED (il2cpp_base + 0x288F150)
+#define PLAYABLEGRAPH_ISDONE_INJECTED (il2cpp_base + 0x288F140)
+#define MANAVIDEOPAGECONTEXT__ONTICK (il2cpp_base + 0x38EA6F0)
+#define GAMEENTITY_GET_TEAM (il2cpp_base + 0x3EBE250)
+#define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x35F3770)
+#else
+#define GLOBALVARS (il2cpp_base + 0x88711C0)
+#define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
+#define TIME_GET_DELTATIME (il2cpp_base + 0x2770900)
+#define SCREEN_GET_WIDTH (il2cpp_base + 0x24861C0)
+#define SCREEN_GET_HEIGHT (il2cpp_base + 0x2486120)
+#define CAMERA_GET_MAIN (il2cpp_base + 0x24B0120)
+#define CAMERA_GET_PIXELWIDTH (il2cpp_base + 0x24B0220)
+#define CAMERA_GET_PIXELHEIGHT (il2cpp_base + 0x24B01D0)
+#define CAMERA_SETFIELD_OFVIEW (il2cpp_base + 0x24B0660)
+#define CAMERA_WORLDTOSCREENPOINT (il2cpp_base + 0x24AFCE0)
+#define TRANSFORM_GET_UP (il2cpp_base + 0x25D7CD0)
+#define TRANSFORM_GET_FORWARD (il2cpp_base + 0x25D7940)
+#define TRANSFORM_GET_POSITION_INJECTED (il2cpp_base + 0x25D7BB0)
+#define TRANSFORM_SET_POSITION_INJECTED (il2cpp_base + 0x25D7FF0)
+#define GAMEOBJECT_GET_TRANSFORM (il2cpp_base + 0x276E270)
+#define ANIMATOR_SET_SPEED (il2cpp_base + 0x260CE30)
+#define GAMEENTITY_GET_UNITYGO (il2cpp_base + 0x3B84960)
+#define ENTITYMANAGER_GET_OWNERWORLDREF (il2cpp_base + 0x3878DE0)
+#define ADVENTURESTATIC_GETENTITYMANAGER (il2cpp_base + 0x3869FE0)
+#define ADVENTURESTATIC_GETPROPMANAGER (il2cpp_base + 0x386CD00)
+#define ADVENTURESTATIC_GETLOCALPLAYER (il2cpp_base + 0x386B2E0)
+#define NPCCOMPONENT_TICKALERTVALUE (il2cpp_base + 0x3C09030)
+#define PROPCOMPONENT_TICK (il2cpp_base + 0x3D9FEA0)
+#define PROPCOMPONENT_GET_OWNERENTITY (il2cpp_base + 0xD9B660)
+#define PROPCOMPONENT_GET_PROPSTATE (il2cpp_base + 0x3DA3870)
+#define GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE (il2cpp_base + 0xB815C0)
+#define BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE (il2cpp_base + 0x3303E90)
+#define ADVENTUREWAYPOINTTARGET_GETTARGETPOS (il2cpp_base + 0x3B09E90)
+#define LUA_PUSHNUMBER (il2cpp_base + 0x1AB1970)
+#define RPGGAMECORESIMPLETALKINFOWRAP__G_GET_FORCETONEXTTIME (il2cpp_base + 0x5529550)
+#define RPGGAMECORESIMPLETALKINFOWRAP__G_GET_PROTECTTIME (il2cpp_base + 0x5529630)
+#define APPLICATION_SET_TARGETFRAMERATE (il2cpp_base + 0x275F590)
+#define PLAYABLEGRAPH_ISPLAYING_INJECTED (il2cpp_base + 0x276E630)
+#define PLAYABLEGRAPH_ISDONE_INJECTED (il2cpp_base + 0x276E620)
+#define MANAVIDEOPAGECONTEXT__ONTICK (il2cpp_base + 0x37C15E0)
+#define GAMEENTITY_GET_TEAM (il2cpp_base + 0x3B84780)
+#define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x34C88D0)
+#endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
 
@@ -124,12 +170,12 @@ namespace UnityEngine
 
 	struct Camera {
 		inline static FN(get_main, void*, (), CAMERA_GET_MAIN);
-		inline static FN(get_pixelWidth, long, (void* _this), CAMERA_GET_PIXEL_WIDTH);
-		inline static FN(get_pixelHeight, long, (void* _this), CAMERA_GET_PIXEL_HEIGHT);
+		inline static FN(get_pixelWidth, long, (void* _this), CAMERA_GET_PIXELWIDTH);
+		inline static FN(get_pixelHeight, long, (void* _this), CAMERA_GET_PIXELHEIGHT);
 
-		inline static FN(set_fieldOfView, void, (void* _this, float value), CAMERA_SET_FIELD_OF_VIEW);
+		inline static FN(set_fieldOfView, void, (void* _this, float value), CAMERA_SETFIELD_OFVIEW);
 
-		inline static FN(WorldToScreenPoint, void*, (void* ret, void* _this, void* position), CAMERA_WORLD_TO_SCREEN_POINT);
+		inline static FN(WorldToScreenPoint, void*, (void* ret, void* _this, void* position), CAMERA_WORLDTOSCREENPOINT);
 	};
 
 	struct Transform {
@@ -147,68 +193,19 @@ namespace UnityEngine
 	struct Animator {
 		inline static FN(set_speed, void, (void* _this, float value), ANIMATOR_SET_SPEED);
 	};
-	
-	struct Animation {
-		inline static FN(get_clip, void*, (void* _this), il2cpp_base + 0x272ABB0);
-
-		inline static FN(Play_1, bool, (void* _this), il2cpp_base + 0x272AB40);
-
-		inline static FN(Play_2, bool, (void* _this, int mode), il2cpp_base + 0x272AB50);
-
-		inline static FN(Play_3, bool, (void* _this, void* animation, int mode), il2cpp_base + 0x272AB20);
-
-		inline static FN(Play_4, bool, (void* _this, void* animation), il2cpp_base + 0x272AB30);
-	};
-	
-	struct AnimationClip {
-		inline static FN(get_length, float, (void* _this), il2cpp_base + 0x2727C70);
-	};
-
-	struct AnimationCurve {
-		inline static FN(get_length, long, (void* _this), il2cpp_base + 0x27F7C10);
-	};
-
-	struct AnimationState {
-		inline static FN(set_speed, void, (void* _this, float value), il2cpp_base + 0x272A7B0);
-		inline static FN(set_normalizedSpeed, void, (void* _this, float value), il2cpp_base + 0x272A790);
-	};
 
 	struct Application {
-		inline static FN(set_targetFrameRate, void, (int value), il2cpp_base + 0x28800B0);
+		inline static FN(set_targetFrameRate, void, (int value), APPLICATION_SET_TARGETFRAMERATE);
 	};
-
-	namespace Timeline
-	{
-		struct TimelineClip {
-			inline static FN(set_duration, void, (void* _this, double value), il2cpp_base + 0x1DDED90);
-		};
-	}
 
 	namespace Playables
 	{
 		struct PlayableGraph {
-			inline static FN(IsPlaying_Injected, bool, (void* _unity_self), il2cpp_base + 0x288F150);
-			inline static FN(IsDone_Injected, bool, (void* _unity_self), il2cpp_base + 0x288F140);
+			inline static FN(IsPlaying_Injected, bool, (void* _unity_self), PLAYABLEGRAPH_ISPLAYING_INJECTED);
+			inline static FN(IsDone_Injected, bool, (void* _unity_self), PLAYABLEGRAPH_ISDONE_INJECTED);
 		};
 	}
 }
-
-struct _EIELKABBJGE {
-	char _[0x10]; // 0x0
-	void* DLLBGIIIMJO; // 0x10
-	long DFLHDLFDPPL; // 0x18
-	float KBMEIHPEOBI; // 0x1C
-};
-
-struct _CJPMFGOOLKO {
-	char _[0x10]; // 0x0
-	_EIELKABBJGE* CELDMFBOAPJ; // 0x10
-	_EIELKABBJGE* DDDMHOACNPH; // 0x18
-	void* PNEOJNECPMA; // 0x20
-	void* GDCEFFKJICD; // 0x28
-	void* GCCEDLGPFDI; // 0x30
-	bool LHNPPKGFBFH; // 0x38
-};
 
 namespace RPG
 {
@@ -265,8 +262,8 @@ namespace RPG
 			PropState_BridgeState2 = 0x4,
 			PropState_BridgeState3 = 0x5,
 			PropState_BridgeState4 = 0x6,
-			PropState_CheckPointDisable = 0x7,
-			PropState_CheckPointEnable = 0x8,
+			PropState_CheckPointDisable = 0x7, // closed exits teleport etc
+			PropState_CheckPointEnable = 0x8, // opened exits teleport etc
 			PropState_TriggerDisable = 0x9,
 			PropState_TriggerEnable = 0xA,
 			PropState_ChestLocked = 0xB,
@@ -276,7 +273,7 @@ namespace RPG
 			PropState_Elevator2 = 0xF,
 			PropState_Elevator3 = 0x10,
 			PropState_WaitActive = 0x11,
-			PropState_EventClose = 0x12,
+			PropState_EventClose = 0x12, // paper items etc
 			PropState_EventOpen = 0x13,
 			PropState_Hidden = 0x14,
 			PropState_TeleportGate0 = 0x15,
@@ -293,69 +290,6 @@ namespace RPG
 			PropState_CustomState07 = 0x6B,
 			PropState_CustomState08 = 0x6C,
 			PropState_CustomState09 = 0x6D,
-		};
-
-		struct PVEGameStatistics {
-			char _[0x10]; // 0x0
-			void* battleScoringList; // 0x10
-			void* battleAchievementList; // 0x18
-			void* battleRaidTargetList; // 0x20
-			void* battleChallengeScoreList; // 0x28
-			void* battleTargetList; // 0x30
-			void* lightTeamStt; // 0x38
-			void* lightTeam; // 0x40
-			void* lightTeamBattleInfoList; // 0x48
-			void* monsterBattleInfoList; // 0x50
-			void* battleEventBattleInfoList; // 0x58
-			void* customValues; // 0x60
-			void* avatarDeathInfos; // 0x68
-			void* avatarBPChain; // 0x70
-			void* monsterPhaseChangeInfos; // 0x78
-			void* statisticEvents; // 0x80
-			void* AetherDivideSpiritPropertyInfos; // 0x88
-			void* ActionBarEventInfos; // 0x90
-			double totalDelayCumulate; // 0x98
-			double costTime; // 0xA0
-			unsigned long skillUltraCount; // 0xA8
-			unsigned long totalBattleRounds; // 0xAC
-			unsigned long totalBattleTurns; // 0xB0
-			unsigned long totalAutoTurns; // 0xB4
-			unsigned long totalAvatarTurns; // 0xB8
-			unsigned long totalMonsterTurns; // 0xBC
-			unsigned long challengeTurnCount; // 0xC0
-			unsigned long CleanWave; // 0xC4
-			unsigned long totalScore; // 0xC8
-			unsigned long totalSkillPerformTime; // 0xCC
-			int battleEndReason; // 0xD0
-			int mechanismBarState; // 0xD4
-		};
-
-		struct StatisticsComponent {
-			char _[0x10]; // 0x0
-			void* _OwnerEntity; // 0x10
-			void* _LightTeamStt; // 0x18
-			void* _MonsterStt; // 0x20
-			void* _BattleEventStt; // 0x28
-			void* _TurnSttList; // 0x30
-			void* _CharacterDeathStt; // 0x38
-			void* _AvatarTurnBPChain; // 0x40
-			void* _monsterPhaseChangeInfos; // 0x48
-			void* _AvatarInitialProperty; // 0x50
-			void* _CustomValues; // 0x58
-			void* _LastTurnAvatarPropertySnapshot; // 0x60
-			void* _StatisticSnapShot; // 0x68
-			void* _StatisticEvents; // 0x70
-			void* _actionBarEvents; // 0x78
-			void* _CustomStringHashSet; // 0x80
-			unsigned long _totalBattleRounds; // 0x88
-			unsigned long _totalBattleTurns; // 0x8C
-			unsigned long _totalAutoTurns; // 0x90
-			unsigned long _totalAvatarTurns; // 0x94
-			unsigned long _totalMonsterTurns; // 0x98
-			float _turnSkillPerformTime; // 0x9C
-			float _totalSkillPerformTime; // 0xA0
-
-			inline static FN(BuildPVEStatistics, RPG::GameCore::PVEGameStatistics*, (RPG::GameCore::StatisticsComponent* _this), BUILDPVESTATISTICS_BUILDPVESTATISTICS);
 		};
 
 		struct GameEntity {
@@ -410,7 +344,7 @@ namespace RPG
 			bool IsOnStage; // 0x103
 
 			inline static FN(get_UnityGO, void*, (void* _this), GAMEENTITY_GET_UNITYGO);
-			inline static FN(get_Team, int, (void* _this), il2cpp_base + 0x3EBE250);
+			inline static FN(get_Team, int, (void* _this), GAMEENTITY_GET_TEAM);
 		};
 
 		struct GameWorld {
@@ -489,9 +423,9 @@ namespace RPG
 		struct TurnBasedGameMode {
 			inline static FN(GetCurrenTurnActionEntity, void*, (void* _this), il2cpp_base + 0x3F13620);
 		};
-
+		
 		struct BattleInstance {
-			inline static FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), il2cpp_base + 0x35F3770);
+			inline static FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
 		};
 	}
 
@@ -526,15 +460,15 @@ namespace RPG
 		};
 
 		struct GamePhaseManager {
-			inline static FN(get_CurrentGamePhaseType, int, (void* _this), GAMEPHASEMANAGER_GET_CURRENT_GAME_PHASE_TYPE);
+			inline static FN(get_CurrentGamePhaseType, int, (void* _this), GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE);
 		};
 
 		struct BaseShaderPropertyTransition {
-			inline static FN(SetElevationDitherAlphaValue, void, (void* _this, float EOBOBKJIJFA), BASESHADERPROPERTYTRANSITION_SET_ELEVATION_DITHER_ALPHA_VALUE);
+			inline static FN(SetElevationDitherAlphaValue, void, (void* _this, float EOBOBKJIJFA), BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE);
 		};
 
 		struct AdventureWaypointTarget {
-			inline static FN(GetTargetPos, void*, (void* _this, void* _res), ADVENTUREWAYPOINTTARGET_GET_TARGET_POS);
+			inline static FN(GetTargetPos, void*, (void* _this, void* _res), ADVENTUREWAYPOINTTARGET_GETTARGETPOS);
 		};
 
 		struct ManaVideoPageContext {
@@ -564,12 +498,7 @@ namespace RPG
 			bool _isCG; // 0x19E
 			bool _HasSend_VideoNearlyEnd; // 0x19F
 
-			inline static FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), il2cpp_base + 0x38EA6F0);
-		};
-
-		struct NetworkManager
-		{
-			inline static FN(NNHJJEODNNM, void, (void* _this, void* AKDCMCOCOAK, void* EGJIEDMPAHC, int MPFGJDMBCMH, unsigned long HGBNPHKHDFI, unsigned long LAPIOCAAOLL, unsigned long KINGCCKOHGH, bool KAHAFDPHHJE), il2cpp_base + 0x37F5300);
+			inline static FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), MANAVIDEOPAGECONTEXT__ONTICK);
 		};
 	}
 }
@@ -589,71 +518,8 @@ namespace XLua
 	namespace CSObjectWrap
 	{
 		struct RPGGameCoreSimpleTalkInfoWrap {
-			inline static FN(_g_get_ForceToNextTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP_G_GET_FORCETONEXTTIME);
-			inline static FN(_g_get_ProtectTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP_G_GET_PROTECTTIME);
-		};
-	}
-}
-
-
-struct CJPMFGOOLKO
-{
-	inline static FN(DPKCLBMCOAK, void, (unsigned long HGBNPHKHDFI, unsigned long LAPIOCAAOLL), il2cpp_base + 0x30E2990);
-};
-
-namespace RPGTools
-{
-	namespace Timeline
-	{
-		enum DontHidePanelType {
-			DontHidePanelType_None = 0x0,
-			DontHidePanelType_BGImage = 0x1,
-			DontHidePanelType_SimpleTalk = 0x2,
-			DontHidePanelType_BlackMask = 0x4,
-		};
-
-		struct PlaySimpleTalkClip
-		{
-			char _[0x18];
-			void* TimelineClip; // 0x18
-			bool ShowMouthAssetCheck; // 0x20
-			void* Config; // 0x28
-			bool BlackMask; // 0x30
-			bool HaveProtectTime; // 0x31
-			void* UniqueName; // 0x38
-			bool Use3DVoice; // 0x40
-			bool UseDiscussionMouthTalk; // 0x41
-			void* _template; // 0x48
-			void* MouthInfo; // 0x50
-			float Duration; // 0x58
-			bool AutoEnd; // 0x5C
-			void* _BehaviourRef; // 0x60
-
-			inline static FN(CreatePlayable, void*, (void* _ret, RPGTools::Timeline::PlaySimpleTalkClip* _this, void* FGJHMJAANHJ, void* LGIPCEPICCO), il2cpp_base + 0x3EFF450);
-			inline static FN(get_clipCaps, int, (RPGTools::Timeline::PlaySimpleTalkClip* _this), il2cpp_base + 0x3EFF6F0);
-		};
-
-		struct PlaySimpleTalkMixer
-		{
-			char _[0x10];
-			double _Duration; // 0x10
-			void* _Director; // 0x18
-			System::Collections::Generic::List* _TimelineClips; // 0x20
-			System::Collections::Generic::List* _ClipOrder; // 0x28
-			long _LastClearMarkerClipIndex; // 0x30
-
-			inline static FN(ProcessFrame, void, (RPGTools::Timeline::PlaySimpleTalkMixer* _this, void* LNDPLMAKCIG, void* DFNKMHPFLAJ, void* NCBODICOGDF), il2cpp_base + 0x3E097A0);
-			inline static FN(ALNBNLOFPKK, void, (RPGTools::Timeline::PlaySimpleTalkMixer* _this, void* PDAACGNMFLF), il2cpp_base + 0x3E09020);
-		};
-
-		struct SimpleTalkMarkerClip
-		{
-			char _[0x18];
-			bool HideAll; // 0x18
-			int DontHidePanels; // 0x1C
-			void* _template; // 0x20
-
-			inline static FN(get_clipCaps, int, (RPGTools::Timeline::SimpleTalkMarkerClip* _this), il2cpp_base + 0x3C4B230);
+			inline static FN(_g_get_ForceToNextTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP__G_GET_FORCETONEXTTIME);
+			inline static FN(_g_get_ProtectTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP__G_GET_PROTECTTIME);
 		};
 	}
 }
@@ -675,5 +541,4 @@ namespace Engine
 	void* GetTransform(void* lpEntity);
 
 	void PlayerTeleport(void* lpPosition);
-
 }

@@ -63,9 +63,6 @@
     <ClInclude Include="peeking.h">
       <Filter>features</Filter>
     </ClInclude>
-    <ClInclude Include="pve_statistics.h">
-      <Filter>features</Filter>
-    </ClInclude>
     <ClInclude Include="quest_teleport.h">
       <Filter>features</Filter>
     </ClInclude>
@@ -106,6 +103,9 @@
       <Filter>features</Filter>
     </ClInclude>
     <ClInclude Include="config.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="unload.h">
       <Filter>features</Filter>
     </ClInclude>
   </ItemGroup>
@@ -161,9 +161,6 @@
     <ClCompile Include="peeking.cpp">
       <Filter>features</Filter>
     </ClCompile>
-    <ClCompile Include="pve_statistics.cpp">
-      <Filter>features</Filter>
-    </ClCompile>
     <ClCompile Include="quest_teleport.cpp">
       <Filter>features</Filter>
     </ClCompile>
@@ -198,6 +195,9 @@
       <Filter>features</Filter>
     </ClCompile>
     <ClCompile Include="config.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="unload.cpp">
       <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>

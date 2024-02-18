@@ -12,6 +12,8 @@
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+DWORD dwCurrentTab = 0;
+
 LRESULT WndProcHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	Inputs::OnWindowMessage(uMsg, wParam, lParam);
@@ -25,58 +27,77 @@ LRESULT WndProcHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return TRUE;
 	}
 
+    lpWindow = hWnd;
+
 	return CallWindowProcA(lpWndProc, hWnd, uMsg, wParam, lParam);
 }
 
 BOOL RenderTabs()
 {
-	if (ImGui::BeginTabBar("##tabs"))
-	{
-		if (ImGui::BeginTabItem("Player"))
-		{
-			Cheats::RenderPlayerTab();
+    LPCSTR lpTabs[] = { "Player", "Battle", "World", "Visuals", "Misc" };
+    
+    ImGui::BeginGroup();
 
-			ImGui::EndTabItem();
-		}
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
 
-		if (ImGui::BeginTabItem("Battle"))
-		{
-			Cheats::RenderBattleTab();
+    if (ImGui::BeginListBox("##listbox", ImVec2(ImGui::GetWindowWidth() / 5.f, -FLT_MIN)))
+    {
+        for (INT i = 0; i < IM_ARRAYSIZE(lpTabs); i++)
+        {
+            BOOL bIsSelected = i == dwCurrentTab;
 
-			ImGui::EndTabItem();
-		}
+            if (ImGui::Selectable(lpTabs[i], bIsSelected))
+                dwCurrentTab = i;
 
-		if (ImGui::BeginTabItem("World"))
-		{
-			Cheats::RenderWorldTab();
+            if (bIsSelected)
+                ImGui::SetItemDefaultFocus();
+        }
 
-			ImGui::EndTabItem();
-		}
+        ImGui::EndListBox();
+    }
 
-		if (ImGui::BeginTabItem("Visuals"))
-		{
-			Cheats::RenderVisualsTab();
+    ImGui::PopStyleVar();
 
-			ImGui::EndTabItem();
-		}
+    ImGui::EndGroup();
 
-		if (ImGui::BeginTabItem("Misc"))
-		{
-			Cheats::RenderMiscTab();
+    ImGui::SameLine();
 
-			ImGui::EndTabItem();
-		}
+    ImGui::BeginGroup();
+    ImGui::BeginChild("##child", ImVec2(0, 0), ImGuiChildFlags_Border);
 
-		ImGui::EndTabBar();
-	}
+    switch (dwCurrentTab)
+    {
+    case 0:
+        Cheats::RenderPlayerTab();
+        break;
+    case 1:
+        Cheats::RenderBattleTab();
+        break;
+    case 2:
+        Cheats::RenderWorldTab();
+        break;
+    case 3:
+        Cheats::RenderVisualsTab();
+        break;
+    case 4:
+        Cheats::RenderMiscTab();
+        break;
+    default:
+        break;
+    }
 
-	return TRUE;
+    ImGui::EndChild();
+    ImGui::EndGroup();
+
+    return TRUE;
 }
 
 BOOL RenderHandler(PVOID lpRenderParameter)
 {
 	if (Options.bMenu)
 	{
+        ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
+
 		ImGui::Begin("Pipsi-SR | " __DATE__);
 
 		RenderTabs();

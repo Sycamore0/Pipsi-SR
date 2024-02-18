@@ -43,11 +43,11 @@ VOID DeleteHook(PVOID lpHandler)
 
 	mCache.erase(lpHandler);
 }
-//
-//VOID DeleteHooks()
-//{
-//	for (auto& [key, value] : mCache)
-//		DisableHook(key);
-//
-//	mCache.clear();
-//}
+
+VOID DeleteHooks()
+{
+	for (auto& [key, value] : mCache)
+		DisableHook(key);
+
+	mCache.clear();
+}

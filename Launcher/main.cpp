@@ -168,7 +168,5 @@ int main()
 	CloseHandle(ProcessInfo.hProcess);
 	CloseHandle(ProcessInfo.hThread);
 
-	system("pause");
-
 	return 0;
 }

@@ -1,3 +1,5 @@
+#define GLOBAL_VERSION 1
+
 #include "main.h"
 
 BOOL bInit = FALSE;
@@ -17,7 +19,11 @@ HMODULE LoadLibraryExWHandler(LPCWSTR lpLibFileName, HANDLE hFile, DWORD dwFlags
 
 		lpEncodedBase[2] = ((DWORD_PTR)hResult - 0x30271D25137D50CF) ^ 0x787761445AC0321D;
 
+#ifdef GLOBAL_VERSION
 		SetupVM(lpEncodedBase, 0x9EB4000, 0x6B18, VM, VM + sizeof(VM));
+#else
+		SetupVM(lpEncodedBase, 0x9E98000, 0x782B, VM, VM + sizeof(VM));
+#endif
 
 		bInit = TRUE;
 	}

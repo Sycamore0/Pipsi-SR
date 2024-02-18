@@ -29,6 +29,8 @@ namespace ChestTeleport
 		Engine::PlayerTeleport(&Position);
 	}
 
+	int iPropState = 0;
+
 	static void TickHandler(void* _this, float fElapsedTimeInSec)
 	{
 		CALL_ORIGIN(TickHandler, _this, fElapsedTimeInSec);
@@ -40,7 +42,7 @@ namespace ChestTeleport
 				switch (RPG::GameCore::PropComponent::get_PropState(_this))
 				{
 				case RPG::GameCore::PropState_ChestClosed:
-				case RPG::GameCore::PropState_ChestLocked:
+				 case RPG::GameCore::PropState_ChestLocked:
 					OnChestComponent(_this);
 					break;
 				default:

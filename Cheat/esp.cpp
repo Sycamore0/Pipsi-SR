@@ -87,7 +87,7 @@ namespace Esp
 			{
 				RPG::GameCore::GameEntity* lpEntity = (RPG::GameCore::GameEntity*)lpEntityList->items->vector[i];
 
-				if (!lpEntity || !lpEntity->Visible || !lpEntity->Name->m_stringLength)
+				if (!lpEntity || !lpEntity->Visible || !lpEntity->Name || !lpEntity->Name->m_stringLength)
 					continue;
 
 				switch (lpEntity->EntityType)

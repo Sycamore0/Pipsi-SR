@@ -21,3 +21,5 @@ static T CallHookOrigin(T(*lpHandler)(P...), LPCSTR lsCallerName = NULL, P... lp
 
 	return T();
 }
+
+VOID DeleteHooks();

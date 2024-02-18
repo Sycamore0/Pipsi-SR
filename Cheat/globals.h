@@ -2,6 +2,7 @@
 #include <windows.h>
 
 extern WNDPROC lpWndProc;
+extern HWND lpWindow;
 
 struct OPTIONS
 {
