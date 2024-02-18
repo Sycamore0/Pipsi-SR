@@ -8,8 +8,6 @@
 
 #include "imgui_internal.h"
 
-
-
 namespace BattleSpeed
 {
 	int iCurrenTurnEntityTeam = 0;
@@ -19,9 +17,7 @@ namespace BattleSpeed
 		PVOID lpResult = CALL_ORIGIN(GetCurrenTurnActionEntityHandler, _this);
 
 		if (lpResult)
-		{
 			iCurrenTurnEntityTeam = RPG::GameCore::GameEntity::get_Team(lpResult);
-		}
 
 		return lpResult;
 	}
@@ -81,6 +77,7 @@ namespace BattleSpeed
 
 	void Update()
 	{
+
 	}
 
 	void Start()

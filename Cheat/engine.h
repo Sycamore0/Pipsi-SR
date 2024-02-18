@@ -47,6 +47,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define MANAVIDEOPAGECONTEXT__ONTICK (il2cpp_base + 0x38EA6F0)
 #define GAMEENTITY_GET_TEAM (il2cpp_base + 0x3EBE250)
 #define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x35F3770)
+#define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F13620)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
@@ -85,6 +86,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define MANAVIDEOPAGECONTEXT__ONTICK (il2cpp_base + 0x37C15E0)
 #define GAMEENTITY_GET_TEAM (il2cpp_base + 0x3B84780)
 #define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x34C88D0)
+#define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F33DA0)
 #endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
@@ -421,7 +423,7 @@ namespace RPG
 		};
 
 		struct TurnBasedGameMode {
-			inline static FN(GetCurrenTurnActionEntity, void*, (void* _this), il2cpp_base + 0x3F13620);
+			inline static FN(GetCurrenTurnActionEntity, void*, (void* _this), TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY);
 		};
 		
 		struct BattleInstance {
