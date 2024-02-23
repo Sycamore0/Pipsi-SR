@@ -537,7 +537,7 @@ namespace Engine
 
 	void* GetTurnBasedGameMode();
 
-	bool GetResolutionScale(Vector2* lpResolutionScale);
+	bool GetResolutionScale(Vector2* lpResolution, Vector2* lpResolutionScale);
 	bool GetScreenPosition(Vector2* lpResolutionScale, void* lpWorldPosition, Vector3* lpRet);
 
 	bool GetEntityPosition(void* lpEntity, void* lpPosition);

@@ -12,7 +12,7 @@
 
 namespace ChestTeleport
 {
-	static void OnChestComponent(PVOID lpPropComponent)
+	static void OnPropComponent(PVOID lpPropComponent)
 	{
 		UPDATE_DELAY(500);
 
@@ -41,9 +41,10 @@ namespace ChestTeleport
 			{
 				switch (RPG::GameCore::PropComponent::get_PropState(_this))
 				{
+				case RPG::GameCore::PropState_CheckPointDisable:
+				case RPG::GameCore::PropState_ChestLocked:
 				case RPG::GameCore::PropState_ChestClosed:
-				 case RPG::GameCore::PropState_ChestLocked:
-					OnChestComponent(_this);
+					OnPropComponent(_this);
 					break;
 				default:
 					break;
@@ -71,7 +72,7 @@ namespace ChestTeleport
 
 	void Update()
 	{
-		
+
 	}
 
 	void Start()

@@ -51,9 +51,6 @@
     <ClInclude Include="esp.h">
       <Filter>features</Filter>
     </ClInclude>
-    <ClInclude Include="force_autobattle.h">
-      <Filter>features</Filter>
-    </ClInclude>
     <ClInclude Include="fov.h">
       <Filter>features</Filter>
     </ClInclude>
@@ -150,9 +147,6 @@
       <Filter>features</Filter>
     </ClCompile>
     <ClCompile Include="esp.cpp">
-      <Filter>features</Filter>
-    </ClCompile>
-    <ClCompile Include="force_autobattle.cpp">
       <Filter>features</Filter>
     </ClCompile>
     <ClCompile Include="fov.cpp">

@@ -40,7 +40,7 @@ BOOL RenderTabs()
 
     ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
 
-    if (ImGui::BeginListBox("##listbox", ImVec2(ImGui::GetWindowWidth() / 5.f, -FLT_MIN)))
+    if (ImGui::BeginListBox("##MainListbox", ImVec2(ImGui::GetWindowWidth() / 5.f, -FLT_MIN)))
     {
         for (INT i = 0; i < IM_ARRAYSIZE(lpTabs); i++)
         {
@@ -63,7 +63,7 @@ BOOL RenderTabs()
     ImGui::SameLine();
 
     ImGui::BeginGroup();
-    ImGui::BeginChild("##child", ImVec2(0, 0), ImGuiChildFlags_Border);
+    ImGui::BeginChild("##MainChild", ImVec2(0, 0), ImGuiChildFlags_Border);
 
     switch (dwCurrentTab)
     {
@@ -96,7 +96,7 @@ BOOL RenderHandler(PVOID lpRenderParameter)
 {
 	if (Options.bMenu)
 	{
-        ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(800, 440), ImGuiCond_FirstUseEver);
 
 		ImGui::Begin("Pipsi-SR | " __DATE__);
 

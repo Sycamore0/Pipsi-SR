@@ -57,7 +57,7 @@ namespace Engine
 		return RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
 	}
 
-	bool GetResolutionScale(Vector2* lpResolutionScale)
+	bool GetResolutionScale(Vector2* lpResolution, Vector2* lpResolutionScale)
 	{
 		PVOID lpMainCamera = UnityEngine::Camera::get_main();
 
@@ -82,6 +82,12 @@ namespace Engine
 		{
 			lpResolutionScale->x = (FLOAT)dwPixelWidth / (FLOAT)dwScreenWidth;
 			lpResolutionScale->y = (FLOAT)dwPixelHeight / (FLOAT)dwScreenHeight;
+		}
+
+		if (lpResolution)
+		{
+			lpResolution->x = (FLOAT)dwScreenWidth;
+			lpResolution->y = (FLOAT)dwScreenHeight;
 		}
 
 		return TRUE;

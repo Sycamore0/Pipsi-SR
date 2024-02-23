@@ -10,7 +10,6 @@
 #include "quest_teleport.h"
 #include "auto_talk.h"
 #include "battle_speed.h"
-#include "force_autobattle.h"
 #include "dump_enemies.h"
 #include "esp.h"
 #include "fov.h"
@@ -29,7 +28,6 @@ namespace Cheats
 	VOID RenderBattleTab()
 	{
 		UnlockAutoBattle::Render();
-		ForceAutoBattle::Render();
 		BattleSpeed::Render();
 	}
 
@@ -68,7 +66,6 @@ namespace Cheats
 		ChestTeleport::Update();
 		QuestTeleport::Update();
 		AutoTalk::Update();
-		ForceAutoBattle::Update();
 		BattleSpeed::Update();
 		DumpEnemies::Update();
 		Esp::Update();
@@ -88,7 +85,6 @@ namespace Cheats
 		ChestTeleport::Start();
 		QuestTeleport::Start();
 		AutoTalk::Start();
-		ForceAutoBattle::Start();
 		BattleSpeed::Start();
 		DumpEnemies::Start();
 		Esp::Start();

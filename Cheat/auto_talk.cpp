@@ -4,6 +4,8 @@
 #include "globals.h"
 #include "hooks.h"
 
+#include "inputs.h"
+
 #include "utils.h"
 
 #include "imgui_internal.h"
@@ -12,7 +14,7 @@ namespace AutoTalk
 {
 	static long _g_get_ForceToNextTimeHandler(__int64 L)
 	{
-		if (!Options.bAutoTalk)
+		if (!Options.bAutoTalk || !Inputs::GetState(Options.dwAutoTalkKey, INPUT_TYPE_HOLD))
 			return CALL_ORIGIN(_g_get_ForceToNextTimeHandler, L);
 
 		XLua::LuaDLL::Lua::lua::pushnumber(L, 0.000001f);
@@ -32,7 +34,7 @@ namespace AutoTalk
 
 	static bool IsDoneHandler(void* _unity_self)
 	{
-		if (Options.bAutoTalk && Options.bAutoTalkSkipScenes && _unity_self)
+		if (Options.bAutoTalk && Options.bAutoTalkSkipScenes && Inputs::GetState(Options.dwAutoTalkKey, INPUT_TYPE_HOLD) && _unity_self)
 		{
 			__try
 			{
@@ -53,6 +55,10 @@ namespace AutoTalk
 		ImGui::BeginGroupPanel("Auto-Talk");
 
 		ImGui::Checkbox("Enable", &Options.bAutoTalk);
+
+		ImGui::SameLine();
+
+		ImGui::Hotkey(&Options.dwAutoTalkKey);
 
 		if (Options.bAutoTalk)
 		{

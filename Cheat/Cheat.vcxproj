@@ -60,7 +60,6 @@
     <ClInclude Include="dump_enemies.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="esp.h" />
-    <ClInclude Include="force_autobattle.h" />
     <ClInclude Include="fov.h" />
     <ClInclude Include="fps.h" />
     <ClInclude Include="globals.h" />
@@ -95,7 +94,6 @@
     <ClCompile Include="dump_enemies.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="esp.cpp" />
-    <ClCompile Include="force_autobattle.cpp" />
     <ClCompile Include="fov.cpp" />
     <ClCompile Include="fps.cpp" />
     <ClCompile Include="globals.cpp" />
