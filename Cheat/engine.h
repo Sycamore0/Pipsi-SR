@@ -15,6 +15,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define GLOBALVARS_UIROOT_OFFSET 0x1D428
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
 #define STRING_NEW (il2cpp_base + 0x25F240)
+#define BEHAVIOUR_SET_ENABLED (il2cpp_base + 0x2786280)
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2891420)
 #define SCREEN_GET_WIDTH (il2cpp_base + 0x25A6D30)
 #define SCREEN_GET_HEIGHT (il2cpp_base + 0x25A6C90)
@@ -60,6 +61,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define GLOBALVARS_UIROOT_OFFSET 0x1D428
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
 #define STRING_NEW (il2cpp_base + 0x2272C0)
+#define BEHAVIOUR_SET_ENABLED (il2cpp_base + 0x2665760)
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2770900)
 #define SCREEN_GET_WIDTH (il2cpp_base + 0x24861C0)
 #define SCREEN_GET_HEIGHT (il2cpp_base + 0x2486120)
@@ -211,12 +213,8 @@ namespace UnityEngine
 		void* m_CachedPtr; // 0x10
 
 		FN(Find, UnityEngine::GameObject*, (void* name), GAMEOBJECT_FIND);
-		FN(GetComponentByName, void*, (void* _this, void* type), il2cpp_base + 0x288E590);
 
 		FN(get_transform, void*, (void* _this), GAMEOBJECT_GET_TRANSFORM);
-
-		FN(set_active, void, (void* _this, bool value), GAMEOBJECT_GET_SET_ACTIVE);
-		FN(SetActive, void, (void* _this, bool value), il2cpp_base + 0x288EB40);
 	};
 
 	struct Animator {

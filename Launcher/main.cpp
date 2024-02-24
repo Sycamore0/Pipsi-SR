@@ -34,67 +34,34 @@ BOOL LoadFile(LPCSTR lpFileName, PCHAR* lpBuffer, PDWORD lpSize)
 	return TRUE;
 }
 
-BOOL InjectBypass(HANDLE hProcess, HANDLE hThread)
+BOOL InjectDll(HANDLE hProcess, LPCSTR lpFileName)
 {
-	printf("Injecting bypass..\n");
+	printf("Injecting %s..\n", lpFileName);
 
-	PCHAR lpBypassDll = NULL;
-	DWORD dwBypassSize = 0;
+	PCHAR lpData = NULL;
+	DWORD dwSize = 0;
 
-	if (!LoadFile("Bypass.dll", &lpBypassDll, &dwBypassSize))
+	if (!LoadFile(lpFileName, &lpData, &dwSize))
 	{
-		printf("Unable to load/find Bypass.dll\n");
+		printf("Unable to load/find %s\n", lpFileName);
 
-		delete[] lpBypassDll;
+		delete[] lpData;
 
 		return FALSE;
 	}
 
-	if (!ManualMapDll(hProcess, (PBYTE)lpBypassDll, dwBypassSize))
+	if (!ManualMapDll(hProcess, (PBYTE)lpData, dwSize))
 	{
-		printf("Failed to inject bypass\n");
+		printf("Failed to inject %s\n", lpFileName);
 
-		delete[] lpBypassDll;
+		delete[] lpData;
 
 		return FALSE;
 	}
 
+	delete[] lpData;
 
-	delete[] lpBypassDll;
-
-	printf("Bypass successfully injected!\n");
-
-	return TRUE;
-}
-
-BOOL InjectCheat(HANDLE hProcess)
-{
-	printf("Injecting cheat..\n");
-
-	PCHAR lpCheatDll = NULL;
-	DWORD dwCheatSize = 0;
-
-	if (!LoadFile("Cheat.dll", &lpCheatDll, &dwCheatSize))
-	{
-		printf("Unable to load/find Cheat.dll\n");
-
-		delete[] lpCheatDll;
-
-		return FALSE;
-	}
-
-	if (!ManualMapDll(hProcess, (PBYTE)lpCheatDll, dwCheatSize))
-	{
-		printf("Failed to inject cheat\n");
-
-		delete[] lpCheatDll;
-
-		return FALSE;
-	}
-
-	delete[] lpCheatDll;
-
-	printf("Cheat successfully injected!\n");
+	printf("%s successfully injected!\n", lpFileName);
 
 	return TRUE;
 }
@@ -136,7 +103,7 @@ int main()
 	if (!CreateProcessA(NULL, lpExecutablePath, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &StartupInfo, &ProcessInfo))
 		return -1;
 
-	if (!InjectBypass(ProcessInfo.hProcess, ProcessInfo.hThread))
+	if (!InjectDll(ProcessInfo.hProcess, "Bypass.dll"))
 	{
 		TerminateProcess(ProcessInfo.hProcess, 0);
 
@@ -156,7 +123,7 @@ int main()
 
 	Sleep(15000);
 
-	if (!InjectCheat(ProcessInfo.hProcess))
+	if (!InjectDll(ProcessInfo.hProcess, "Cheat.dll"))
 	{
 		TerminateProcess(ProcessInfo.hProcess, 0);
 
