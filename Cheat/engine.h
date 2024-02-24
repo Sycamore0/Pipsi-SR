@@ -4,14 +4,17 @@
 #include <windows.h>
 #include <math.h>
 
-#define FN(n, t, p, a) t(*n)p = ((t(*)p)(a))
+#define FN(n, t, p, a) inline static t(*n)p = ((t(*)p)(a))
 #define SD(n, t, a) t* n = (t*)(a)
 
 static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 
 #ifdef GLOBAL_VERSION
 #define GLOBALVARS (il2cpp_base + 0x8889A80)
+#define GLOBALVARS_UICAMERA_OFFSET 0x1D420
+#define GLOBALVARS_UIROOT_OFFSET 0x1D428
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
+#define STRING_NEW (il2cpp_base + 0x25F240)
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2891420)
 #define SCREEN_GET_WIDTH (il2cpp_base + 0x25A6D30)
 #define SCREEN_GET_HEIGHT (il2cpp_base + 0x25A6C90)
@@ -24,7 +27,9 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define TRANSFORM_GET_FORWARD (il2cpp_base + 0x26F8460)
 #define TRANSFORM_GET_POSITION_INJECTED (il2cpp_base + 0x26F86D0)
 #define TRANSFORM_SET_POSITION_INJECTED (il2cpp_base + 0x26F8B10)
+#define GAMEOBJECT_FIND (il2cpp_base + 0x288E580)
 #define GAMEOBJECT_GET_TRANSFORM (il2cpp_base + 0x288ED90)
+#define GAMEOBJECT_GET_SET_ACTIVE (il2cpp_base + 0x288EDA0)
 #define ANIMATOR_SET_SPEED (il2cpp_base + 0x272D950)
 #define GAMEENTITY_GET_UNITYGO (il2cpp_base + 0x3EBE430)
 #define ENTITYMANAGER_GET_OWNERWORLDREF (il2cpp_base + 0x391C080)
@@ -51,7 +56,10 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F13620)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
+#define GLOBALVARS_UICAMERA_OFFSET 0x1D420
+#define GLOBALVARS_UIROOT_OFFSET 0x1D428
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
+#define STRING_NEW (il2cpp_base + 0x2272C0)
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2770900)
 #define SCREEN_GET_WIDTH (il2cpp_base + 0x24861C0)
 #define SCREEN_GET_HEIGHT (il2cpp_base + 0x2486120)
@@ -64,7 +72,9 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define TRANSFORM_GET_FORWARD (il2cpp_base + 0x25D7940)
 #define TRANSFORM_GET_POSITION_INJECTED (il2cpp_base + 0x25D7BB0)
 #define TRANSFORM_SET_POSITION_INJECTED (il2cpp_base + 0x25D7FF0)
+#define GAMEOBJECT_FIND (il2cpp_base + 0x276DA60)
 #define GAMEOBJECT_GET_TRANSFORM (il2cpp_base + 0x276E270)
+#define GAMEOBJECT_GET_SET_ACTIVE (il2cpp_base + 0x276E280)
 #define ANIMATOR_SET_SPEED (il2cpp_base + 0x260CE30)
 #define GAMEENTITY_GET_UNITYGO (il2cpp_base + 0x3B84960)
 #define ENTITYMANAGER_GET_OWNERWORLDREF (il2cpp_base + 0x3878DE0)
@@ -135,6 +145,8 @@ namespace System
 		char _[0x10]; // 0x0
 		long m_stringLength; // 0x10
 		const unsigned short m_firstChar[1]; // 0x14
+
+		FN(New, System::String*, (const char* str), STRING_NEW);
 	};
 
 	namespace Collections
@@ -163,50 +175,63 @@ namespace System
 
 namespace UnityEngine
 {
+	struct Behaviour {
+		FN(set_enabled, void, (void* _this, bool value), il2cpp_base + 0x2786280);
+	};
+
 	struct Time {
-		inline static FN(get_deltaTime, float, (), TIME_GET_DELTATIME);
+		FN(get_deltaTime, float, (), TIME_GET_DELTATIME);
 	};
 
 	struct Screen {
-		inline static FN(get_width, long, (), SCREEN_GET_WIDTH);
-		inline static FN(get_height, long, (), SCREEN_GET_HEIGHT);
+		FN(get_width, long, (), SCREEN_GET_WIDTH);
+		FN(get_height, long, (), SCREEN_GET_HEIGHT);
 	};
 
 	struct Camera {
-		inline static FN(get_main, void*, (), CAMERA_GET_MAIN);
-		inline static FN(get_pixelWidth, long, (void* _this), CAMERA_GET_PIXELWIDTH);
-		inline static FN(get_pixelHeight, long, (void* _this), CAMERA_GET_PIXELHEIGHT);
+		FN(get_main, void*, (), CAMERA_GET_MAIN);
+		FN(get_pixelWidth, long, (void* _this), CAMERA_GET_PIXELWIDTH);
+		FN(get_pixelHeight, long, (void* _this), CAMERA_GET_PIXELHEIGHT);
 
-		inline static FN(set_fieldOfView, void, (void* _this, float value), CAMERA_SETFIELD_OFVIEW);
+		FN(set_fieldOfView, void, (void* _this, float value), CAMERA_SETFIELD_OFVIEW);
 
-		inline static FN(WorldToScreenPoint, void*, (void* ret, void* _this, void* position), CAMERA_WORLDTOSCREENPOINT);
+		FN(WorldToScreenPoint, void*, (void* ret, void* _this, void* position), CAMERA_WORLDTOSCREENPOINT);
 	};
 
 	struct Transform {
-		inline static FN(get_up, void, (void* ret, void* _this), TRANSFORM_GET_UP);
-		inline static FN(get_forward, void, (void* ret, void* _this), TRANSFORM_GET_FORWARD);
-		inline static FN(get_position_Injected, void, (void* _this, void* ret), TRANSFORM_GET_POSITION_INJECTED);
+		FN(get_up, void, (void* ret, void* _this), TRANSFORM_GET_UP);
+		FN(get_forward, void, (void* ret, void* _this), TRANSFORM_GET_FORWARD);
+		FN(get_position_Injected, void, (void* _this, void* ret), TRANSFORM_GET_POSITION_INJECTED);
 
-		inline static FN(set_position_Injected, void, (void* _this, void* value), TRANSFORM_SET_POSITION_INJECTED);
+		FN(set_position_Injected, void, (void* _this, void* value), TRANSFORM_SET_POSITION_INJECTED);
 	};
 
 	struct GameObject {
-		inline static FN(get_transform, void*, (void* _this), GAMEOBJECT_GET_TRANSFORM);
+		char _[0x10]; // 0x0
+		void* m_CachedPtr; // 0x10
+
+		FN(Find, UnityEngine::GameObject*, (void* name), GAMEOBJECT_FIND);
+		FN(GetComponentByName, void*, (void* _this, void* type), il2cpp_base + 0x288E590);
+
+		FN(get_transform, void*, (void* _this), GAMEOBJECT_GET_TRANSFORM);
+
+		FN(set_active, void, (void* _this, bool value), GAMEOBJECT_GET_SET_ACTIVE);
+		FN(SetActive, void, (void* _this, bool value), il2cpp_base + 0x288EB40);
 	};
 
 	struct Animator {
-		inline static FN(set_speed, void, (void* _this, float value), ANIMATOR_SET_SPEED);
+		FN(set_speed, void, (void* _this, float value), ANIMATOR_SET_SPEED);
 	};
 
 	struct Application {
-		inline static FN(set_targetFrameRate, void, (int value), APPLICATION_SET_TARGETFRAMERATE);
+		FN(set_targetFrameRate, void, (int value), APPLICATION_SET_TARGETFRAMERATE);
 	};
 
 	namespace Playables
 	{
 		struct PlayableGraph {
-			inline static FN(IsPlaying_Injected, bool, (void* _unity_self), PLAYABLEGRAPH_ISPLAYING_INJECTED);
-			inline static FN(IsDone_Injected, bool, (void* _unity_self), PLAYABLEGRAPH_ISDONE_INJECTED);
+			FN(IsPlaying_Injected, bool, (void* _unity_self), PLAYABLEGRAPH_ISPLAYING_INJECTED);
+			FN(IsDone_Injected, bool, (void* _unity_self), PLAYABLEGRAPH_ISDONE_INJECTED);
 		};
 	}
 }
@@ -347,8 +372,8 @@ namespace RPG
 			bool Visible; // 0x102
 			bool IsOnStage; // 0x103
 
-			inline static FN(get_UnityGO, void*, (void* _this), GAMEENTITY_GET_UNITYGO);
-			inline static FN(get_Team, int, (void* _this), GAMEENTITY_GET_TEAM);
+			FN(get_UnityGO, void*, (void* _this), GAMEENTITY_GET_UNITYGO);
+			FN(get_Team, int, (void* _this), GAMEENTITY_GET_TEAM);
 		};
 
 		struct GameWorld {
@@ -391,7 +416,7 @@ namespace RPG
 		};
 
 		struct EntityManager {
-			inline static FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), ENTITYMANAGER_GET_OWNERWORLDREF);
+			FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), ENTITYMANAGER_GET_OWNERWORLDREF);
 		};
 
 		struct PropManager {
@@ -406,31 +431,31 @@ namespace RPG
 		};
 		
 		struct AdventureStatic {
-			inline static FN(GetEntityManager, void*, (), ADVENTURESTATIC_GETENTITYMANAGER);
+			FN(GetEntityManager, void*, (), ADVENTURESTATIC_GETENTITYMANAGER);
 
-			inline static FN(GetPropManager, RPG::GameCore::PropManager*, (), ADVENTURESTATIC_GETPROPMANAGER);
+			FN(GetPropManager, RPG::GameCore::PropManager*, (), ADVENTURESTATIC_GETPROPMANAGER);
 
-			inline static FN(GetLocalPlayer, void*, (), ADVENTURESTATIC_GETLOCALPLAYER);
+			FN(GetLocalPlayer, void*, (), ADVENTURESTATIC_GETLOCALPLAYER);
 		};
 
 		struct NPCComponent {
-			inline static FN(TickAlertValue, void, (void* _this, float fElapsedTimeInSec, void* target, void* detail), NPCCOMPONENT_TICKALERTVALUE);
+			FN(TickAlertValue, void, (void* _this, float fElapsedTimeInSec, void* target, void* detail), NPCCOMPONENT_TICKALERTVALUE);
 		};
 		
 		struct PropComponent {
-			inline static FN(Tick, void, (void* _this, float fElapsedTimeInSec), PROPCOMPONENT_TICK);
+			FN(Tick, void, (void* _this, float fElapsedTimeInSec), PROPCOMPONENT_TICK);
 
-			inline static FN(get_OwnerEntity, void*, (void* _this), PROPCOMPONENT_GET_OWNERENTITY);
-			inline static FN(get_PropState, int, (void* _this), PROPCOMPONENT_GET_PROPSTATE);
+			FN(get_OwnerEntity, void*, (void* _this), PROPCOMPONENT_GET_OWNERENTITY);
+			FN(get_PropState, int, (void* _this), PROPCOMPONENT_GET_PROPSTATE);
 		};
 
 		struct TurnBasedGameMode {
-			inline static FN(GetCurrenTurnActionEntity, void*, (void* _this), TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY);
+			FN(GetCurrenTurnActionEntity, void*, (void* _this), TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY);
 		};
 		
 		struct BattleInstance {
-			inline static FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
-			inline static FN(IsStageForbidAutoBattle, bool, (void* _this), BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE);
+			FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
+			FN(IsStageForbidAutoBattle, bool, (void* _this), BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE);
 		};
 	}
 
@@ -465,15 +490,15 @@ namespace RPG
 		};
 
 		struct GamePhaseManager {
-			inline static FN(get_CurrentGamePhaseType, int, (void* _this), GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE);
+			FN(get_CurrentGamePhaseType, int, (void* _this), GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE);
 		};
 
 		struct BaseShaderPropertyTransition {
-			inline static FN(SetElevationDitherAlphaValue, void, (void* _this, float EOBOBKJIJFA), BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE);
+			FN(SetElevationDitherAlphaValue, void, (void* _this, float EOBOBKJIJFA), BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE);
 		};
 
 		struct AdventureWaypointTarget {
-			inline static FN(GetTargetPos, void*, (void* _this, void* _res), ADVENTUREWAYPOINTTARGET_GETTARGETPOS);
+			FN(GetTargetPos, void*, (void* _this, void* _res), ADVENTUREWAYPOINTTARGET_GETTARGETPOS);
 		};
 
 		struct ManaVideoPageContext {
@@ -503,7 +528,7 @@ namespace RPG
 			bool _isCG; // 0x19E
 			bool _HasSend_VideoNearlyEnd; // 0x19F
 
-			inline static FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), MANAVIDEOPAGECONTEXT__ONTICK);
+			FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), MANAVIDEOPAGECONTEXT__ONTICK);
 		};
 	}
 }
@@ -515,7 +540,7 @@ namespace XLua
 		namespace Lua
 		{
 			struct lua {
-				inline static FN(pushnumber, void, (__int64 L, double number), LUA_PUSHNUMBER);
+				FN(pushnumber, void, (__int64 L, double number), LUA_PUSHNUMBER);
 			};
 		}
 	}
@@ -523,8 +548,8 @@ namespace XLua
 	namespace CSObjectWrap
 	{
 		struct RPGGameCoreSimpleTalkInfoWrap {
-			inline static FN(_g_get_ForceToNextTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP__G_GET_FORCETONEXTTIME);
-			inline static FN(_g_get_ProtectTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP__G_GET_PROTECTTIME);
+			FN(_g_get_ForceToNextTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP__G_GET_FORCETONEXTTIME);
+			FN(_g_get_ProtectTime, long, (__int64 L), RPGGAMECORESIMPLETALKINFOWRAP__G_GET_PROTECTTIME);
 		};
 	}
 }
@@ -542,6 +567,9 @@ namespace Engine
 
 	bool GetEntityPosition(void* lpEntity, void* lpPosition);
 	int GetPhaseType();
+
+	void* GetUICamera();
+	void* GetUIRoot();
 
 	void* GetTransform(void* lpEntity);
 

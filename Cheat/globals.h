@@ -18,7 +18,6 @@ struct OPTIONS
 	bool bEsp;
 	bool bEspTracer;
 	float fEspTracerSize;
-	float vEspTracerColor[4];
 
 	bool bEspDebug;
 	float fFontSize;
@@ -62,6 +61,10 @@ struct OPTIONS
 
 	bool bUnlockAutoBattle;
 
+	bool bUi;
+	bool bUiHide;
+	bool bUiHideUid;
+
 	OPTIONS() :
 		bMenu(FALSE),
 		dwMenuKey(VK_INSERT),
@@ -71,7 +74,6 @@ struct OPTIONS
 		bEsp(FALSE),
 		bEspTracer(FALSE),
 		fEspTracerSize(2.f),
-		vEspTracerColor{ 1.f,1.f,1.f,1.f },
 		bEspDebug(FALSE),
 		fFontSize(13.f),
 		flEspDistance(25.f),
@@ -102,7 +104,10 @@ struct OPTIONS
 		bSkipCutscene(FALSE),
 		bFpsIndicator(TRUE),
 		iFpsValue(60),
-		bUnlockAutoBattle(FALSE)
+		bUnlockAutoBattle(FALSE),
+		bUi(FALSE),
+		bUiHide(FALSE),
+		bUiHideUid(FALSE)
 	{
 	}
 };

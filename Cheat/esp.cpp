@@ -55,9 +55,6 @@ namespace Esp
 			ImGui::Indent();
 
 			ImGui::Checkbox("Tracer", &Options.bEspTracer);
-			ImGui::SameLine();
-			ImGui::ColorEdit4("Tracer Color", Options.vEspTracerColor, ImGuiColorEditFlags_PickerMask_);
-
 			ImGui::Checkbox("Debug Names", &Options.bEspDebug);
 			
 			ImGui::SliderFloat("Tracer Size", &Options.fEspTracerSize, 1.f, 100.f, "%.1f");

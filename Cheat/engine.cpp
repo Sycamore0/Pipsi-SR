@@ -132,12 +132,31 @@ namespace Engine
 
 	int GetPhaseType()
 	{
+		if (!*lpGlobalVars)
+			return 0;
+
 		PVOID lpPhaseManager = *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_GAMEPHASEMANAGER_OFFSET);
 
 		if (!lpPhaseManager)
 			return 0;
 
 		return RPG::Client::GamePhaseManager::get_CurrentGamePhaseType(lpPhaseManager);
+	}
+
+	void* GetUICamera()
+	{
+		if (!*lpGlobalVars)
+			return 0;
+
+		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_UICAMERA_OFFSET);
+	}
+	
+	void* GetUIRoot()
+	{
+		if (!*lpGlobalVars)
+			return 0;
+
+		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_UIROOT_OFFSET);
 	}
 
 	void* GetTransform(void* lpEntity)

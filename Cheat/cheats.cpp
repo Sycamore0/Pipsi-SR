@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "ui.h"
 #include "unlock_autobattle.h"
 #include "unload.h"
 #include "config.h"
@@ -42,6 +43,7 @@ namespace Cheats
 
 	VOID RenderVisualsTab()
 	{
+		Ui::Render();
 		Esp::Render();
 		Fov::Render();
 		Peeking::Render();
@@ -57,6 +59,7 @@ namespace Cheats
 
 	VOID Update()
 	{
+		Ui::Update();
 		UnlockAutoBattle::Update();
 		Unload::Update();
 		Config::Update();
@@ -76,6 +79,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		Ui::Start();
 		UnlockAutoBattle::Start();
 		Unload::Start();
 		Config::Start();

@@ -21,10 +21,10 @@ namespace Config
 
 		if (!WriteFile(hFile, &Options, sizeof(Options), &dwBytesWritten, NULL))
 		{
-			printf("Unable to save config\n");
+			// printf("Unable to save config\n");
 		}
 
-		printf("Saved config %x\n", dwBytesWritten);
+		// printf("Saved config %x\n", dwBytesWritten);
 
 		CloseHandle(hFile);
 	}
@@ -40,10 +40,10 @@ namespace Config
 
 		if (!ReadFile(hFile, &Options, sizeof(Options), &dwBytesRead, NULL))
 		{
-			printf("Unable to load config\n");
+			// printf("Unable to load config\n");
 		}
 		
-		printf("Loaded config %x\n", dwBytesRead);
+		// printf("Loaded config %x\n", dwBytesRead);
 
 		CloseHandle(hFile);
 	}
