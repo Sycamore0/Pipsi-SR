@@ -85,7 +85,7 @@ int main()
 
 		OpenFileName.lpstrFile = lpExecutablePath;
 		OpenFileName.nMaxFile = sizeof(lpExecutablePath);
-		OpenFileName.lpstrFilter = "Executable Files\0StarRail.exe\0All Files (*.*)\0*.*\0";
+		OpenFileName.lpstrFilter = "Executable Files\0" EXECUTABLE_NAME "\0All Files (*.*)\0*.*\0";
 		OpenFileName.nFilterIndex = 1;
 		OpenFileName.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
@@ -103,7 +103,7 @@ int main()
 	if (!CreateProcessA(NULL, lpExecutablePath, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &StartupInfo, &ProcessInfo))
 		return -1;
 
-	if (!InjectDll(ProcessInfo.hProcess, "Bypass.dll"))
+	if (!InjectDll(ProcessInfo.hProcess, BYPASS_DLL_NAME))
 	{
 		TerminateProcess(ProcessInfo.hProcess, 0);
 
@@ -118,12 +118,12 @@ int main()
 
 	HWND hWnd = NULL;
 
-	while ((hWnd = FindWindowA("UnityWndClass", NULL)) == NULL)
+	while ((hWnd = FindWindowA(WNDCLASS_NAME, NULL)) == NULL)
 		Sleep(1000);
 
 	Sleep(15000);
 
-	if (!InjectDll(ProcessInfo.hProcess, "Cheat.dll"))
+	if (!InjectDll(ProcessInfo.hProcess, CHEAT_DLL_NAME))
 	{
 		TerminateProcess(ProcessInfo.hProcess, 0);
 

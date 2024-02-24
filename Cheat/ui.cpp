@@ -12,7 +12,7 @@ namespace Ui
 {
 	void Render()
 	{
-		ImGui::BeginGroupPanel("UI Tools");
+		ImGui::BeginGroupPanel("UI-Tools");
 
 		ImGui::Checkbox("Enable", &Options.bUi);
 
