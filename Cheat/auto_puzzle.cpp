@@ -60,8 +60,11 @@ namespace AutoPuzzle
 		{
 			CALL_ORIGIN(UpdateHandler, _this);
 
-			_this->NHHBJDCKPOG = 5.f; // idk why but let it be
-			_this->KDHABOGLJKC = RPG::Client::Prop::PuzzlePhase_FinishDelay;
+			if (Options.bAutoPuzzle)
+			{
+				_this->NHHBJDCKPOG = 5.f; // idk why but let it be
+				_this->KDHABOGLJKC = RPG::Client::Prop::PuzzlePhase_FinishDelay;
+			}
 		}
 	}
 
