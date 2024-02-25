@@ -10,13 +10,11 @@
 
 namespace AutoPuzzle
 {
-	bool bAutoPuzzle = FALSE;
-
 	namespace CablePuzzle
 	{
 		static bool LADNBFDOAMJHandler(RPG::Client::Prop::CablePuzzleBoard* _this, void* FMJLOIDBOKI, void* BHMGPLJEDCH)
 		{
-			if (!bAutoPuzzle)
+			if (!Options.bAutoPuzzle)
 				return CALL_ORIGIN(LADNBFDOAMJHandler, _this, FMJLOIDBOKI, BHMGPLJEDCH);
 
 			return TRUE;
@@ -27,7 +25,7 @@ namespace AutoPuzzle
 	{
 		static void OnRotateFinishHandler(RPG::Client::Prop::RubikCubePuzzleCube* _this)
 		{
-			if (bAutoPuzzle && _this)
+			if (Options.bAutoPuzzle && _this)
 				_this->Order = 0;
 
 			CALL_ORIGIN(OnRotateFinishHandler, _this);
@@ -38,7 +36,7 @@ namespace AutoPuzzle
 	{
 		static bool get_IsCompleteHandler(void* _this)
 		{
-			if (!bAutoPuzzle)
+			if (!Options.bAutoPuzzle)
 				return CALL_ORIGIN(get_IsCompleteHandler, _this);
 
 			return TRUE;
@@ -49,7 +47,7 @@ namespace AutoPuzzle
 	{
 		static bool IsMatchItemHandler(void* _this, void* FBLKNKFEIFI)
 		{
-			if (!bAutoPuzzle)
+			if (!Options.bAutoPuzzle)
 				return CALL_ORIGIN(IsMatchItemHandler, _this, FBLKNKFEIFI);
 
 			return TRUE;
@@ -62,7 +60,7 @@ namespace AutoPuzzle
 		{
 			CALL_ORIGIN(UpdateHandler, _this);
 
-			if (bAutoPuzzle && _this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_FinishDelay && _this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_Finish)
+			if (Options.bAutoPuzzle && _this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_FinishDelay && _this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_Finish)
 				RPG::Client::Prop::OpticalIllusionPuzzleBoard::AANAJJJKMKM(_this, RPG::GameCore::PuzzleCustomEvent_OpticalIllusionFinish);
 		}
 	}
@@ -71,7 +69,7 @@ namespace AutoPuzzle
 	{
 		static bool CheckIsGameFinishHandler(void* _this)
 		{
-			if (!bAutoPuzzle)
+			if (!Options.bAutoPuzzle)
 				return CALL_ORIGIN(CheckIsGameFinishHandler, _this);
 
 			return TRUE;
@@ -83,7 +81,7 @@ namespace AutoPuzzle
 	{
 		ImGui::BeginGroupPanel("Auto-Puzzle");
 
-		ImGui::Checkbox("Enable", &bAutoPuzzle);
+		ImGui::Checkbox("Enable", &Options.bAutoPuzzle);
 
 		ImGui::SameLine();
 

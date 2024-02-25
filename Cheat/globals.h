@@ -63,6 +63,8 @@ struct OPTIONS
 
 	bool bUiHide;
 
+	bool bAutoPuzzle;
+
 	OPTIONS() :
 		bMenu(FALSE),
 		dwMenuKey(VK_INSERT),
@@ -103,7 +105,8 @@ struct OPTIONS
 		bFpsIndicator(TRUE),
 		iFpsValue(60),
 		bUnlockAutoBattle(FALSE),
-		bUiHide(FALSE)
+		bUiHide(FALSE),
+		bAutoPuzzle(FALSE)
 	{
 	}
 };
