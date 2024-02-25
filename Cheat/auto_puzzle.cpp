@@ -60,8 +60,8 @@ namespace AutoPuzzle
 		{
 			CALL_ORIGIN(UpdateHandler, _this);
 
-			if (Options.bAutoPuzzle && _this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_FinishDelay && _this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_Finish)
-				RPG::Client::Prop::OpticalIllusionPuzzleBoard::AANAJJJKMKM(_this, RPG::GameCore::PuzzleCustomEvent_OpticalIllusionFinish);
+			_this->NHHBJDCKPOG = 5.f; // idk why but let it be
+			_this->KDHABOGLJKC = RPG::Client::Prop::PuzzlePhase_FinishDelay;
 		}
 	}
 
