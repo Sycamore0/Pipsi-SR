@@ -23,10 +23,12 @@
 
 #### Battle
 
+- Unlock Auto-Battle
 - Battle Speed
 
 #### World
 
+- Auto-Puzzle
 - Cutscene Skip
 - Chest Teleport
 - Quest Teleport
@@ -37,6 +39,7 @@
 
 #### Visuals
 
+- Hide UI
 - Esp
 - Fov Changer
 - Peeking
