@@ -66,8 +66,8 @@ namespace BattleSpeed
 		{
 			ImGui::Indent();
 
-			ImGui::SliderFloat("Dark Team", &Options.flBattleDarkTeamSpeed, 0.1f, 100.f, "%.1f");
-			ImGui::SliderFloat("Light Team", &Options.flBattleLightTeamSpeed, 0.1f, 5.f, "%.1f");
+			ImGui::SliderFloat("Dark Team", &Options.flBattleDarkTeamSpeed, 0.0f, 100.f, "%.1f");
+			ImGui::SliderFloat("Light Team", &Options.flBattleLightTeamSpeed, 0.0f, 5.f, "%.1f");
 
 			ImGui::Unindent();
 		}

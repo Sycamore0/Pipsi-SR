@@ -56,9 +56,9 @@ namespace AutoTalk
 
 		ImGui::Checkbox("Enable", &Options.bAutoTalk);
 
-		ImGui::SameLine();
+		//ImGui::SameLine();
 
-		ImGui::Hotkey(&Options.dwAutoTalkKey);
+		//ImGui::Hotkey(&Options.dwAutoTalkKey);
 
 		if (Options.bAutoTalk)
 		{

@@ -1,7 +1,7 @@
 #pragma once
 #include <windows.h>
 
-namespace Ui
+namespace HideUI
 {
 	void Render();
 

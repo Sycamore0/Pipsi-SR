@@ -24,6 +24,10 @@ namespace DumpEnemies
 
 		ImGui::Checkbox("Enable", &Options.bDumpEnemies);
 
+		ImGui::SameLine();
+
+		ImGui::HelpMarker("Prevents monsters from moving.");
+
 		ImGui::EndGroupPanel();
 	}
 

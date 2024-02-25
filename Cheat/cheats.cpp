@@ -1,6 +1,7 @@
 #include "cheats.h"
 
-#include "ui.h"
+#include "auto_puzzle.h"
+#include "hide_ui.h"
 #include "unlock_autobattle.h"
 #include "unload.h"
 #include "config.h"
@@ -34,6 +35,7 @@ namespace Cheats
 
 	VOID RenderWorldTab()
 	{
+		AutoPuzzle::Render();
 		SkipCutscene::Render();
 		ChestTeleport::Render();
 		QuestTeleport::Render();
@@ -43,7 +45,7 @@ namespace Cheats
 
 	VOID RenderVisualsTab()
 	{
-		Ui::Render();
+		HideUI::Render();
 		Esp::Render();
 		Fov::Render();
 		Peeking::Render();
@@ -59,7 +61,8 @@ namespace Cheats
 
 	VOID Update()
 	{
-		Ui::Update();
+		AutoPuzzle::Update();
+		HideUI::Update();
 		UnlockAutoBattle::Update();
 		Unload::Update();
 		Config::Update();
@@ -79,7 +82,8 @@ namespace Cheats
 
 	VOID Start()
 	{
-		Ui::Start();
+		AutoPuzzle::Start();
+		HideUI::Start();
 		UnlockAutoBattle::Start();
 		Unload::Start();
 		Config::Start();

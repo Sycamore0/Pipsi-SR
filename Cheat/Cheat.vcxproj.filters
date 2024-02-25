@@ -108,7 +108,10 @@
     <ClInclude Include="unlock_autobattle.h">
       <Filter>features</Filter>
     </ClInclude>
-    <ClInclude Include="ui.h">
+    <ClInclude Include="hide_ui.h">
+      <Filter>features</Filter>
+    </ClInclude>
+    <ClInclude Include="auto_puzzle.h">
       <Filter>features</Filter>
     </ClInclude>
   </ItemGroup>
@@ -203,7 +206,10 @@
     <ClCompile Include="unlock_autobattle.cpp">
       <Filter>features</Filter>
     </ClCompile>
-    <ClCompile Include="ui.cpp">
+    <ClCompile Include="hide_ui.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="auto_puzzle.cpp">
       <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>

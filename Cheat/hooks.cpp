@@ -26,7 +26,13 @@ VOID EnableHook(PVOID& lpFunction, PVOID lpHandler)
 {
 	DetourTransactionBegin();
 	DetourUpdateThread(GetCurrentThread());
-	DetourAttach(&(PVOID&)lpFunction, lpHandler);
+
+	if (DetourAttach(&(PVOID&)lpFunction, lpHandler) != NO_ERROR)
+	{
+		MessageBoxA(NULL, "Failed to attach hook.", "Error", MB_ICONERROR | MB_OK);
+		TerminateProcess(GetCurrentProcess(), 0);
+	}
+
 	DetourTransactionCommit();
 }
 

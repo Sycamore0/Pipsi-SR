@@ -55,6 +55,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x35F3770)
 #define BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE (il2cpp_base + 0x35F22F0)
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F13620)
+#define OPTICALILLUSIONPUZZLEBOARD_UPDATE (il2cpp_base + 0x3862E90)
+#define OPTICALILLUSIONPUZZLEBOARD_AANAJJJKMKM (il2cpp_base + 0x3852320)
+#define CABLEPUZZLEBOARD_LADNBFDOAMJ (il2cpp_base + 0x3E314A0)
+#define RUBIKCUBEPUZZLECUBE_ONROTATEFINISH (il2cpp_base + 0x38BEDB0)
+#define ROTATEPILLARPUZZLEFRAGMENT_GET_ISCOMPLETE (il2cpp_base + 0x3E10A00)
+#define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3BECFA0)
+#define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x3AD81E0)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
 #define GLOBALVARS_UICAMERA_OFFSET 0x1D420
@@ -101,6 +108,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF (il2cpp_base + 0x34C88D0)
 #define BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE (il2cpp_base + 0x34C7450)
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F33DA0)
+#define OPTICALILLUSIONPUZZLEBOARD_UPDATE (il2cpp_base + 0x373C060)
+#define OPTICALILLUSIONPUZZLEBOARD_AANAJJJKMKM (il2cpp_base + 0x372B4F0)
+#define CABLEPUZZLEBOARD_LADNBFDOAMJ (il2cpp_base + 0x3D4EE60)
+#define RUBIKCUBEPUZZLECUBE_ONROTATEFINISH (il2cpp_base + 0x383E0B0)
+#define ROTATEPILLARPUZZLEFRAGMENT_GET_ISCOMPLETE (il2cpp_base + 0x3A12A50)
+#define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3AC03C0)
+#define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x39B2980)
 #endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
@@ -157,18 +171,18 @@ namespace System
 		{
 			struct Array {
 				void* klass; // 0x0
-				void* monitor; // 0x0
-				void* bounds; // 0x0
-				size_t max_length; // 0x0
-				void* vector[32]; // 0x0
+				void* monitor; // 0x8
+				void* bounds; // 0x10
+				size_t max_length; // 0x18
+				void* vector[32]; // 0x20
 			};
 
 			struct List {
 				char _[0x10]; // 0x0
-				Array* items; // 0x0
-				long size; // 0x0
-				long version; // 0x0
-				void* syncRoot; // 0x0
+				Array* items; // 0x10
+				long size; // 0x18
+				long version; // 0x1C
+				void* syncRoot; // 0x20
 			};
 
 		}
@@ -178,7 +192,7 @@ namespace System
 namespace UnityEngine
 {
 	struct Behaviour {
-		FN(set_enabled, void, (void* _this, bool value), il2cpp_base + 0x2786280);
+		FN(set_enabled, void, (void* _this, bool value), BEHAVIOUR_SET_ENABLED);
 	};
 
 	struct Time {
@@ -317,6 +331,58 @@ namespace RPG
 			PropState_CustomState07 = 0x6B,
 			PropState_CustomState08 = 0x6C,
 			PropState_CustomState09 = 0x6D,
+		};
+
+		enum PuzzleCustomEvent {
+			PuzzleCustomEvent_PillarPuzzleSequenceActivateWithHint = 0x1,
+			PuzzleCustomEvent_PillarPuzzleSequenceActivateSkipHint = 0x2,
+			PuzzleCustomEvent_PillarPuzzleDisappear = 0x3,
+			PuzzleCustomEvent_PillarPuzzleWrongAttriHit = 0x4,
+			PuzzleCustomEvent_PadsPuzzleTeleport = 0xA,
+			PuzzleCustomEvent_PadsPuzzleFinishPads = 0xB,
+			PuzzleCustomEvent_PadsPuzzleResetPads = 0xC,
+			PuzzleCustomEvent_PadsPuzzleResetTeleportBlend = 0xD,
+			PuzzleCustomEvent_PadsPuzzleResetTeleportInstant = 0xE,
+			PuzzleCustomEvent_ProbePuzzleReset = 0xF,
+			PuzzleCustomEvent_ProbePuzzleInRange = 0x10,
+			PuzzleCustomEvent_ProbePuzzleOutOfRange = 0x11,
+			PuzzleCustomEvent_DeployPuzzleBasePointDisabled = 0x14,
+			PuzzleCustomEvent_DeployPuzzleBasePointPlaced = 0x15,
+			PuzzleCustomEvent_DeployPuzzleBasePointWait = 0x16,
+			PuzzleCustomEvent_DeployPuzzleBasePointSwap = 0x17,
+			PuzzleCustomEvent_DeployPuzzleBasePointActivate = 0x18,
+			PuzzleCustomEvent_DeployPuzzleBasePointDeactivate = 0x19,
+			PuzzleCustomEvent_DeployPuzzleBoardWaitInteract = 0x1A,
+			PuzzleCustomEvent_DeployPuzzleBoardInteract = 0x1B,
+			PuzzleCustomEvent_DeployPuzzleBoardEndInteract = 0x1C,
+			PuzzleCustomEvent_CoilPuzzleAllPillarLightup = 0x64,
+			PuzzleCustomEvent_CoilPuzzleCancelAllPillarLightup = 0x65,
+			PuzzleCustomEvent_AdventurePinballOnPlateUnhover = 0xC0,
+			PuzzleCustomEvent_AdventurePinballOnPlateHover = 0xC1,
+			PuzzleCustomEvent_AdventurePinballOnPlateUnselect = 0xC2,
+			PuzzleCustomEvent_AdventurePinballOnPlateSelect = 0xC3,
+			PuzzleCustomEvent_AdventurePinballOnPlateHit = 0xC4,
+			PuzzleCustomEvent_AdventurePinballOnArriveStation = 0xC5,
+			PuzzleCustomEvent_AdventurePinballOnStationPrepareLaunch = 0xC6,
+			PuzzleCustomEvent_AdventurePinballOnInteractStation = 0xC7,
+			PuzzleCustomEvent_AdventurePinballOnStationEnter = 0xC8,
+			PuzzleCustomEvent_AdventurePinballOnConnectSuccess = 0xC9,
+			PuzzleCustomEvent_AdventurePinballOnConnectFail = 0xCA,
+			PuzzleCustomEvent_AdventurePinballOnStartConnect = 0xCB,
+			PuzzleCustomEvent_AdventurePinballOnLoseConnect = 0xCC,
+			PuzzleCustomEvent_AdventurePinballOnOtherStationEnter = 0xCD,
+			PuzzleCustomEvent_AdventurePinballOnStationExit = 0xCE,
+			PuzzleCustomEvent_AdventurePinballOnLaunchStart = 0xCF,
+			PuzzleCustomEvent_AdventurePinballOnLaunchEnd = 0xD0,
+			PuzzleCustomEvent_AdventurePinballOnLaunchBy = 0xD2,
+			PuzzleCustomEvent_AdventureMovieOnFlip = 0xD3,
+			PuzzleCustomEvent_AdventureMovieOnCollider = 0xD4,
+			PuzzleCustomEvent_OpticalIllusionFinish = 0x12C,
+			PuzzleCustomEvent_OpticalIllusionQuit = 0x12D,
+			PuzzleCustomEvent_OpticalIllusionWayPass = 0x12E,
+			PuzzleCustomEvent_OpticalIllusionRotateBlock = 0x12F,
+			PuzzleCustomEvent_OpticalIllusionReach = 0x130,
+			PuzzleCustomEvent_OpticalIllusionReset = 0x131,
 		};
 
 		struct GameEntity {
@@ -528,6 +594,183 @@ namespace RPG
 
 			FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), MANAVIDEOPAGECONTEXT__ONTICK);
 		};
+
+		namespace Prop
+		{
+			enum PuzzlePhase {
+				PuzzlePhase_FreeOP = 0x0,
+				PuzzlePhase_PathEffect = 0x1,
+				PuzzlePhase_NPCMove = 0x2,
+				PuzzlePhase_FinishDelay = 0x3,
+				PuzzlePhase_Finish = 0x4,
+				PuzzlePhase_Reset = 0x5,
+			};
+
+			struct OpticalIllusionPuzzleBoard {
+				char _[0x40]; // 0x0
+				void* ABEJDKOOIAP; // 0x40
+				void* LKFJGEBBFHJ; // 0x48
+				int KDHABOGLJKC; // 0x50
+				bool PKBKJIDHAGC; // 0x54
+				void* OPIPJDIPDPF; // 0x58
+				void* PDEIJJEOFNK; // 0x60
+				void* CCNNIGBKMJD; // 0x68
+				void* IGHPBOJHANB; // 0x70
+				void* FCBMDJMBPGF; // 0x78
+				void* AEAACGEDMDK; // 0x80
+				void* EFLPLKJPMCI; // 0x88
+				void* FCNIMIBEEOJ; // 0x90
+				bool AIKMKPOJGAJ; // 0x98
+				void* AGDCJMJNACN; // 0xA0
+				void* DBJKBCNPNDJ; // 0xA8
+				void* CJMMODJLIFB; // 0xB0
+				int OJGDACMPLFC; // 0xB8
+				char HPJKOOAFFAN[0xC]; // 0xBC
+				int KCAOEKAOBJH; // 0xC8
+				void* NBDGGCGDGDG; // 0xD0
+				bool NMPDEDMEDIA; // 0xD8
+				float JMFBPBBJMFI; // 0xDC
+				float PMPIJCGMKGH; // 0xE0
+				float IIPAIKNCNHJ; // 0xE4
+				void* CHEKMKPPNML; // 0xE8
+				float NFMAMDIILGO; // 0xF0
+				float NHHBJDCKPOG; // 0xF4
+				void* PEPDMNGCCOE; // 0xF8
+				char AJMKAJJCGBN[0xC]; // 0x100
+				char CLBBADOPJMI[0xC]; // 0x10C
+				char FPCLFMNHEDO[0x10]; // 0x118
+				void* FNPMLCLEPOM; // 0x128
+				void* INBNKIGCONH; // 0x130
+				void* HOACMNDALBP; // 0x138
+				char ENOBEHJJEAA[0x10]; // 0x140
+				void* ADCAKCFPONK; // 0x150
+				bool DMGBMGGBMCN; // 0x158
+				void* HGCENHFELGC; // 0x160
+				bool MOAFFLIPMHL; // 0x168
+				int MCBMDKHHPAG; // 0x16C
+				int CAFCCKAKBFI; // 0x170
+				int HICENGBBJBJ; // 0x174
+				int MIMKKAGMLMJ; // 0x178
+				bool FOLNGHJHCID; // 0x17C
+				void* OPBNHPCNACL; // 0x180
+				void* DEEEOJHDPPC; // 0x188
+				void* NADEJLLOKFO; // 0x190
+				void* DKIFGDPJKMG; // 0x198
+				void* GDPANCCJJBF; // 0x1A0
+				float CBNKIDDACID; // 0x1A8
+				unsigned int NKOEOHEMLLF; // 0x1AC
+				float NECPLMIKJIP; // 0x1B0
+				bool CEBNHPJONLK; // 0x1B4
+				char PlayerStartPosition[0xC]; // 0x1B8
+				char PlayerStartRotation[0x10]; // 0x1C4
+				int PlayerMotion; // 0x1D4
+				float PlayerSpeedRate; // 0x1D8
+				void* DesignPaths; // 0x1E0
+				int MirrorPlane; // 0x1E8
+				bool SetCamera; // 0x1EC
+				char CameraPosition[0xC]; // 0x1F0
+				char CameraRotation[0x10]; // 0x1FC
+				float OrthographicSize; // 0x20C
+				int HEHGDADCDNO; // 0x210
+				unsigned int NKAEFBKDOGJ; // 0x214
+				int LEPPBLHMNFC; // 0x218
+				void* PPGNOIIODDL; // 0x220
+
+				FN(Update, void, (void* _this), OPTICALILLUSIONPUZZLEBOARD_UPDATE);
+
+				FN(AANAJJJKMKM, void*, (void* _this, int IPODHLKMHJF), OPTICALILLUSIONPUZZLEBOARD_AANAJJJKMKM);
+			};
+			
+			struct CablePuzzleBoard {
+				char _[0xE0]; // 0x0
+				float RotateSpeed; // 0xE0
+				void* ResetTriggerCustomString; // 0xE8
+				void* ControllerModeInitHighlightPos; // 0xF0
+				float DelayResetTime; // 0xF8
+				void* RotationSpeedCurve; // 0x100
+				void* InitAnimationCurve; // 0x108
+				void* CenterCoord; // 0x110
+				float InitAnimationDuration; // 0x118
+				float CenterItemInitAnimationHeight; // 0x11C
+				float CenterLightDelay; // 0x120
+				float LightDelay; // 0x124
+				void* RotateSoundEvent; // 0x128
+				void* ConnectSoundEvent; // 0x130
+				void* FinishSoundEvent; // 0x138
+				long StartTime; // 0x140
+				bool MOHOIPOMKBF; // 0x144
+				void* MEFNLAALECB; // 0x148
+				long EOHFEHDDOHN; // 0x150
+				void* PDEIJJEOFNK; // 0x158
+				void* LADBNAFBFDA; // 0x160
+				void* GCGLPABFJCH; // 0x168
+				void* EOBGPLBPEEH; // 0x170
+				System::Collections::Generic::List* BCHLPJAAGPE; // 0x178
+				void* GANALNEDEFH; // 0x180
+				void* ACCLNDCNGPB; // 0x188
+				void* CLLNOKCIKNI; // 0x190
+				void* OINNEDHHODB; // 0x198
+				bool COIAGGPMFAI; // 0x1A0
+				bool PBIBKCCEFLH; // 0x1A1
+				void* PABPHGHBDCP; // 0x1A8
+
+				FN(LADNBFDOAMJ, bool, (void* _this, void* FMJLOIDBOKI, void* BHMGPLJEDCH), CABLEPUZZLEBOARD_LADNBFDOAMJ);
+			};
+
+			struct RubikCubePuzzleCube {
+				char _[0x18]; // 0x0
+				bool _IsRotate; // 0x18
+				bool _IsDrag; // 0x19
+				void* UniqueName; // 0x20
+				int Order; // 0x28
+				void* Blocks; // 0x30
+				float RotateSpeed; // 0x38
+				void* CubeStatus; // 0x40
+				void* StartRotateCustomString; // 0x48
+				void* StopRotateCustomString; // 0x50
+				void* SolidNormalMaterial; // 0x58
+				void* SolidSelectMaterial; // 0x60
+				void* ThirdStatusNormalMaterial; // 0x68
+				void* ThirdStatusSelectMaterial; // 0x70
+				void* EmptyNormalMaterial; // 0x78
+				void* EmptySelectMaterial; // 0x80
+				void* CompleteMaterial; // 0x88
+				void* RotateCurve; // 0x90
+				void* LECBPFBNIMA; // 0x98
+				void* EJHMDFFLGFN; // 0xA0
+				void* ODCBCCOAKME; // 0xA8
+				void* FDFECPCMJKF; // 0xB0
+				void* PDMKCOEONHI; // 0xB8
+				void* LOAJPFHKCNG; // 0xC0
+				void* JIKLGALCJIH; // 0xC8
+				void* HCNPPAKMALJ; // 0xD0
+				void* HCINFOIKAEP; // 0xD8
+				void* OGAOEAAFHPG; // 0xE0
+				void* DCMHOANOOFI; // 0xE8
+				void* JDICCHNAGAA; // 0xF0
+				void* PDABLOGCFJE; // 0xF8
+				void* LDPJHDGBPCD; // 0x100
+				int IMEBLMIBLPJ; // 0x108
+				unsigned int GNGBLKIDMEC; // 0x10C
+				int PEBBPDGJDHL; // 0x110
+				int LAPHEAMBAGC; // 0x114
+				int CHKIOPKIEKA; // 0x118
+
+				FN(OnRotateFinish, void, (void* _this), RUBIKCUBEPUZZLECUBE_ONROTATEFINISH);
+			};
+
+			struct RotatePillarPuzzleFragment {
+				FN(get_IsComplete, bool, (void* _this), ROTATEPILLARPUZZLEFRAGMENT_GET_ISCOMPLETE);
+			};
+
+			struct InsertionPuzzleItem {
+				FN(IsMatchItem, bool, (void* _this, void* FBLKNKFEIFI), INSERTIONPUZZLEITEM_ISMATCHITEM);
+			};
+
+			struct JigsawPuzzleBoard {
+				FN(_CheckIsGameFinish, bool, (void* _this), JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH);
+			};
+		}
 	}
 }
 

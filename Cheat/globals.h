@@ -61,9 +61,7 @@ struct OPTIONS
 
 	bool bUnlockAutoBattle;
 
-	bool bUi;
 	bool bUiHide;
-	bool bUiHideUid;
 
 	OPTIONS() :
 		bMenu(FALSE),
@@ -105,9 +103,7 @@ struct OPTIONS
 		bFpsIndicator(TRUE),
 		iFpsValue(60),
 		bUnlockAutoBattle(FALSE),
-		bUi(FALSE),
-		bUiHide(FALSE),
-		bUiHideUid(FALSE)
+		bUiHide(FALSE)
 	{
 	}
 };

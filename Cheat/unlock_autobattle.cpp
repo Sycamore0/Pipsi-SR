@@ -24,6 +24,10 @@ namespace UnlockAutoBattle
 
 		ImGui::Checkbox("Enable", &Options.bUnlockAutoBattle);
 
+		ImGui::SameLine();
+
+		ImGui::HelpMarker("Will work only after the tutorial.");
+
 		ImGui::EndGroupPanel();
 	}
 
