@@ -56,12 +56,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE (il2cpp_base + 0x35F22F0)
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F13620)
 #define OPTICALILLUSIONPUZZLEBOARD_UPDATE (il2cpp_base + 0x3862E90)
-#define OPTICALILLUSIONPUZZLEBOARD_AANAJJJKMKM (il2cpp_base + 0x3852320)
+#define OPTICALILLUSIONPUZZLEBOARD_MELEDIOAKMC (il2cpp_base + 0x385EA40)
 #define CABLEPUZZLEBOARD_LADNBFDOAMJ (il2cpp_base + 0x3E314A0)
 #define RUBIKCUBEPUZZLECUBE_ONROTATEFINISH (il2cpp_base + 0x38BEDB0)
 #define ROTATEPILLARPUZZLEFRAGMENT_GET_ISCOMPLETE (il2cpp_base + 0x3E10A00)
 #define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3BECFA0)
 #define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x3AD81E0)
+#define GAMEPLAYLOCKMODULE_LOCK (il2cpp_base + 0x35487C0)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
 #define GLOBALVARS_UICAMERA_OFFSET 0x1D420
@@ -109,12 +110,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE (il2cpp_base + 0x34C7450)
 #define TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY (il2cpp_base + 0x3F33DA0)
 #define OPTICALILLUSIONPUZZLEBOARD_UPDATE (il2cpp_base + 0x373C060)
-#define OPTICALILLUSIONPUZZLEBOARD_AANAJJJKMKM (il2cpp_base + 0x372B4F0)
+#define OPTICALILLUSIONPUZZLEBOARD_MELEDIOAKMC (il2cpp_base + 0x3737C10)
 #define CABLEPUZZLEBOARD_LADNBFDOAMJ (il2cpp_base + 0x3D4EE60)
 #define RUBIKCUBEPUZZLECUBE_ONROTATEFINISH (il2cpp_base + 0x383E0B0)
 #define ROTATEPILLARPUZZLEFRAGMENT_GET_ISCOMPLETE (il2cpp_base + 0x3A12A50)
 #define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3AC03C0)
 #define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x39B2980)
+#define GAMEPLAYLOCKMODULE_LOCK (il2cpp_base + 0x339DEB0)
 #endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
@@ -594,6 +596,10 @@ namespace RPG
 
 			FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), MANAVIDEOPAGECONTEXT__ONTICK);
 		};
+		
+		struct GamePlayLockModule {
+			FN(Lock, void, (void* _this, void* lockSource, void* lockParams), GAMEPLAYLOCKMODULE_LOCK);
+		};
 
 		namespace Prop
 		{
@@ -665,7 +671,7 @@ namespace RPG
 				char PlayerStartRotation[0x10]; // 0x1C4
 				int PlayerMotion; // 0x1D4
 				float PlayerSpeedRate; // 0x1D8
-				void* DesignPaths; // 0x1E0
+				System::Collections::Generic::Array* DesignPaths; // 0x1E0
 				int MirrorPlane; // 0x1E8
 				bool SetCamera; // 0x1EC
 				char CameraPosition[0xC]; // 0x1F0
@@ -678,7 +684,7 @@ namespace RPG
 
 				FN(Update, void, (void* _this), OPTICALILLUSIONPUZZLEBOARD_UPDATE);
 
-				FN(AANAJJJKMKM, void*, (void* _this, int IPODHLKMHJF), OPTICALILLUSIONPUZZLEBOARD_AANAJJJKMKM);
+				FN(MELEDIOAKMC, void, (void* _this), OPTICALILLUSIONPUZZLEBOARD_MELEDIOAKMC);
 			};
 			
 			struct CablePuzzleBoard {

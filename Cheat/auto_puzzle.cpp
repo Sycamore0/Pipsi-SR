@@ -56,14 +56,18 @@ namespace AutoPuzzle
 
 	namespace OpticalIllusionPuzzle
 	{
+		float fOldTime = 0.f;
+
 		static void UpdateHandler(RPG::Client::Prop::OpticalIllusionPuzzleBoard* _this)
 		{
 			CALL_ORIGIN(UpdateHandler, _this);
 
-			if (Options.bAutoPuzzle)
+			if (Options.bAutoPuzzle && _this)
 			{
-				_this->NHHBJDCKPOG = 5.f; // idk why but let it be
-				_this->KDHABOGLJKC = RPG::Client::Prop::PuzzlePhase_FinishDelay;
+				_this->DesignPaths->max_length = 0;
+
+				if (_this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_FinishDelay)
+					RPG::Client::Prop::OpticalIllusionPuzzleBoard::MELEDIOAKMC(_this);
 			}
 		}
 	}
@@ -78,6 +82,11 @@ namespace AutoPuzzle
 			return TRUE;
 		}
 
+	}
+
+	static void LockHandler(void* _this, void* lockSource, void* lockParams)
+	{
+		return;
 	}
 
 	void Render()
@@ -108,5 +117,7 @@ namespace AutoPuzzle
 
 		CreateHook(RPG::Client::Prop::OpticalIllusionPuzzleBoard::Update, OpticalIllusionPuzzle::UpdateHandler);
 		CreateHook(RPG::Client::Prop::JigsawPuzzleBoard::_CheckIsGameFinish, JigsawPuzzle::CheckIsGameFinishHandler);
+
+		CreateHook(RPG::Client::GamePlayLockModule::Lock, LockHandler);
 	}
 }
