@@ -34,6 +34,7 @@ namespace AutoPuzzle
 
 	namespace RotatePillarPuzzle
 	{
+#pragma optimize("", off)
 		static bool get_IsCompleteHandler(void* _this)
 		{
 			if (!Options.bAutoPuzzle)
@@ -41,6 +42,7 @@ namespace AutoPuzzle
 
 			return TRUE;
 		}
+#pragma optimize("", on)
 	}
 
 	namespace InsertionPuzzle
@@ -56,15 +58,13 @@ namespace AutoPuzzle
 
 	namespace OpticalIllusionPuzzle
 	{
-		float fOldTime = 0.f;
-
 		static void UpdateHandler(RPG::Client::Prop::OpticalIllusionPuzzleBoard* _this)
 		{
 			CALL_ORIGIN(UpdateHandler, _this);
 
 			if (Options.bAutoPuzzle && _this)
 			{
-				_this->DesignPaths->max_length = 0;
+				_this->DesignPaths->max_length = 0; // why not
 
 				if (_this->KDHABOGLJKC != RPG::Client::Prop::PuzzlePhase_FinishDelay)
 					RPG::Client::Prop::OpticalIllusionPuzzleBoard::MELEDIOAKMC(_this);
@@ -74,6 +74,7 @@ namespace AutoPuzzle
 
 	namespace JigsawPuzzle
 	{
+#pragma optimize("", off)
 		static bool CheckIsGameFinishHandler(void* _this)
 		{
 			if (!Options.bAutoPuzzle)
@@ -81,7 +82,7 @@ namespace AutoPuzzle
 
 			return TRUE;
 		}
-
+#pragma optimize("", on)
 	}
 
 	static void LockHandler(void* _this, void* lockSource, void* lockParams)
