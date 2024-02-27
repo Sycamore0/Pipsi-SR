@@ -42,16 +42,23 @@ namespace Config
 		{
 			// printf("Unable to load config\n");
 		}
-		
+
 		// printf("Loaded config %x\n", dwBytesRead);
 
 		CloseHandle(hFile);
 	}
 
+	static BOOL TerminateProcessHandler(HANDLE hProcess, UINT uExitCode)
+	{
+		SaveConfig();
+
+		return CALL_ORIGIN(TerminateProcessHandler, hProcess, uExitCode);
+	}
+
 	void Render()
 	{
 		ImGui::BeginGroupPanel("Config");
-		
+
 		if (ImGui::Button("Save"))
 		{
 			SaveConfig();
@@ -73,5 +80,8 @@ namespace Config
 
 	void Start()
 	{
+		CreateHook(TerminateProcess, TerminateProcessHandler);
+
+		LoadConfig();
 	}
 }

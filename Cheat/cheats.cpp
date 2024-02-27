@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "uid_editor.h"
 #include "auto_puzzle.h"
 #include "hide_ui.h"
 #include "unlock_autobattle.h"
@@ -45,6 +46,7 @@ namespace Cheats
 
 	VOID RenderVisualsTab()
 	{
+		UIDEditor::Render();
 		HideUI::Render();
 		Esp::Render();
 		Fov::Render();
@@ -61,6 +63,7 @@ namespace Cheats
 
 	VOID Update()
 	{
+		UIDEditor::Update();
 		AutoPuzzle::Update();
 		HideUI::Update();
 		UnlockAutoBattle::Update();
@@ -82,6 +85,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		UIDEditor::Start();
 		AutoPuzzle::Start();
 		HideUI::Start();
 		UnlockAutoBattle::Start();

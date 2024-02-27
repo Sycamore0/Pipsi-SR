@@ -12,7 +12,7 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #ifdef GLOBAL_VERSION
 #define GLOBALVARS (il2cpp_base + 0x8889A80)
 #define GLOBALVARS_UICAMERA_OFFSET 0x1D420
-#define GLOBALVARS_UIROOT_OFFSET 0x1D428
+#define GLOBALVARS_BETAHINTDIALOGCONTEXT_OFFSET 0x1D630
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
 #define STRING_NEW (il2cpp_base + 0x25F240)
 #define BEHAVIOUR_SET_ENABLED (il2cpp_base + 0x2786280)
@@ -63,10 +63,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3BECFA0)
 #define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x3AD81E0)
 #define GAMEPLAYLOCKMODULE_LOCK (il2cpp_base + 0x35487C0)
+
+#define LOCALIZEDTEXT_SET_TEXT (il2cpp_base + 0x38A2470)
+#define BETAHINTDIALOGCONTEXT_CFNOBNMKNCA (il2cpp_base + 0x2E79DA0)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
 #define GLOBALVARS_UICAMERA_OFFSET 0x1D420
-#define GLOBALVARS_UIROOT_OFFSET 0x1D428
+#define GLOBALVARS_BETAHINTDIALOGCONTEXT_OFFSET 0x1D630
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
 #define STRING_NEW (il2cpp_base + 0x2272C0)
 #define BEHAVIOUR_SET_ENABLED (il2cpp_base + 0x2665760)
@@ -117,6 +120,8 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3AC03C0)
 #define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x39B2980)
 #define GAMEPLAYLOCKMODULE_LOCK (il2cpp_base + 0x339DEB0)
+#define LOCALIZEDTEXT_SET_TEXT (il2cpp_base + 0x3843610)
+#define BETAHINTDIALOGCONTEXT_CFNOBNMKNCA (il2cpp_base + 0x2D55590) // IEGAIDEBOIA_CFNOBNMKNCA
 #endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
@@ -162,7 +167,7 @@ namespace System
 	struct String {
 		char _[0x10]; // 0x0
 		long m_stringLength; // 0x10
-		const unsigned short m_firstChar[1]; // 0x14
+		unsigned short m_firstChar[1]; // 0x14
 
 		FN(New, System::String*, (const char* str), STRING_NEW);
 	};
@@ -216,7 +221,12 @@ namespace UnityEngine
 		FN(WorldToScreenPoint, void*, (void* ret, void* _this, void* position), CAMERA_WORLDTOSCREENPOINT);
 	};
 
-	struct Transform {
+	struct Object {
+		char _[0x10]; // 0x0
+		void* m_CachedPtr; // 0x10
+	};
+
+	struct Transform : Object {
 		FN(get_up, void, (void* ret, void* _this), TRANSFORM_GET_UP);
 		FN(get_forward, void, (void* ret, void* _this), TRANSFORM_GET_FORWARD);
 		FN(get_position_Injected, void, (void* _this, void* ret), TRANSFORM_GET_POSITION_INJECTED);
@@ -224,13 +234,10 @@ namespace UnityEngine
 		FN(set_position_Injected, void, (void* _this, void* value), TRANSFORM_SET_POSITION_INJECTED);
 	};
 
-	struct GameObject {
-		char _[0x10]; // 0x0
-		void* m_CachedPtr; // 0x10
+	struct GameObject : Object {
+		FN(get_transform, void*, (void* _this), GAMEOBJECT_GET_TRANSFORM);
 
 		FN(Find, UnityEngine::GameObject*, (void* name), GAMEOBJECT_FIND);
-
-		FN(get_transform, void*, (void* _this), GAMEOBJECT_GET_TRANSFORM);
 	};
 
 	struct Animator {
@@ -240,6 +247,22 @@ namespace UnityEngine
 	struct Application {
 		FN(set_targetFrameRate, void, (int value), APPLICATION_SET_TARGETFRAMERATE);
 	};
+
+	namespace UI
+	{
+		struct Text {
+			char _[0xF8]; // 0x0
+			void* m_FontData; // 0xF8
+			System::String* m_Text; // 0x100
+			bool m_EnableUnderline; // 0x108
+			void* m_TextCache; // 0x110
+			void* m_TextCacheForLayout; // 0x118
+			bool m_DisableFontTextureRebuiltCallback; // 0x120
+			float m_TextureScale; // 0x124
+			void* m_TempVerts; // 0x128
+			char m_EllipsisChar; // 0x130
+		};
+	}
 
 	namespace Playables
 	{
@@ -495,7 +518,7 @@ namespace RPG
 			System::Collections::Generic::List* MapPropList; // 0x38
 			void* PDINLCMCJPE; // 0x40
 		};
-		
+
 		struct AdventureStatic {
 			FN(GetEntityManager, void*, (), ADVENTURESTATIC_GETENTITYMANAGER);
 
@@ -507,7 +530,7 @@ namespace RPG
 		struct NPCComponent {
 			FN(TickAlertValue, void, (void* _this, float fElapsedTimeInSec, void* target, void* detail), NPCCOMPONENT_TICKALERTVALUE);
 		};
-		
+
 		struct PropComponent {
 			FN(Tick, void, (void* _this, float fElapsedTimeInSec), PROPCOMPONENT_TICK);
 
@@ -518,7 +541,7 @@ namespace RPG
 		struct TurnBasedGameMode {
 			FN(GetCurrenTurnActionEntity, void*, (void* _this), TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY);
 		};
-		
+
 		struct BattleInstance {
 			FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
 			FN(IsStageForbidAutoBattle, bool, (void* _this), BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE);
@@ -596,9 +619,41 @@ namespace RPG
 
 			FN(_OnTick, void, (RPG::Client::ManaVideoPageContext* _this, float deltaSecond), MANAVIDEOPAGECONTEXT__ONTICK);
 		};
-		
+
 		struct GamePlayLockModule {
 			FN(Lock, void, (void* _this, void* lockSource, void* lockParams), GAMEPLAYLOCKMODULE_LOCK);
+		};
+
+		struct LocalizedText : UnityEngine::UI::Text {
+			bool mForbidNoLeadingChar; // 0x138
+			void* _CustomFont; // 0x140
+			void* TextmapID; // 0x148
+			void* textID; // 0x150
+			void* replaceParams; // 0x158
+			bool _InUse; // 0x160
+			bool _InMCVPattern; // 0x161
+			bool _RegisteredDirtyLayoutCallback; // 0x162
+			void* _CustomizedTextBeforeCompileRuby; // 0x168
+			float _DefaultDisplayHeight; // 0x170
+			bool _IsResized; // 0x174
+			bool RefreshByLanguageChange; // 0x175
+			bool IsWhiteBG; // 0x176
+			bool EnableRuby; // 0x177
+			bool IsSingleLineEllipsis; // 0x178
+			int ForcedFont; // 0x17C
+			bool IsDynamicTextID; // 0x180
+
+			FN(set_text, void, (void* _this, void* value), LOCALIZEDTEXT_SET_TEXT);
+		};
+
+		struct EAIECBLOINL {
+			char _[0x18]; // 0x0
+			LocalizedText* HintText; // 0x18
+			LocalizedText* VersionText; // 0x20
+		};
+		
+		struct BetaHintDialogContext {
+			FN(CFNOBNMKNCA, RPG::Client::EAIECBLOINL*, (void* _this), BETAHINTDIALOGCONTEXT_CFNOBNMKNCA);
 		};
 
 		namespace Prop
@@ -686,7 +741,7 @@ namespace RPG
 
 				FN(MELEDIOAKMC, void, (void* _this), OPTICALILLUSIONPUZZLEBOARD_MELEDIOAKMC);
 			};
-			
+
 			struct CablePuzzleBoard {
 				char _[0xE0]; // 0x0
 				float RotateSpeed; // 0xE0
@@ -816,7 +871,7 @@ namespace Engine
 	int GetPhaseType();
 
 	void* GetUICamera();
-	void* GetUIRoot();
+	void* GetBetaHintDialogContext();
 
 	void* GetTransform(void* lpEntity);
 

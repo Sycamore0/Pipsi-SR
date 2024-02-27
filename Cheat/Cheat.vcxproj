@@ -83,6 +83,7 @@
     <ClInclude Include="render.h" />
     <ClInclude Include="skip_cutscene.h" />
     <ClInclude Include="hide_ui.h" />
+    <ClInclude Include="uid_editor.h" />
     <ClInclude Include="unload.h" />
     <ClInclude Include="unlock_autobattle.h" />
     <ClInclude Include="utils.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="render.cpp" />
     <ClCompile Include="skip_cutscene.cpp" />
     <ClCompile Include="hide_ui.cpp" />
+    <ClCompile Include="uid_editor.cpp" />
     <ClCompile Include="unload.cpp" />
     <ClCompile Include="unlock_autobattle.cpp" />
     <ClCompile Include="utils.cpp" />

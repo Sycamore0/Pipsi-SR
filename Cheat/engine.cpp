@@ -151,12 +151,12 @@ namespace Engine
 		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_UICAMERA_OFFSET);
 	}
 	
-	void* GetUIRoot()
+	void* GetBetaHintDialogContext()
 	{
 		if (!*lpGlobalVars)
 			return 0;
 
-		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_UIROOT_OFFSET);
+		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_BETAHINTDIALOGCONTEXT_OFFSET);
 	}
 
 	void* GetTransform(void* lpEntity)

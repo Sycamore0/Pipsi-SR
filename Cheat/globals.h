@@ -65,6 +65,9 @@ struct OPTIONS
 
 	bool bAutoPuzzle;
 
+	bool bUIDEditor = FALSE;
+	char lpUIDEditorText[80] = { "PIPSI-SR" };
+
 	OPTIONS() :
 		bMenu(FALSE),
 		dwMenuKey(VK_INSERT),
@@ -106,7 +109,9 @@ struct OPTIONS
 		iFpsValue(60),
 		bUnlockAutoBattle(FALSE),
 		bUiHide(FALSE),
-		bAutoPuzzle(FALSE)
+		bAutoPuzzle(FALSE),
+		bUIDEditor(FALSE),
+		lpUIDEditorText{"PIPSI-SR"}
 	{
 	}
 };
