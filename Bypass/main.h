@@ -1,4 +1,6 @@
 ﻿#pragma once
+#define GLOBAL_VERSION 1
+
 #include <windows.h>
 
 #define FN(n, t, p, a) t(*n)p = ((t(*)p)(a))

@@ -1,5 +1,3 @@
-#define GLOBAL_VERSION 1
-
 #include "main.h"
 
 BOOL bInit = FALSE;
