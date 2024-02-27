@@ -9,7 +9,7 @@
 
 namespace Esp
 {
-	void OnEntity(ImDrawList* lpDrawList, RPG::GameCore::GameEntity* lpEntity, Vector3* PlayerPosition, Vector2* lpResolution, Vector2* lpResolutionScale, LPCSTR lpName, ImColor* lpColor)
+	static void OnEntity(ImDrawList* lpDrawList, RPG::GameCore::GameEntity* lpEntity, Vector3* PlayerPosition, Vector2* lpResolution, Vector2* lpResolutionScale, LPCSTR lpName, ImColor* lpColor)
 	{
 		Vector3 Position = {};
 

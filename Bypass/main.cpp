@@ -2,12 +2,12 @@
 
 BOOL bInit = FALSE;
 
-BOOL ShowWindowHandler(HWND hWnd, int nCmdShow)
+static BOOL ShowWindowHandler(HWND hWnd, int nCmdShow)
 {
 	return TRUE;
 }
 
-HMODULE LoadLibraryExWHandler(LPCWSTR lpLibFileName, HANDLE hFile, DWORD dwFlags)
+static HMODULE LoadLibraryExWHandler(LPCWSTR lpLibFileName, HANDLE hFile, DWORD dwFlags)
 {
 	HMODULE hResult = OriginalLoadLibraryExW(lpLibFileName, hFile, dwFlags);
 

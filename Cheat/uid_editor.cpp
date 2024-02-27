@@ -13,7 +13,7 @@ namespace UIDEditor
 	bool bUIDEditor = FALSE;
 	char lpUIDEditorText[80] = { "PIPSI-SR" };
 
-	void set_textHandler(void* _this, void* value)
+	static void set_textHandler(void* _this, void* value)
 	{
 		if (bUIDEditor && _this)
 		{
@@ -28,7 +28,7 @@ namespace UIDEditor
 					RPG::Client::LocalizedText* lpHintText = lpCFNOBNMKNCA->HintText;
 
 					if (lpHintText && _this == lpHintText)
-							value = System::String::New(lpUIDEditorText);
+							value = System::String::New(Options.lpUIDEditorText);
 				}
 			}
 		}
@@ -40,7 +40,7 @@ namespace UIDEditor
 	{
 		ImGui::BeginGroupPanel("UID Editor");
 
-		ImGui::Checkbox("Enable", &bUIDEditor);
+		ImGui::Checkbox("Enable", &Options.bUIDEditor);
 
 		ImGui::SameLine();
 
@@ -50,7 +50,7 @@ namespace UIDEditor
 		{
 			ImGui::Indent();
 
-			ImGui::InputText("New Text", lpUIDEditorText, sizeof(lpUIDEditorText));
+			ImGui::InputText("New Text", Options.lpUIDEditorText, sizeof(Options.lpUIDEditorText));
 
 			ImGui::Unindent();
 		}

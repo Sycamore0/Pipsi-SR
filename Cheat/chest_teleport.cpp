@@ -29,8 +29,6 @@ namespace ChestTeleport
 		Engine::PlayerTeleport(&Position);
 	}
 
-	int iPropState = 0;
-
 	static void TickHandler(void* _this, float fElapsedTimeInSec)
 	{
 		CALL_ORIGIN(TickHandler, _this, fElapsedTimeInSec);

@@ -12,7 +12,7 @@
 
 namespace QuestTeleport
 {
-	void* GetTargetPosHandler(void* _this, void* _res)
+	static void* GetTargetPosHandler(void* _this, void* _res)
 	{
 		void* lpResult = CALL_ORIGIN(GetTargetPosHandler, _this, _res);
 

@@ -10,7 +10,7 @@
 
 namespace SkipCutscene
 {
-	void _OnTickHandler(RPG::Client::ManaVideoPageContext* _this, float deltaSecond)
+	static void _OnTickHandler(RPG::Client::ManaVideoPageContext* _this, float deltaSecond)
 	{
 		if (Options.bSkipCutscene && _this)
 		{
