@@ -10,12 +10,9 @@
 
 namespace UIDEditor
 {
-	bool bUIDEditor = FALSE;
-	char lpUIDEditorText[80] = { "PIPSI-SR" };
-
 	static void set_textHandler(void* _this, void* value)
 	{
-		if (bUIDEditor && _this)
+		if (Options.bUIDEditor && _this)
 		{
 			PVOID lpBetaHintDialogContext = Engine::GetBetaHintDialogContext();
 
@@ -46,7 +43,7 @@ namespace UIDEditor
 
 		ImGui::HelpMarker("To update the UID you need to teleport.");
 
-		if (bUIDEditor)
+		if (Options.bUIDEditor)
 		{
 			ImGui::Indent();
 
