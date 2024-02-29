@@ -17,4 +17,6 @@ namespace ImGui
 	void EndGroupPanel();
 
 	void Hotkey(unsigned int* lpValue);
+
+	ImVec2 CalcCenterPosition(ImVec2* lpPosition, LPCSTR lpName);
 }

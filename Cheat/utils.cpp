@@ -248,4 +248,11 @@ namespace ImGui
 			Inputs::SetWaitInput(NULL);
 		}
 	}
+
+	ImVec2 CalcCenterPosition(ImVec2* lpPosition, LPCSTR lpName)
+	{
+		ImVec2 TextSize = ImGui::CalcTextSize(lpName);
+
+		return ImVec2(lpPosition->x - TextSize.x * 0.5f, lpPosition->y - TextSize.y * 0.5f);
+	}
 }

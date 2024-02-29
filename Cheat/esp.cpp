@@ -107,7 +107,9 @@ namespace Esp
 			lpName = lpText;
 		}
 
-		lpDrawList->AddText(ImGui::GetIO().FontDefault, Options.fFontSize, ImVec2(ScreenPosition.x, ScreenPosition.y), *lpColor, lpName);
+		ImVec2 TextPosition = { ScreenPosition.x, ScreenPosition.y };
+
+		lpDrawList->AddText(ImGui::GetIO().FontDefault, Options.fFontSize, ImGui::CalcCenterPosition(&TextPosition, lpName), *lpColor, lpName);
 	}
 
 	void Render()
