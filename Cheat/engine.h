@@ -38,8 +38,6 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define ADVENTURESTATIC_GETPROPMANAGER (il2cpp_base + 0x390FFA0)
 #define ADVENTURESTATIC_GETLOCALPLAYER (il2cpp_base + 0x390E580)
 #define NPCCOMPONENT_TICKALERTVALUE (il2cpp_base + 0x3C35B00)
-#define PROPCOMPONENT_TICK (il2cpp_base + 0x3E824E0)
-#define PROPCOMPONENT_GET_OWNERENTITY (il2cpp_base + 0xE03D30)
 #define PROPCOMPONENT_GET_PROPSTATE (il2cpp_base + 0x3E85EB0)
 #define GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE (il2cpp_base + 0xC55540)
 #define BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE (il2cpp_base + 0x33602D0)
@@ -95,8 +93,6 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define ADVENTURESTATIC_GETPROPMANAGER (il2cpp_base + 0x386CD00)
 #define ADVENTURESTATIC_GETLOCALPLAYER (il2cpp_base + 0x386B2E0)
 #define NPCCOMPONENT_TICKALERTVALUE (il2cpp_base + 0x3C09030)
-#define PROPCOMPONENT_TICK (il2cpp_base + 0x3D9FEA0)
-#define PROPCOMPONENT_GET_OWNERENTITY (il2cpp_base + 0xD9B660)
 #define PROPCOMPONENT_GET_PROPSTATE (il2cpp_base + 0x3DA3870)
 #define GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE (il2cpp_base + 0xB815C0)
 #define BASESHADERPROPERTYTRANSITION_SETELEVATIONDITHERALPHAVALUE (il2cpp_base + 0x3303E90)
@@ -161,6 +157,23 @@ struct Vector3
 		return sqrtf(dx * dx + dy * dy + dz * dz);
 	}
 };
+
+namespace Base
+{
+	struct Class
+	{
+		char _[0x10];
+		char* name;
+		char __[0x90];
+		unsigned long id;
+	};
+
+	struct Actor
+	{
+		Base::Class* klass;
+		void* monitor;
+	};
+}
 
 namespace System
 {
@@ -422,7 +435,7 @@ namespace RPG
 			void* DisposeCallback; // 0x48
 			void* _OwnerWorldRef; // 0x50
 			void* _ComponentList; // 0x58
-			void* _TickComponentList; // 0x60
+			System::Collections::Generic::List* TickComponentList; // 0x60
 			void* _LateUpdateComponentList; // 0x68
 			void* _ComponentArrayRef; // 0x70
 			void* _ComponentArray; // 0x78
@@ -532,9 +545,6 @@ namespace RPG
 		};
 
 		struct PropComponent {
-			FN(Tick, void, (void* _this, float fElapsedTimeInSec), PROPCOMPONENT_TICK);
-
-			FN(get_OwnerEntity, void*, (void* _this), PROPCOMPONENT_GET_OWNERENTITY);
 			FN(get_PropState, int, (void* _this), PROPCOMPONENT_GET_PROPSTATE);
 		};
 
@@ -863,6 +873,7 @@ namespace Engine
 	System::Collections::Generic::List* GetPropEntityList();
 
 	void* GetTurnBasedGameMode();
+	void* GetPropComponent(System::Collections::Generic::List* lpComponentList);
 
 	bool GetResolutionScale(Vector2* lpResolution, Vector2* lpResolutionScale);
 	bool GetScreenPosition(Vector2* lpResolutionScale, void* lpWorldPosition, Vector3* lpRet);

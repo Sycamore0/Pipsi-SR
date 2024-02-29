@@ -57,6 +57,38 @@ namespace Engine
 		return RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
 	}
 
+	void* GetPropComponent(System::Collections::Generic::List* lpComponentList)
+	{
+		static INT iPropId = 0;
+
+		if (!lpComponentList)
+			return NULL;
+
+		if (lpComponentList->size > 3 && iPropId)
+		{
+			Base::Actor* lpComponent = (Base::Actor*)lpComponentList->items->vector[3];
+
+			if (lpComponent && lpComponent->klass && lpComponent->klass->id == iPropId)
+				return lpComponent;
+		}
+
+		for (INT i = 0; i < lpComponentList->size; i++)
+		{
+			Base::Actor* lpComponent = (Base::Actor*)lpComponentList->items->vector[i];
+
+			if (!lpComponent->klass)
+				continue;
+
+			if (iPropId == 0 && lpComponent->klass->name && strcmp(lpComponent->klass->name, "PropComponent") == 0)
+				iPropId = lpComponent->klass->id;
+
+			if (lpComponent && lpComponent->klass->id == iPropId)
+				return lpComponent;
+		}
+
+		return NULL;
+	}
+
 	bool GetResolutionScale(Vector2* lpResolution, Vector2* lpResolutionScale)
 	{
 		PVOID lpMainCamera = UnityEngine::Camera::get_main();

@@ -12,47 +12,66 @@
 
 namespace ChestTeleport
 {
-	static void OnPropComponent(PVOID lpPropComponent)
-	{
-		UPDATE_DELAY(500);
+	static bool IsValid(RPG::GameCore::GameEntity* lpEntity, Vector3* PlayerPosition, bool bCheckLocked) {
+		PVOID lpPropComponent = Engine::GetPropComponent(lpEntity->TickComponentList);
 
-		PVOID lpOwnerEntity = RPG::GameCore::PropComponent::get_OwnerEntity(lpPropComponent);
+		if (!lpPropComponent)
+			return FALSE;
 
-		if (!lpOwnerEntity)
-			return;
+		INT iPropState = RPG::GameCore::PropComponent::get_PropState(lpPropComponent);
 
-		Vector3 Position = {};
+		if ((bCheckLocked && iPropState != RPG::GameCore::PropState_ChestLocked) ||
+			(!bCheckLocked && (iPropState != RPG::GameCore::PropState_CheckPointDisable && iPropState != RPG::GameCore::PropState_ChestClosed))) {
+			return FALSE;
+		}
 
-		if (!Engine::GetEntityPosition(lpOwnerEntity, &Position))
-			return;
+		Vector3 ChestPosition;
 
-		Engine::PlayerTeleport(&Position);
+		if (!Engine::GetEntityPosition(lpEntity, &ChestPosition))
+			return FALSE;
+
+		FLOAT fDistance = PlayerPosition->Distance(ChestPosition);
+
+		if (fDistance < 3.0f)
+			return FALSE;
+
+		return TRUE;
 	}
 
-	static void TickHandler(void* _this, float fElapsedTimeInSec)
+	static void* TryFindChest(Vector3* PlayerPosition, System::Collections::Generic::List* lpEntityList, bool bCheckLocked)
 	{
-		CALL_ORIGIN(TickHandler, _this, fElapsedTimeInSec);
-
-		if (Options.bChestTeleport && Inputs::GetState(Options.dwChestTeleportKey, INPUT_TYPE_HOLD))
+		for (int i = 0; i < lpEntityList->size; i++)
 		{
-			__try
-			{
-				switch (RPG::GameCore::PropComponent::get_PropState(_this))
-				{
-				case RPG::GameCore::PropState_CheckPointDisable:
-				case RPG::GameCore::PropState_ChestLocked:
-				case RPG::GameCore::PropState_ChestClosed:
-					OnPropComponent(_this);
-					break;
-				default:
-					break;
-				}
-			}
-			__except (EXCEPTION_EXECUTE_HANDLER)
-			{
-				printf("ChestTeleport::TickHandler(), exception 0x%X\n", GetExceptionCode());
-			}
+			RPG::GameCore::GameEntity* lpEntity = (RPG::GameCore::GameEntity*)lpEntityList->items->vector[i];
+
+			if (!lpEntity || lpEntity->EntityType != RPG::GameCore::EntityType_Prop)
+				continue;
+
+			if (IsValid(lpEntity, PlayerPosition, FALSE))
+				return lpEntity;
 		}
+
+		return NULL;
+	}
+
+	static void* FindChest(System::Collections::Generic::List* lpEntityList)
+	{
+		PVOID lpPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
+
+		if (!lpPlayer)
+			return NULL;
+
+		Vector3 PlayerPosition = {};
+
+		if (!Engine::GetEntityPosition(lpPlayer, &PlayerPosition))
+			return NULL;
+
+		PVOID lpChest = TryFindChest(&PlayerPosition, lpEntityList, FALSE);
+
+		if (!lpChest)
+			return lpChest;
+
+		return TryFindChest(&PlayerPosition, lpEntityList, TRUE);
 	}
 
 	void Render()
@@ -70,11 +89,40 @@ namespace ChestTeleport
 
 	void Update()
 	{
+		UPDATE_DELAY(500);
 
+		if (!Options.bChestTeleport || Engine::GetPhaseType() != RPG::Client::GamePhaseType_Adventure)
+			return;
+
+		if (!Inputs::GetState(Options.dwChestTeleportKey, INPUT_TYPE_HOLD))
+			return;
+
+		__try
+		{
+			System::Collections::Generic::List* lpEntityList = Engine::GetWorldEntityList();
+
+			if (!lpEntityList)
+				return;
+
+			PVOID lpChest = FindChest(lpEntityList);
+
+			if (!lpChest)
+				return;
+
+			Vector3 Position = {};
+
+			if (!Engine::GetEntityPosition(lpChest, &Position))
+				return;
+
+			Engine::PlayerTeleport(&Position);
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER)
+		{
+			printf("ChestTeleport::Update(), exception 0x%X\n", GetExceptionCode());
+		}
 	}
 
 	void Start()
 	{
-		CreateHook(RPG::GameCore::PropComponent::Tick, TickHandler);
 	}
 }

@@ -36,14 +36,19 @@ namespace Config
 		if (hFile == INVALID_HANDLE_VALUE || hFile == NULL)
 			return;
 
-		DWORD dwBytesRead;
+		DWORD dwFileSize = GetFileSize(hFile, NULL);
 
-		if (!ReadFile(hFile, &Options, sizeof(Options), &dwBytesRead, NULL))
+		if (dwFileSize == sizeof(Options))
 		{
-			// printf("Unable to load config\n");
-		}
+			DWORD dwBytesRead;
 
-		// printf("Loaded config %x\n", dwBytesRead);
+			if (!ReadFile(hFile, &Options, sizeof(Options), &dwBytesRead, NULL))
+			{
+				// printf("Unable to load config\n");
+			}
+
+			// printf("Loaded config %x\n", dwBytesRead);
+		}
 
 		CloseHandle(hFile);
 	}

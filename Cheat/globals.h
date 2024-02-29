@@ -18,7 +18,6 @@ struct OPTIONS
 	bool bEsp;
 	bool bEspTracer;
 	float fEspTracerSize;
-
 	bool bEspDebug;
 	float fFontSize;
 	float flEspDistance;
@@ -26,10 +25,16 @@ struct OPTIONS
 	float vEspMonsterColor[4];
 	bool bEspNpc;
 	float vEspNpcColor[4];
-	bool bEspProp;
-	float vEspPropColor[4];
-	bool bEspMission;
-	float vEspMissionColor[4];
+	bool bEspTrigger;
+	float vEspTriggerColor[4];
+	bool bEspClosed;
+	float vEspClosedColor[4];
+	bool bEspCheckPoint;
+	float vEspCheckPointColor[4];
+	bool bEspEvent;
+	float vEspEventColor[4];
+	bool bEspChest;
+	float vEspChestColor[4];
 
 	bool bDumpEnemies;
 
@@ -84,10 +89,16 @@ struct OPTIONS
 		vEspMonsterColor{ 1.f,1.f,1.f,1.f },
 		bEspNpc(FALSE),
 		vEspNpcColor{ 1.f,1.f,1.f,1.f },
-		bEspProp(FALSE),
-		vEspPropColor{ 1.f,1.f,1.f,1.f },
-		bEspMission(FALSE),
-		vEspMissionColor{ 1.f,1.f,1.f,1.f },
+		bEspTrigger(FALSE),
+		vEspTriggerColor{ 1.f,1.f,1.f,1.f },
+		bEspClosed(FALSE),
+		vEspClosedColor{ 1.f,1.f,1.f,1.f },
+		bEspCheckPoint(FALSE),
+		vEspCheckPointColor{ 1.f,1.f,1.f,1.f },
+		bEspEvent(FALSE),
+		vEspEventColor{ 1.f,1.f,1.f,1.f },
+		bEspChest(FALSE),
+		vEspChestColor{ 1.f,1.f,1.f,1.f },
 		bDumpEnemies(FALSE),
 		bPeeking(FALSE),
 		bFov(FALSE),
