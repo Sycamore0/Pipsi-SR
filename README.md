@@ -39,6 +39,7 @@
 
 #### Visuals
 
+- UID Editor
 - Hide UI
 - Esp
 - Fov Changer
