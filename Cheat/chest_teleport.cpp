@@ -47,7 +47,7 @@ namespace ChestTeleport
 			if (!lpEntity || lpEntity->EntityType != RPG::GameCore::EntityType_Prop)
 				continue;
 
-			if (IsValid(lpEntity, PlayerPosition, FALSE))
+			if (IsValid(lpEntity, PlayerPosition, bCheckLocked))
 				return lpEntity;
 		}
 
@@ -68,7 +68,7 @@ namespace ChestTeleport
 
 		PVOID lpChest = TryFindChest(&PlayerPosition, lpEntityList, FALSE);
 
-		if (!lpChest)
+		if (lpChest)
 			return lpChest;
 
 		return TryFindChest(&PlayerPosition, lpEntityList, TRUE);
