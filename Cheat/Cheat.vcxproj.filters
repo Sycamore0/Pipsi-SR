@@ -117,6 +117,9 @@
     <ClInclude Include="uid_editor.h">
       <Filter>features</Filter>
     </ClInclude>
+    <ClInclude Include="auto_chat.h">
+      <Filter>features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cheats.cpp">
@@ -216,6 +219,9 @@
       <Filter>features</Filter>
     </ClCompile>
     <ClCompile Include="uid_editor.cpp">
+      <Filter>features</Filter>
+    </ClCompile>
+    <ClCompile Include="auto_chat.cpp">
       <Filter>features</Filter>
     </ClCompile>
   </ItemGroup>

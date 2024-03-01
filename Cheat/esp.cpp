@@ -189,7 +189,7 @@ namespace Esp
 			if (!Engine::GetResolutionScale(&Resolution, &ResolutionScale))
 				return;
 
-			System::Collections::Generic::List* lpEntityList = Engine::GetWorldEntityList();
+			System::Collections::Generic::List<RPG::GameCore::GameEntity*>* lpEntityList = Engine::GetWorldEntityList();
 
 			for (int i = 0; i < lpEntityList->size; i++)
 			{

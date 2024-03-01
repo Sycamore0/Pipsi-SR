@@ -73,6 +73,10 @@ struct OPTIONS
 	bool bUIDEditor = FALSE;
 	char lpUIDEditorText[80] = { "PIPSI-SR" };
 
+	bool bAutoChat;
+	bool bAutoChatDisableDelay;
+	bool bAutoChatAutoReply;
+
 	OPTIONS() :
 		bMenu(FALSE),
 		dwMenuKey(VK_INSERT),
@@ -122,7 +126,10 @@ struct OPTIONS
 		bUiHide(FALSE),
 		bAutoPuzzle(FALSE),
 		bUIDEditor(FALSE),
-		lpUIDEditorText{"PIPSI-SR"}
+		lpUIDEditorText{ "PIPSI-SR" },
+		bAutoChat(FALSE),
+		bAutoChatDisableDelay(FALSE),
+		bAutoChatAutoReply(FALSE)
 	{
 	}
 };

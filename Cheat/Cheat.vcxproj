@@ -52,6 +52,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="auto_chat.h" />
     <ClInclude Include="auto_puzzle.h" />
     <ClInclude Include="auto_talk.h" />
     <ClInclude Include="battle_speed.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="auto_chat.cpp" />
     <ClCompile Include="auto_puzzle.cpp" />
     <ClCompile Include="auto_talk.cpp" />
     <ClCompile Include="battle_speed.cpp" />

@@ -1,5 +1,6 @@
 #include "cheats.h"
 
+#include "auto_chat.h"
 #include "uid_editor.h"
 #include "auto_puzzle.h"
 #include "hide_ui.h"
@@ -36,6 +37,7 @@ namespace Cheats
 
 	VOID RenderWorldTab()
 	{
+		AutoChat::Render();
 		AutoPuzzle::Render();
 		SkipCutscene::Render();
 		ChestTeleport::Render();
@@ -63,6 +65,7 @@ namespace Cheats
 
 	VOID Update()
 	{
+		AutoChat::Update();
 		UIDEditor::Update();
 		AutoPuzzle::Update();
 		HideUI::Update();
@@ -85,6 +88,7 @@ namespace Cheats
 
 	VOID Start()
 	{
+		AutoChat::Start();
 		UIDEditor::Start();
 		AutoPuzzle::Start();
 		HideUI::Start();

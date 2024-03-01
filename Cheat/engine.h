@@ -9,11 +9,13 @@
 
 static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 
-#ifdef GLOBAL_VERSION
-#define GLOBALVARS (il2cpp_base + 0x8889A80)
 #define GLOBALVARS_UICAMERA_OFFSET 0x1D420
 #define GLOBALVARS_BETAHINTDIALOGCONTEXT_OFFSET 0x1D630
 #define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
+#define GLOBALVARS_MODULEMANAGER_OFFSET 0x1D550
+
+#ifdef GLOBAL_VERSION
+#define GLOBALVARS (il2cpp_base + 0x8889A80)
 #define STRING_NEW (il2cpp_base + 0x25F240)
 #define BEHAVIOUR_SET_ENABLED (il2cpp_base + 0x2786280)
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2891420)
@@ -61,14 +63,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define INSERTIONPUZZLEITEM_ISMATCHITEM (il2cpp_base + 0x3BECFA0)
 #define JIGSAWPUZZLEBOARD__CHECKISGAMEFINISH (il2cpp_base + 0x3AD81E0)
 #define GAMEPLAYLOCKMODULE_LOCK (il2cpp_base + 0x35487C0)
-
 #define LOCALIZEDTEXT_SET_TEXT (il2cpp_base + 0x38A2470)
 #define BETAHINTDIALOGCONTEXT_CFNOBNMKNCA (il2cpp_base + 0x2E79DA0)
+#define MESSAGEUTILS_GETWRITINGTIME (il2cpp_base + 0x3D0F4F0)
+#define MESSAGESECTIONDATA_GET_WAITINGITEMIDS (il2cpp_base + 0x3999A70)
+#define MESSAGEMODULE_FINISHITEMBYCHOICE (il2cpp_base + 0x3334840)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
-#define GLOBALVARS_UICAMERA_OFFSET 0x1D420
-#define GLOBALVARS_BETAHINTDIALOGCONTEXT_OFFSET 0x1D630
-#define GLOBALVARS_GAMEPHASEMANAGER_OFFSET 0x1D4B0
 #define STRING_NEW (il2cpp_base + 0x2272C0)
 #define BEHAVIOUR_SET_ENABLED (il2cpp_base + 0x2665760)
 #define TIME_GET_DELTATIME (il2cpp_base + 0x2770900)
@@ -118,6 +119,9 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define GAMEPLAYLOCKMODULE_LOCK (il2cpp_base + 0x339DEB0)
 #define LOCALIZEDTEXT_SET_TEXT (il2cpp_base + 0x3843610)
 #define BETAHINTDIALOGCONTEXT_CFNOBNMKNCA (il2cpp_base + 0x2D55590) // IEGAIDEBOIA_CFNOBNMKNCA
+#define MESSAGEUTILS_GETWRITINGTIME (il2cpp_base + 0x3C6B960)
+#define MESSAGESECTIONDATA_GET_WAITINGITEMIDS (il2cpp_base + 0x37EAEC0)
+#define MESSAGEMODULE_FINISHITEMBYCHOICE (il2cpp_base + 0x3781710)
 #endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
@@ -189,17 +193,19 @@ namespace System
 	{
 		namespace Generic
 		{
+			template<typename T>
 			struct Array {
 				void* klass; // 0x0
 				void* monitor; // 0x8
 				void* bounds; // 0x10
 				size_t max_length; // 0x18
-				void* vector[32]; // 0x20
+				T vector[32]; // 0x20
 			};
 
+			template<typename A>
 			struct List {
 				char _[0x10]; // 0x0
-				Array* items; // 0x10
+				Array<A>* items; // 0x10
 				long size; // 0x18
 				long version; // 0x1C
 				void* syncRoot; // 0x20
@@ -435,7 +441,7 @@ namespace RPG
 			void* DisposeCallback; // 0x48
 			void* _OwnerWorldRef; // 0x50
 			void* _ComponentList; // 0x58
-			System::Collections::Generic::List* TickComponentList; // 0x60
+			System::Collections::Generic::List<Base::Actor*>* TickComponentList; // 0x60
 			void* _LateUpdateComponentList; // 0x68
 			void* _ComponentArrayRef; // 0x70
 			void* _ComponentArray; // 0x78
@@ -496,7 +502,7 @@ namespace RPG
 			void* _TimeScaleStack; // 0x78
 			void* _EntityManager; // 0x80
 			void* _EventManager; // 0x88
-			System::Collections::Generic::List* EntityList; // 0x90
+			System::Collections::Generic::List<RPG::GameCore::GameEntity*>* EntityList; // 0x90
 			void* _DyingEntityList; // 0x98
 			void* _DeferDeleteEntityList; // 0xA0
 			void* _EnterDyingEntityList; // 0xA8
@@ -521,21 +527,8 @@ namespace RPG
 			FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), ENTITYMANAGER_GET_OWNERWORLDREF);
 		};
 
-		struct PropManager {
-			char _[0x10]; // 0x0
-			System::Collections::Generic::List* PropEntityList; // 0x10
-			void* BNNLPNNKOPA; // 0x18
-			void* DIFDPHNFOMB; // 0x20
-			void* BHCDIDNBIEO; // 0x28
-			void* ILKJAAEMHDD; // 0x30
-			System::Collections::Generic::List* MapPropList; // 0x38
-			void* PDINLCMCJPE; // 0x40
-		};
-
 		struct AdventureStatic {
 			FN(GetEntityManager, void*, (), ADVENTURESTATIC_GETENTITYMANAGER);
-
-			FN(GetPropManager, RPG::GameCore::PropManager*, (), ADVENTURESTATIC_GETPROPMANAGER);
 
 			FN(GetLocalPlayer, void*, (), ADVENTURESTATIC_GETLOCALPLAYER);
 		};
@@ -666,6 +659,113 @@ namespace RPG
 			FN(CFNOBNMKNCA, RPG::Client::EAIECBLOINL*, (void* _this), BETAHINTDIALOGCONTEXT_CFNOBNMKNCA);
 		};
 
+		struct MessageUtils {
+			FN(GetWritingTime, float, (void* _this, void* itemData), MESSAGEUTILS_GETWRITINGTIME);
+		};
+
+		struct MessageSectionData {
+			FN(get_WaitingItemIDs, System::Collections::Generic::Array<int>*, (void* _this), MESSAGESECTIONDATA_GET_WAITINGITEMIDS);
+		};
+
+		struct MessageModule {
+			FN(FinishItemByChoice, void, (void* _this, unsigned int itemID), MESSAGEMODULE_FINISHITEMBYCHOICE);
+		};
+
+		struct ModuleManager {
+			char _[0x10];
+			void* modules; // 0x10
+			void* PlayerModule; // 0x18
+			void* TeamModule; // 0x20
+			void* BigMapModule; // 0x28
+			void* BattleModule; // 0x30
+			void* OperationModule; // 0x38
+			void* LoginModule; // 0x40
+			void* AdventureModule; // 0x48
+			void* RogueModule; // 0x50
+			void* ServerPrefsModule; // 0x58
+			void* FloorConnectivityModule; // 0x60
+			void* MissionModule; // 0x68
+			void* AvatarModule; // 0x70
+			void* InventoryModule; // 0x78
+			void* ItemComposeModule; // 0x80
+			void* ActivityModule; // 0x88
+			void* ResidentActivityModule; // 0x90
+			void* QuestModule; // 0x98
+			void* NovelModule; // 0xA0
+			void* ChallengeModule; // 0xA8
+			void* SystemOpenModule; // 0xB0
+			void* GamePlayLockModule; // 0xB8
+			void* AntiAddictionModule; // 0xC0
+			void* GachaModule; // 0xC8
+			void* ExpeditionModule; // 0xD0
+			void* TalkModule; // 0xD8
+			void* PamModule; // 0xE0
+			void* TrainModule; // 0xE8
+			void* DialogueModule; // 0xF0
+			void* RaidModule; // 0xF8
+			void* RaidCollectionModule; // 0x100
+			void* ScheduleModule; // 0x108
+			void* PayModule; // 0x110
+			void* LuaDataModule; // 0x118
+			void* LoadingTipsModule; // 0x120
+			void* AchievementModule; // 0x128
+			void* SpaceAnchorModule; // 0x130
+			void* EntityScoreModule; // 0x138
+			RPG::Client::MessageModule* MessageModule; // 0x140
+			void* FeatureSwitchModule; // 0x148
+			void* FriendModule; // 0x150
+			void* PhotoGraphModule; // 0x158
+			void* MusicAlbumModule; // 0x160
+			void* MapPropOverrideConditionModule; // 0x168
+			void* TutorialSupportModule; // 0x170
+			void* BattlePassModule; // 0x178
+			void* BattleTipsModule; // 0x180
+			void* BattleEventModule; // 0x188
+			void* PunkLordModule; // 0x190
+			void* RogueHandbookModule; // 0x198
+			void* TransferModule; // 0x1A0
+			void* HandbookModule; // 0x1A8
+			void* FarmModule; // 0x1B0
+			void* TextJoinModule; // 0x1B8
+			void* ChessRogueModule; // 0x1C0
+			void* RogueAdventureModule; // 0x1C8
+			void* FightActivityModule; // 0x1D0
+			void* FantasticStoryActivityModule; // 0x1D8
+			void* CompanionMissionActivityModule; // 0x1E0
+			void* MultipleDropModule; // 0x1E8
+			void* SilverWolfModule; // 0x1F0
+			void* ArchiveModule; // 0x1F8
+			void* PerformanceRecallModule; // 0x200
+			void* ChatModule; // 0x208
+			void* PersonalizeModule; // 0x210
+			void* ShareModule; // 0x218
+			void* BoxingClubModule; // 0x220
+			void* BattleCollegeModule; // 0x228
+			void* ActivityTelevisionModule; // 0x230
+			void* RoleTrialModule; // 0x238
+			void* ActivityMonsterResearchModule; // 0x240
+			void* MuseumModule; // 0x248
+			void* TravelBrochureModule; // 0x250
+			void* TreasureDungeonModule; // 0x258
+			void* ActivityGuessTheSilhouetteModule; // 0x260
+			void* ActivityPlayerReturnModule; // 0x268
+			void* AlleyModule; // 0x270
+			void* AetherDivideModule; // 0x278
+			void* FloorDataModule; // 0x280
+			void* MapRotationModule; // 0x288
+			void* ActivityAetherDivideModule; // 0x290
+			void* ActivityStrongChallengeModule; // 0x298
+			void* RollShopModule; // 0x2A0
+			void* SpaceZooModule; // 0x2A8
+			void* HeliobusModule; // 0x2B0
+			void* HeartDialModule; // 0x2B8
+			void* StoryLineModule; // 0x2C0
+			void* OfferingModule; // 0x2C8
+			void* MissionChronicleModule; // 0x2D0
+			void* _ModuleInitRequestList; // 0x2D8
+			bool isInited; // 0x2E0
+		};
+
 		namespace Prop
 		{
 			enum PuzzlePhase {
@@ -736,7 +836,7 @@ namespace RPG
 				char PlayerStartRotation[0x10]; // 0x1C4
 				int PlayerMotion; // 0x1D4
 				float PlayerSpeedRate; // 0x1D8
-				System::Collections::Generic::Array* DesignPaths; // 0x1E0
+				System::Collections::Generic::Array<void*>* DesignPaths; // 0x1E0
 				int MirrorPlane; // 0x1E8
 				bool SetCamera; // 0x1EC
 				char CameraPosition[0xC]; // 0x1F0
@@ -776,7 +876,7 @@ namespace RPG
 				void* LADBNAFBFDA; // 0x160
 				void* GCGLPABFJCH; // 0x168
 				void* EOBGPLBPEEH; // 0x170
-				System::Collections::Generic::List* BCHLPJAAGPE; // 0x178
+				void* BCHLPJAAGPE; // 0x178
 				void* GANALNEDEFH; // 0x180
 				void* ACCLNDCNGPB; // 0x188
 				void* CLLNOKCIKNI; // 0x190
@@ -868,12 +968,10 @@ namespace XLua
 
 namespace Engine
 {
-	System::Collections::Generic::List* GetWorldEntityList();
-	System::Collections::Generic::List* GetMapPropList();
-	System::Collections::Generic::List* GetPropEntityList();
+	System::Collections::Generic::List<RPG::GameCore::GameEntity*>* GetWorldEntityList();
 
 	void* GetTurnBasedGameMode();
-	void* GetPropComponent(System::Collections::Generic::List* lpComponentList);
+	void* GetPropComponent(System::Collections::Generic::List<Base::Actor*>* lpComponentList);
 
 	bool GetResolutionScale(Vector2* lpResolution, Vector2* lpResolutionScale);
 	bool GetScreenPosition(Vector2* lpResolutionScale, void* lpWorldPosition, Vector3* lpRet);
@@ -883,6 +981,7 @@ namespace Engine
 
 	void* GetUICamera();
 	void* GetBetaHintDialogContext();
+	RPG::Client::ModuleManager* GetModuleManager();
 
 	void* GetTransform(void* lpEntity);
 

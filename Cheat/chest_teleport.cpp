@@ -38,11 +38,11 @@ namespace ChestTeleport
 		return TRUE;
 	}
 
-	static void* TryFindChest(Vector3* PlayerPosition, System::Collections::Generic::List* lpEntityList, bool bCheckLocked)
+	static void* TryFindChest(Vector3* PlayerPosition, System::Collections::Generic::List<RPG::GameCore::GameEntity*>* lpEntityList, bool bCheckLocked)
 	{
 		for (int i = 0; i < lpEntityList->size; i++)
 		{
-			RPG::GameCore::GameEntity* lpEntity = (RPG::GameCore::GameEntity*)lpEntityList->items->vector[i];
+			RPG::GameCore::GameEntity* lpEntity = lpEntityList->items->vector[i];
 
 			if (!lpEntity || lpEntity->EntityType != RPG::GameCore::EntityType_Prop)
 				continue;
@@ -54,7 +54,7 @@ namespace ChestTeleport
 		return NULL;
 	}
 
-	static void* FindChest(System::Collections::Generic::List* lpEntityList)
+	static void* FindChest(System::Collections::Generic::List<RPG::GameCore::GameEntity*>* lpEntityList)
 	{
 		PVOID lpPlayer = RPG::GameCore::AdventureStatic::GetLocalPlayer();
 
@@ -99,7 +99,7 @@ namespace ChestTeleport
 
 		__try
 		{
-			System::Collections::Generic::List* lpEntityList = Engine::GetWorldEntityList();
+			System::Collections::Generic::List<RPG::GameCore::GameEntity*>* lpEntityList = Engine::GetWorldEntityList();
 
 			if (!lpEntityList)
 				return;

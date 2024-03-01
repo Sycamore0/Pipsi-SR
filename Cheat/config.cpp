@@ -53,6 +53,11 @@ namespace Config
 		CloseHandle(hFile);
 	}
 
+	static void ResetConfig()
+	{
+		Options = OPTIONS();
+	}
+
 	static BOOL TerminateProcessHandler(HANDLE hProcess, UINT uExitCode)
 	{
 		SaveConfig();
@@ -65,16 +70,17 @@ namespace Config
 		ImGui::BeginGroupPanel("Config");
 
 		if (ImGui::Button("Save"))
-		{
 			SaveConfig();
-		}
 
 		ImGui::SameLine();
 
 		if (ImGui::Button("Load"))
-		{
 			LoadConfig();
-		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Reset"))
+			ResetConfig();
 
 		ImGui::EndGroupPanel();
 	}

@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-	System::Collections::Generic::List* GetWorldEntityList()
+	System::Collections::Generic::List<RPG::GameCore::GameEntity*>* GetWorldEntityList()
 	{
 		PVOID lpEntityManager = RPG::GameCore::AdventureStatic::GetEntityManager();
 
@@ -15,26 +15,6 @@ namespace Engine
 			return NULL;
 
 		return lpWorld->EntityList;
-	}
-
-	System::Collections::Generic::List* GetMapPropList()
-	{
-		RPG::GameCore::PropManager* lpPropManager = RPG::GameCore::AdventureStatic::GetPropManager();
-
-		if (!lpPropManager)
-			return NULL;
-
-		return lpPropManager->MapPropList;
-	}
-
-	System::Collections::Generic::List* GetPropEntityList()
-	{
-		RPG::GameCore::PropManager* lpPropManager = RPG::GameCore::AdventureStatic::GetPropManager();
-
-		if (!lpPropManager)
-			return NULL;
-
-		return lpPropManager->PropEntityList;
 	}
 
 	void* GetTurnBasedGameMode()
@@ -57,7 +37,7 @@ namespace Engine
 		return RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
 	}
 
-	void* GetPropComponent(System::Collections::Generic::List* lpComponentList)
+	void* GetPropComponent(System::Collections::Generic::List<Base::Actor*>* lpComponentList)
 	{
 		static INT iPropId = 0;
 
@@ -66,7 +46,7 @@ namespace Engine
 
 		if (lpComponentList->size > 3 && iPropId)
 		{
-			Base::Actor* lpComponent = (Base::Actor*)lpComponentList->items->vector[3];
+			Base::Actor* lpComponent = lpComponentList->items->vector[3];
 
 			if (lpComponent && lpComponent->klass && lpComponent->klass->id == iPropId)
 				return lpComponent;
@@ -74,7 +54,7 @@ namespace Engine
 
 		for (INT i = 0; i < lpComponentList->size; i++)
 		{
-			Base::Actor* lpComponent = (Base::Actor*)lpComponentList->items->vector[i];
+			Base::Actor* lpComponent = lpComponentList->items->vector[i];
 
 			if (!lpComponent->klass)
 				continue;
@@ -189,6 +169,14 @@ namespace Engine
 			return 0;
 
 		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_BETAHINTDIALOGCONTEXT_OFFSET);
+	}
+
+	RPG::Client::ModuleManager* GetModuleManager()
+	{
+		if (!*lpGlobalVars)
+			return 0;
+
+		return *(RPG::Client::ModuleManager**)((PBYTE)(*lpGlobalVars) + GLOBALVARS_MODULEMANAGER_OFFSET);
 	}
 
 	void* GetTransform(void* lpEntity)
