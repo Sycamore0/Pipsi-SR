@@ -28,6 +28,7 @@
 
 #### World
 
+- Auto-Chat
 - Auto-Puzzle
 - Cutscene Skip
 - Chest Teleport
