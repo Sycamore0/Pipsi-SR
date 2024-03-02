@@ -4,6 +4,8 @@
 
 #include "imgui.h"
 
+#include <random>
+
 namespace ImGui
 {
 	struct GroupPanelHeaderBounds
@@ -255,4 +257,12 @@ namespace ImGui
 
 		return ImVec2(lpPosition->x - TextSize.x * 0.5f, lpPosition->y - TextSize.y * 0.5f);
 	}
+}
+
+float RandomFloat(float min, float max)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dis(min, max);
+	return dis(gen);
 }

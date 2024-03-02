@@ -68,6 +68,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define MESSAGEUTILS_GETWRITINGTIME (il2cpp_base + 0x3D0F4F0)
 #define MESSAGESECTIONDATA_GET_WAITINGITEMIDS (il2cpp_base + 0x3999A70)
 #define MESSAGEMODULE_FINISHITEMBYCHOICE (il2cpp_base + 0x3334840)
+#define ANIMATIONCURVE_GET_LENGTH (il2cpp_base + 0x27F7C10)
+#define ANIMATIONSTATE_GET_LENGTH (il2cpp_base + 0x27F7C10)
+#define ANIMATIONCLIP_GET_LENGTH (il2cpp_base + 0x27F7C10)
+#define BEZIERCURVE_GET_LENGTH (il2cpp_base + 0x2A37190)
+#define MDCGJBLKAPI_MMOFLGJNNOF (il2cpp_base + 0x2E4EB60)
+#define EIELKABBJGE_HKBGDIAHJEP (il2cpp_base + 0x29BAF90)
+#define EIELKABBJGE_JEBJMEIBFMP (il2cpp_base + 0x29BB080)
 #else
 #define GLOBALVARS (il2cpp_base + 0x88711C0)
 #define STRING_NEW (il2cpp_base + 0x2272C0)
@@ -122,6 +129,13 @@ static PBYTE il2cpp_base = (PBYTE)GetModuleHandleA("gameassembly.dll");
 #define MESSAGEUTILS_GETWRITINGTIME (il2cpp_base + 0x3C6B960)
 #define MESSAGESECTIONDATA_GET_WAITINGITEMIDS (il2cpp_base + 0x37EAEC0)
 #define MESSAGEMODULE_FINISHITEMBYCHOICE (il2cpp_base + 0x3781710)
+#define ANIMATIONCURVE_GET_LENGTH (il2cpp_base + 0x26D70F0)
+#define ANIMATIONSTATE_GET_LENGTH (il2cpp_base + 0x2609BB0)
+#define ANIMATIONCLIP_GET_LENGTH (il2cpp_base + 0x2607150)
+#define BEZIERCURVE_GET_LENGTH (il2cpp_base + 0x2916670)
+#define MDCGJBLKAPI_MMOFLGJNNOF (il2cpp_base + 0x2D2AC00)
+#define EIELKABBJGE_HKBGDIAHJEP (il2cpp_base + 0x289A470)
+#define EIELKABBJGE_JEBJMEIBFMP (il2cpp_base + 0x289A560)
 #endif
 
 inline static SD(lpGlobalVars, void**, GLOBALVARS);
@@ -222,6 +236,8 @@ namespace UnityEngine
 	};
 
 	struct Time {
+		FN(get_time, float, (), il2cpp_base + 0x2891510);
+
 		FN(get_deltaTime, float, (), TIME_GET_DELTATIME);
 	};
 
@@ -259,6 +275,18 @@ namespace UnityEngine
 		FN(Find, UnityEngine::GameObject*, (void* name), GAMEOBJECT_FIND);
 	};
 
+	struct AnimationCurve {
+		FN(get_length, int, (void* _this), ANIMATIONCURVE_GET_LENGTH);
+	};
+	
+	struct AnimationState {
+		FN(get_length, float, (void* _this), ANIMATIONSTATE_GET_LENGTH);
+	};
+	
+	struct AnimationClip {
+		FN(get_length, float, (void* _this), ANIMATIONCLIP_GET_LENGTH);
+	};
+
 	struct Animator {
 		FN(set_speed, void, (void* _this, float value), ANIMATOR_SET_SPEED);
 	};
@@ -294,262 +322,6 @@ namespace UnityEngine
 
 namespace RPG
 {
-	namespace GameCore
-	{
-		enum TeamType {
-			TeamType_TeamUnknow = 0x0,
-			TeamType_TeamLight = 0x1,
-			TeamType_TeamDark = 0x2,
-			TeamType_TeamNeutral = 0x3,
-			TeamType_TeamNPC = 0x4,
-			TeamType_Count = 0x5,
-		};
-
-		enum EntityType {
-			EntityType_None = 0x0,
-			EntityType_Avatar = 0x1,
-			EntityType_Monster = 0x2,
-			EntityType_LocalPlayer = 0x3,
-			EntityType_NPC = 0x4,
-			EntityType_NPCMonster = 0x5,
-			EntityType_StoryCharacter = 0x6,
-			EntityType_Prop = 0x7,
-			EntityType_Mission = 0x8,
-			EntityType_LevelEntity = 0x9,
-			EntityType_Neutral = 0xA,
-			EntityType_AtmoNpc = 0xB,
-			EntityType_BattleEvent = 0xC,
-			EntityType_TutorialEntity = 0xD,
-			EntityType_Team = 0xE,
-			EntityType_Partner = 0xF,
-			EntityType_LevelGraph = 0x10,
-			EntityType_Snapshot = 0x11,
-			EntityType_TeamFormation = 0x12,
-			EntityType_Model = 0x13,
-			EntityType_UICamera = 0x14,
-			EntityType_District = 0x15,
-			EntityType_GlobalShield = 0x16,
-			EntityType_CustomData = 0x17,
-			EntityType_Simple = 0x18,
-			EntityType_PuzzleGameObjectProp = 0x19,
-			EntityType_PerformanceLevelGraph = 0x1A,
-			EntityType_Group = 0x1B,
-			EntityType_ChessCharacter = 0x1C,
-			EntityType_ChessTerrain = 0x1D,
-			EntityType_SummonUnit = 0x1E,
-		};
-
-		enum PropState {
-			PropState_Closed = 0x0,
-			PropState_Open = 0x1,
-			PropState_Locked = 0x2,
-			PropState_BridgeState1 = 0x3,
-			PropState_BridgeState2 = 0x4,
-			PropState_BridgeState3 = 0x5,
-			PropState_BridgeState4 = 0x6,
-			PropState_CheckPointDisable = 0x7, // closed exits teleport etc
-			PropState_CheckPointEnable = 0x8, // opened exits teleport etc
-			PropState_TriggerDisable = 0x9,
-			PropState_TriggerEnable = 0xA,
-			PropState_ChestLocked = 0xB,
-			PropState_ChestClosed = 0xC,
-			PropState_ChestUsed = 0xD,
-			PropState_Elevator1 = 0xE,
-			PropState_Elevator2 = 0xF,
-			PropState_Elevator3 = 0x10,
-			PropState_WaitActive = 0x11,
-			PropState_EventClose = 0x12, // paper items etc
-			PropState_EventOpen = 0x13,
-			PropState_Hidden = 0x14,
-			PropState_TeleportGate0 = 0x15,
-			PropState_TeleportGate1 = 0x16,
-			PropState_TeleportGate2 = 0x17,
-			PropState_TeleportGate3 = 0x18,
-			PropState_Destructed = 0x19,
-			PropState_CustomState01 = 0x65,
-			PropState_CustomState02 = 0x66,
-			PropState_CustomState03 = 0x67,
-			PropState_CustomState04 = 0x68,
-			PropState_CustomState05 = 0x69,
-			PropState_CustomState06 = 0x6A,
-			PropState_CustomState07 = 0x6B,
-			PropState_CustomState08 = 0x6C,
-			PropState_CustomState09 = 0x6D,
-		};
-
-		enum PuzzleCustomEvent {
-			PuzzleCustomEvent_PillarPuzzleSequenceActivateWithHint = 0x1,
-			PuzzleCustomEvent_PillarPuzzleSequenceActivateSkipHint = 0x2,
-			PuzzleCustomEvent_PillarPuzzleDisappear = 0x3,
-			PuzzleCustomEvent_PillarPuzzleWrongAttriHit = 0x4,
-			PuzzleCustomEvent_PadsPuzzleTeleport = 0xA,
-			PuzzleCustomEvent_PadsPuzzleFinishPads = 0xB,
-			PuzzleCustomEvent_PadsPuzzleResetPads = 0xC,
-			PuzzleCustomEvent_PadsPuzzleResetTeleportBlend = 0xD,
-			PuzzleCustomEvent_PadsPuzzleResetTeleportInstant = 0xE,
-			PuzzleCustomEvent_ProbePuzzleReset = 0xF,
-			PuzzleCustomEvent_ProbePuzzleInRange = 0x10,
-			PuzzleCustomEvent_ProbePuzzleOutOfRange = 0x11,
-			PuzzleCustomEvent_DeployPuzzleBasePointDisabled = 0x14,
-			PuzzleCustomEvent_DeployPuzzleBasePointPlaced = 0x15,
-			PuzzleCustomEvent_DeployPuzzleBasePointWait = 0x16,
-			PuzzleCustomEvent_DeployPuzzleBasePointSwap = 0x17,
-			PuzzleCustomEvent_DeployPuzzleBasePointActivate = 0x18,
-			PuzzleCustomEvent_DeployPuzzleBasePointDeactivate = 0x19,
-			PuzzleCustomEvent_DeployPuzzleBoardWaitInteract = 0x1A,
-			PuzzleCustomEvent_DeployPuzzleBoardInteract = 0x1B,
-			PuzzleCustomEvent_DeployPuzzleBoardEndInteract = 0x1C,
-			PuzzleCustomEvent_CoilPuzzleAllPillarLightup = 0x64,
-			PuzzleCustomEvent_CoilPuzzleCancelAllPillarLightup = 0x65,
-			PuzzleCustomEvent_AdventurePinballOnPlateUnhover = 0xC0,
-			PuzzleCustomEvent_AdventurePinballOnPlateHover = 0xC1,
-			PuzzleCustomEvent_AdventurePinballOnPlateUnselect = 0xC2,
-			PuzzleCustomEvent_AdventurePinballOnPlateSelect = 0xC3,
-			PuzzleCustomEvent_AdventurePinballOnPlateHit = 0xC4,
-			PuzzleCustomEvent_AdventurePinballOnArriveStation = 0xC5,
-			PuzzleCustomEvent_AdventurePinballOnStationPrepareLaunch = 0xC6,
-			PuzzleCustomEvent_AdventurePinballOnInteractStation = 0xC7,
-			PuzzleCustomEvent_AdventurePinballOnStationEnter = 0xC8,
-			PuzzleCustomEvent_AdventurePinballOnConnectSuccess = 0xC9,
-			PuzzleCustomEvent_AdventurePinballOnConnectFail = 0xCA,
-			PuzzleCustomEvent_AdventurePinballOnStartConnect = 0xCB,
-			PuzzleCustomEvent_AdventurePinballOnLoseConnect = 0xCC,
-			PuzzleCustomEvent_AdventurePinballOnOtherStationEnter = 0xCD,
-			PuzzleCustomEvent_AdventurePinballOnStationExit = 0xCE,
-			PuzzleCustomEvent_AdventurePinballOnLaunchStart = 0xCF,
-			PuzzleCustomEvent_AdventurePinballOnLaunchEnd = 0xD0,
-			PuzzleCustomEvent_AdventurePinballOnLaunchBy = 0xD2,
-			PuzzleCustomEvent_AdventureMovieOnFlip = 0xD3,
-			PuzzleCustomEvent_AdventureMovieOnCollider = 0xD4,
-			PuzzleCustomEvent_OpticalIllusionFinish = 0x12C,
-			PuzzleCustomEvent_OpticalIllusionQuit = 0x12D,
-			PuzzleCustomEvent_OpticalIllusionWayPass = 0x12E,
-			PuzzleCustomEvent_OpticalIllusionRotateBlock = 0x12F,
-			PuzzleCustomEvent_OpticalIllusionReach = 0x130,
-			PuzzleCustomEvent_OpticalIllusionReset = 0x131,
-		};
-
-		struct GameEntity {
-			char _[0x10]; // 0x0
-			void* TickLodTemplate; // 0x10
-			void* _TickLodProxy; // 0x18
-			System::String* Name; // 0x20
-			void* OnStageStateChange; // 0x28
-			void* OnTeamChange; // 0x30
-			void* TimeScaleStack; // 0x38
-			void* HoyoTagContainer; // 0x40
-			void* DisposeCallback; // 0x48
-			void* _OwnerWorldRef; // 0x50
-			void* _ComponentList; // 0x58
-			System::Collections::Generic::List<Base::Actor*>* TickComponentList; // 0x60
-			void* _LateUpdateComponentList; // 0x68
-			void* _ComponentArrayRef; // 0x70
-			void* _ComponentArray; // 0x78
-			void* _UnstageReasonKey; // 0x80
-			void* _DestroyWaitList; // 0x88
-			void* _UnityGO; // 0x90
-			void* _ComponentDelayedTickDataList; // 0x98
-			void* _ComponentDelayedLateUpdateDataList; // 0xA0
-			void* _CurTickListRef; // 0xA8
-			char __[0x8]; // 0xB0
-			unsigned long long _LastTickFrame; // 0xB8
-			float _LastTickTime; // 0xC0
-			float _TickLodBoundSize; // 0xC4
-			float _MaxTickDistance; // 0xC8
-			unsigned long ForceIgnoreTickLodBistSet; // 0xCC
-			unsigned long _TickDelayFrameCount; // 0xD0
-			unsigned long _RuntimeID; // 0xD4
-			int EntityType; // 0xD8
-			int _CampID; // 0xDC
-			int _ObjectFeature; // 0xE0
-			int _AliveState; // 0xE4
-			int _Team; // 0xE8
-			unsigned long _ServerEntityID; // 0xEC
-			unsigned long _GroupID; // 0xF0
-			unsigned long _GroupEntityID; // 0xF4
-			bool Tickable; // 0xF8
-			bool IsLoaded; // 0xF9
-			bool ForceIgnoreTickLod; // 0xFA
-			bool ShouldLateUpdate; // 0xFB
-			bool HasDisposed; // 0xFC
-			bool Disposing; // 0xFD
-			bool _IsStoryMode; // 0xFE
-			bool KillImmediately; // 0xFF
-			bool IsHero; // 0x100
-			bool IsFakeAvatar; // 0x101
-			bool Visible; // 0x102
-			bool IsOnStage; // 0x103
-
-			FN(get_UnityGO, void*, (void* _this), GAMEENTITY_GET_UNITYGO);
-			FN(get_Team, int, (void* _this), GAMEENTITY_GET_TEAM);
-		};
-
-		struct GameWorld {
-			char _[0x10]; // 0x0
-			void* _EntityTickList; // 0x10
-			void* _TickedEntityListPerFrame; // 0x18
-			void* _GlobalTimeScaleDatas; // 0x20
-			void* _BattleInstanceRef; // 0x28
-			void* _BattleModeRef; // 0x30
-			void* LogicRandom; // 0x38
-			void* _ParamRegister; // 0x40
-			void* NewEntityCallback; // 0x48
-			void* EntityBeforeDyingCallback; // 0x50
-			void* EntityDiedCallback; // 0x58
-			void* EntityReviveCallback; // 0x60
-			void* EntityWillDestroyCallback; // 0x68
-			void* MonoEffectManagerRef; // 0x70
-			void* _TimeScaleStack; // 0x78
-			void* _EntityManager; // 0x80
-			void* _EventManager; // 0x88
-			System::Collections::Generic::List<RPG::GameCore::GameEntity*>* EntityList; // 0x90
-			void* _DyingEntityList; // 0x98
-			void* _DeferDeleteEntityList; // 0xA0
-			void* _EnterDyingEntityList; // 0xA8
-			void* _LevelAreaManager; // 0xB0
-			void* _PrefabGameObjectMap; // 0xB8
-			void* _Modules; // 0xC0
-			void* _NeedTickModules; // 0xC8
-			void* _NeedLateUpdateModules; // 0xD0
-			float _BalanceTickDurationTime; // 0xD8
-			float _UnscaledDeltaTime; // 0xDC
-			unsigned long _IDFactory; // 0xE0
-			unsigned long _IDFactory_ClientOnly; // 0xE4
-			unsigned long _IDFactory_Battle; // 0xE8
-			long _NextTickDeferDeleteCount; // 0xEC
-			bool _IsBattleGameWorld; // 0xF0
-			bool _IsPause; // 0xF1
-			bool _IsInTick; // 0xF2
-			bool _IsDisposing; // 0xF3
-		};
-
-		struct EntityManager {
-			FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), ENTITYMANAGER_GET_OWNERWORLDREF);
-		};
-
-		struct AdventureStatic {
-			FN(GetEntityManager, void*, (), ADVENTURESTATIC_GETENTITYMANAGER);
-
-			FN(GetLocalPlayer, void*, (), ADVENTURESTATIC_GETLOCALPLAYER);
-		};
-
-		struct NPCComponent {
-			FN(TickAlertValue, void, (void* _this, float fElapsedTimeInSec, void* target, void* detail), NPCCOMPONENT_TICKALERTVALUE);
-		};
-
-		struct PropComponent {
-			FN(get_PropState, int, (void* _this), PROPCOMPONENT_GET_PROPSTATE);
-		};
-
-		struct TurnBasedGameMode {
-			FN(GetCurrenTurnActionEntity, void*, (void* _this), TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY);
-		};
-
-		struct BattleInstance {
-			FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
-			FN(IsStageForbidAutoBattle, bool, (void* _this), BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE);
-		};
-	}
 
 	namespace Client
 	{
@@ -581,8 +353,61 @@ namespace RPG
 			GamePhaseType_Empty = 0x18,
 		};
 
+		struct BezierCurve {
+			FN(get_Length, float, (void* _this), BEZIERCURVE_GET_LENGTH);
+		};
+
 		struct GamePhaseManager {
 			FN(get_CurrentGamePhaseType, int, (void* _this), GAMEPHASEMANAGER_GET_CURRENTGAMEPHASETYPE);
+		};
+
+		struct BattleGamePhase {
+			char _[0x18]; // 0x0
+			void* _BGMStageState; // 0x18
+			void* _CurrentBattleBGMState; // 0x20
+			void* EndProcess; // 0x28
+			void* ChallengeFinish; // 0x30
+			void* DropItems; // 0x38
+			void* _PropManager; // 0x40
+			void* _Map; // 0x48
+			void* _BattleInstance; // 0x50
+			void* _PhaseUI; // 0x58
+			void* _AnimClipDic; // 0x60
+			void* _AnimClipNameDic; // 0x68
+			void* _SyncLoadClips; // 0x70
+			void* _BGPInitParams; // 0x78
+			void* _LevelDirector; // 0x80
+			void* _InputSourceCollection; // 0x88
+			void* _BattleInputProvider; // 0x90
+			void* _EnvironmentSystem; // 0x98
+			void* _mapBattleAreaDef; // 0xA0
+			void* _ADVInitParams; // 0xA8
+			void* _Mode; // 0xB0
+			void* _BattleAreaEnvPath; // 0xB8
+			void* _SpecialAvatarLevelAreas; // 0xC0
+			void* _DisabledVOTypes; // 0xC8
+			void* _CameraOccluder; // 0xD0
+			void* _OpExecutant; // 0xD8
+			void* _CameraEngineRef; // 0xE0
+			void* _InvokeEndOfFrameSetPhase; // 0xE8
+			int _BattleAudioLisnterMode; // 0xF0
+			unsigned int _ReloginDirtyBlockUID; // 0xF4
+			int _FromPhaseType; // 0xF8
+			unsigned int AddPlayerExp; // 0xFC
+			unsigned int AddAvatarExp; // 0x100
+			int _ShowCutinUIState; // 0x104
+			unsigned int CurrentBattleID; // 0x108
+			bool SkipBattleCheckFlag; // 0x10C
+			bool UseLocalTimeSlowForHit; // 0x10D
+			bool _IsQuitByServerNotify; // 0x10E
+			bool _PropHideState; // 0x10F
+			bool _PendingLeaveBattle; // 0x110
+			bool _IsShowReloginHint; // 0x111
+			bool _IsPauseSoundInBattle; // 0x112
+			bool _IsReStartBattle; // 0x113
+			bool _HasDisposed; // 0x114
+			bool _NeedClearMapSideEffect; // 0x115
+			void* _HasUsedBattleSeverCheckEffectiveGMCommand; // 0x116
 		};
 
 		struct BaseShaderPropertyTransition {
@@ -654,7 +479,7 @@ namespace RPG
 			LocalizedText* HintText; // 0x18
 			LocalizedText* VersionText; // 0x20
 		};
-		
+
 		struct BetaHintDialogContext {
 			FN(CFNOBNMKNCA, RPG::Client::EAIECBLOINL*, (void* _this), BETAHINTDIALOGCONTEXT_CFNOBNMKNCA);
 		};
@@ -764,6 +589,40 @@ namespace RPG
 			void* MissionChronicleModule; // 0x2D0
 			void* _ModuleInitRequestList; // 0x2D8
 			bool isInited; // 0x2E0
+		};
+
+		struct MDCGJBLKAPI {
+			char _[0x10]; // 0x0
+			void* ADANEEBLOCG; // 0x10
+			void* MNDMLIOLFNO; // 0x18
+			RPG::Client::BattleGamePhase* KDHABOGLJKC; // 0x20
+			int NNLIGCFFKLI; // 0x28
+			float PHHPADGPBAM; // 0x2C
+			bool MKMICGMPAOG; // 0x30
+			bool BPKAGCKNEFK; // 0x31
+			bool DNFIPCOHELE; // 0x32
+			bool BAHICPDHNED; // 0x33
+			bool GINIAGOBIPO; // 0x34
+			bool KGJNGDMLOOM; // 0x35
+			bool GDOHMIIMOJN; // 0x36
+
+			FN(MMOFLGJNNOF, void, (RPG::Client::MDCGJBLKAPI* _this, bool BBOMECGIIPP, bool NDLAHGEPBJJ), MDCGJBLKAPI_MMOFLGJNNOF);
+		};
+
+		struct EIELKABBJGE {
+			FN(HKBGDIAHJEP, float, (void* _this, bool FHAMNOCDHCJ), EIELKABBJGE_HKBGDIAHJEP);
+
+			FN(JEBJMEIBFMP, void, (void* _this, float GEPKLNADNJL), EIELKABBJGE_JEBJMEIBFMP);
+		};
+
+		struct CJPMFGOOLKO {
+			char _[0x10]; // 0x10
+			void* CELDMFBOAPJ; // 0x10
+			void* DDDMHOACNPH; // 0x18
+			void* PNEOJNECPMA; // 0x20
+			void* GDCEFFKJICD; // 0x28
+			void* GCCEDLGPFDI; // 0x30
+			bool LHNPPKGFBFH; // 0x38
 		};
 
 		namespace Prop
@@ -943,6 +802,411 @@ namespace RPG
 			};
 		}
 	}
+
+	namespace GameCore
+	{
+		enum TeamType {
+			TeamType_TeamUnknow = 0x0,
+			TeamType_TeamLight = 0x1,
+			TeamType_TeamDark = 0x2,
+			TeamType_TeamNeutral = 0x3,
+			TeamType_TeamNPC = 0x4,
+			TeamType_Count = 0x5,
+		};
+
+		enum EntityType {
+			EntityType_None = 0x0,
+			EntityType_Avatar = 0x1,
+			EntityType_Monster = 0x2,
+			EntityType_LocalPlayer = 0x3,
+			EntityType_NPC = 0x4,
+			EntityType_NPCMonster = 0x5,
+			EntityType_StoryCharacter = 0x6,
+			EntityType_Prop = 0x7,
+			EntityType_Mission = 0x8,
+			EntityType_LevelEntity = 0x9,
+			EntityType_Neutral = 0xA,
+			EntityType_AtmoNpc = 0xB,
+			EntityType_BattleEvent = 0xC,
+			EntityType_TutorialEntity = 0xD,
+			EntityType_Team = 0xE,
+			EntityType_Partner = 0xF,
+			EntityType_LevelGraph = 0x10,
+			EntityType_Snapshot = 0x11,
+			EntityType_TeamFormation = 0x12,
+			EntityType_Model = 0x13,
+			EntityType_UICamera = 0x14,
+			EntityType_District = 0x15,
+			EntityType_GlobalShield = 0x16,
+			EntityType_CustomData = 0x17,
+			EntityType_Simple = 0x18,
+			EntityType_PuzzleGameObjectProp = 0x19,
+			EntityType_PerformanceLevelGraph = 0x1A,
+			EntityType_Group = 0x1B,
+			EntityType_ChessCharacter = 0x1C,
+			EntityType_ChessTerrain = 0x1D,
+			EntityType_SummonUnit = 0x1E,
+		};
+
+		enum PropState {
+			PropState_Closed = 0x0,
+			PropState_Open = 0x1,
+			PropState_Locked = 0x2,
+			PropState_BridgeState1 = 0x3,
+			PropState_BridgeState2 = 0x4,
+			PropState_BridgeState3 = 0x5,
+			PropState_BridgeState4 = 0x6,
+			PropState_CheckPointDisable = 0x7, // closed exits teleport etc
+			PropState_CheckPointEnable = 0x8, // opened exits teleport etc
+			PropState_TriggerDisable = 0x9,
+			PropState_TriggerEnable = 0xA,
+			PropState_ChestLocked = 0xB,
+			PropState_ChestClosed = 0xC,
+			PropState_ChestUsed = 0xD,
+			PropState_Elevator1 = 0xE,
+			PropState_Elevator2 = 0xF,
+			PropState_Elevator3 = 0x10,
+			PropState_WaitActive = 0x11,
+			PropState_EventClose = 0x12, // paper items etc
+			PropState_EventOpen = 0x13,
+			PropState_Hidden = 0x14,
+			PropState_TeleportGate0 = 0x15,
+			PropState_TeleportGate1 = 0x16,
+			PropState_TeleportGate2 = 0x17,
+			PropState_TeleportGate3 = 0x18,
+			PropState_Destructed = 0x19,
+			PropState_CustomState01 = 0x65,
+			PropState_CustomState02 = 0x66,
+			PropState_CustomState03 = 0x67,
+			PropState_CustomState04 = 0x68,
+			PropState_CustomState05 = 0x69,
+			PropState_CustomState06 = 0x6A,
+			PropState_CustomState07 = 0x6B,
+			PropState_CustomState08 = 0x6C,
+			PropState_CustomState09 = 0x6D,
+		};
+
+		enum PuzzleCustomEvent {
+			PuzzleCustomEvent_PillarPuzzleSequenceActivateWithHint = 0x1,
+			PuzzleCustomEvent_PillarPuzzleSequenceActivateSkipHint = 0x2,
+			PuzzleCustomEvent_PillarPuzzleDisappear = 0x3,
+			PuzzleCustomEvent_PillarPuzzleWrongAttriHit = 0x4,
+			PuzzleCustomEvent_PadsPuzzleTeleport = 0xA,
+			PuzzleCustomEvent_PadsPuzzleFinishPads = 0xB,
+			PuzzleCustomEvent_PadsPuzzleResetPads = 0xC,
+			PuzzleCustomEvent_PadsPuzzleResetTeleportBlend = 0xD,
+			PuzzleCustomEvent_PadsPuzzleResetTeleportInstant = 0xE,
+			PuzzleCustomEvent_ProbePuzzleReset = 0xF,
+			PuzzleCustomEvent_ProbePuzzleInRange = 0x10,
+			PuzzleCustomEvent_ProbePuzzleOutOfRange = 0x11,
+			PuzzleCustomEvent_DeployPuzzleBasePointDisabled = 0x14,
+			PuzzleCustomEvent_DeployPuzzleBasePointPlaced = 0x15,
+			PuzzleCustomEvent_DeployPuzzleBasePointWait = 0x16,
+			PuzzleCustomEvent_DeployPuzzleBasePointSwap = 0x17,
+			PuzzleCustomEvent_DeployPuzzleBasePointActivate = 0x18,
+			PuzzleCustomEvent_DeployPuzzleBasePointDeactivate = 0x19,
+			PuzzleCustomEvent_DeployPuzzleBoardWaitInteract = 0x1A,
+			PuzzleCustomEvent_DeployPuzzleBoardInteract = 0x1B,
+			PuzzleCustomEvent_DeployPuzzleBoardEndInteract = 0x1C,
+			PuzzleCustomEvent_CoilPuzzleAllPillarLightup = 0x64,
+			PuzzleCustomEvent_CoilPuzzleCancelAllPillarLightup = 0x65,
+			PuzzleCustomEvent_AdventurePinballOnPlateUnhover = 0xC0,
+			PuzzleCustomEvent_AdventurePinballOnPlateHover = 0xC1,
+			PuzzleCustomEvent_AdventurePinballOnPlateUnselect = 0xC2,
+			PuzzleCustomEvent_AdventurePinballOnPlateSelect = 0xC3,
+			PuzzleCustomEvent_AdventurePinballOnPlateHit = 0xC4,
+			PuzzleCustomEvent_AdventurePinballOnArriveStation = 0xC5,
+			PuzzleCustomEvent_AdventurePinballOnStationPrepareLaunch = 0xC6,
+			PuzzleCustomEvent_AdventurePinballOnInteractStation = 0xC7,
+			PuzzleCustomEvent_AdventurePinballOnStationEnter = 0xC8,
+			PuzzleCustomEvent_AdventurePinballOnConnectSuccess = 0xC9,
+			PuzzleCustomEvent_AdventurePinballOnConnectFail = 0xCA,
+			PuzzleCustomEvent_AdventurePinballOnStartConnect = 0xCB,
+			PuzzleCustomEvent_AdventurePinballOnLoseConnect = 0xCC,
+			PuzzleCustomEvent_AdventurePinballOnOtherStationEnter = 0xCD,
+			PuzzleCustomEvent_AdventurePinballOnStationExit = 0xCE,
+			PuzzleCustomEvent_AdventurePinballOnLaunchStart = 0xCF,
+			PuzzleCustomEvent_AdventurePinballOnLaunchEnd = 0xD0,
+			PuzzleCustomEvent_AdventurePinballOnLaunchBy = 0xD2,
+			PuzzleCustomEvent_AdventureMovieOnFlip = 0xD3,
+			PuzzleCustomEvent_AdventureMovieOnCollider = 0xD4,
+			PuzzleCustomEvent_OpticalIllusionFinish = 0x12C,
+			PuzzleCustomEvent_OpticalIllusionQuit = 0x12D,
+			PuzzleCustomEvent_OpticalIllusionWayPass = 0x12E,
+			PuzzleCustomEvent_OpticalIllusionRotateBlock = 0x12F,
+			PuzzleCustomEvent_OpticalIllusionReach = 0x130,
+			PuzzleCustomEvent_OpticalIllusionReset = 0x131,
+		};
+
+		struct StatisticsComponent {
+			char _[0x10];
+			void* _OwnerEntity; // 0x10
+			void* _LightTeamStt; // 0x18
+			void* _MonsterStt; // 0x20
+			void* _BattleEventStt; // 0x28
+			void* _TurnSttList; // 0x30
+			void* _CharacterDeathStt; // 0x38
+			void* _AvatarTurnBPChain; // 0x40
+			void* _monsterPhaseChangeInfos; // 0x48
+			void* _AvatarInitialProperty; // 0x50
+			void* _CustomValues; // 0x58
+			void* _LastTurnAvatarPropertySnapshot; // 0x60
+			void* _StatisticSnapShot; // 0x68
+			void* _StatisticEvents; // 0x70
+			void* _actionBarEvents; // 0x78
+			void* _CustomStringHashSet; // 0x80
+			unsigned int _totalBattleRounds; // 0x88
+			unsigned int _totalBattleTurns; // 0x8C
+			unsigned int _totalAutoTurns; // 0x90
+			unsigned int _totalAvatarTurns; // 0x94
+			unsigned int _totalMonsterTurns; // 0x98
+			float _turnSkillPerformTime; // 0x9C
+			float _totalSkillPerformTime; // 0xA0
+
+			FN(BuildPVEStatistics, void*, (void* _this), il2cpp_base + 0x3C7DAF0);
+		};
+
+		struct GameEntity {
+			char _[0x10]; // 0x0
+			void* TickLodTemplate; // 0x10
+			void* _TickLodProxy; // 0x18
+			System::String* Name; // 0x20
+			void* OnStageStateChange; // 0x28
+			void* OnTeamChange; // 0x30
+			void* TimeScaleStack; // 0x38
+			void* HoyoTagContainer; // 0x40
+			void* DisposeCallback; // 0x48
+			void* _OwnerWorldRef; // 0x50
+			void* _ComponentList; // 0x58
+			System::Collections::Generic::List<Base::Actor*>* TickComponentList; // 0x60
+			void* _LateUpdateComponentList; // 0x68
+			void* _ComponentArrayRef; // 0x70
+			void* _ComponentArray; // 0x78
+			void* _UnstageReasonKey; // 0x80
+			void* _DestroyWaitList; // 0x88
+			void* _UnityGO; // 0x90
+			void* _ComponentDelayedTickDataList; // 0x98
+			void* _ComponentDelayedLateUpdateDataList; // 0xA0
+			void* _CurTickListRef; // 0xA8
+			char __[0x8]; // 0xB0
+			unsigned long long _LastTickFrame; // 0xB8
+			float _LastTickTime; // 0xC0
+			float _TickLodBoundSize; // 0xC4
+			float _MaxTickDistance; // 0xC8
+			unsigned long ForceIgnoreTickLodBistSet; // 0xCC
+			unsigned long _TickDelayFrameCount; // 0xD0
+			unsigned long _RuntimeID; // 0xD4
+			int EntityType; // 0xD8
+			int _CampID; // 0xDC
+			int _ObjectFeature; // 0xE0
+			int _AliveState; // 0xE4
+			int _Team; // 0xE8
+			unsigned long _ServerEntityID; // 0xEC
+			unsigned long _GroupID; // 0xF0
+			unsigned long _GroupEntityID; // 0xF4
+			bool Tickable; // 0xF8
+			bool IsLoaded; // 0xF9
+			bool ForceIgnoreTickLod; // 0xFA
+			bool ShouldLateUpdate; // 0xFB
+			bool HasDisposed; // 0xFC
+			bool Disposing; // 0xFD
+			bool _IsStoryMode; // 0xFE
+			bool KillImmediately; // 0xFF
+			bool IsHero; // 0x100
+			bool IsFakeAvatar; // 0x101
+			bool Visible; // 0x102
+			bool IsOnStage; // 0x103
+
+			FN(get_UnityGO, void*, (void* _this), GAMEENTITY_GET_UNITYGO);
+			FN(get_Team, int, (void* _this), GAMEENTITY_GET_TEAM);
+		};
+
+		struct GameWorld {
+			char _[0x10]; // 0x0
+			void* _EntityTickList; // 0x10
+			void* _TickedEntityListPerFrame; // 0x18
+			void* _GlobalTimeScaleDatas; // 0x20
+			void* _BattleInstanceRef; // 0x28
+			void* _BattleModeRef; // 0x30
+			void* LogicRandom; // 0x38
+			void* _ParamRegister; // 0x40
+			void* NewEntityCallback; // 0x48
+			void* EntityBeforeDyingCallback; // 0x50
+			void* EntityDiedCallback; // 0x58
+			void* EntityReviveCallback; // 0x60
+			void* EntityWillDestroyCallback; // 0x68
+			void* MonoEffectManagerRef; // 0x70
+			void* _TimeScaleStack; // 0x78
+			void* _EntityManager; // 0x80
+			void* _EventManager; // 0x88
+			System::Collections::Generic::List<RPG::GameCore::GameEntity*>* EntityList; // 0x90
+			void* _DyingEntityList; // 0x98
+			void* _DeferDeleteEntityList; // 0xA0
+			void* _EnterDyingEntityList; // 0xA8
+			void* _LevelAreaManager; // 0xB0
+			void* _PrefabGameObjectMap; // 0xB8
+			void* _Modules; // 0xC0
+			void* _NeedTickModules; // 0xC8
+			void* _NeedLateUpdateModules; // 0xD0
+			float _BalanceTickDurationTime; // 0xD8
+			float _UnscaledDeltaTime; // 0xDC
+			unsigned long _IDFactory; // 0xE0
+			unsigned long _IDFactory_ClientOnly; // 0xE4
+			unsigned long _IDFactory_Battle; // 0xE8
+			long _NextTickDeferDeleteCount; // 0xEC
+			bool _IsBattleGameWorld; // 0xF0
+			bool _IsPause; // 0xF1
+			bool _IsInTick; // 0xF2
+			bool _IsDisposing; // 0xF3
+		};
+
+		struct EntityManager {
+			FN(get_OwnerWorldRef, RPG::GameCore::GameWorld*, (void* _this), ENTITYMANAGER_GET_OWNERWORLDREF);
+		};
+
+		struct AdventureStatic {
+			FN(GetEntityManager, void*, (), ADVENTURESTATIC_GETENTITYMANAGER);
+
+			FN(GetLocalPlayer, void*, (), ADVENTURESTATIC_GETLOCALPLAYER);
+		};
+
+		struct NPCComponent {
+			FN(TickAlertValue, void, (void* _this, float fElapsedTimeInSec, void* target, void* detail), NPCCOMPONENT_TICKALERTVALUE);
+		};
+
+		struct PropComponent {
+			FN(get_PropState, int, (void* _this), PROPCOMPONENT_GET_PROPSTATE);
+		};
+
+		struct TurnBasedGameMode {
+			char _[0x10]; // 0x0
+			RPG::Client::CJPMFGOOLKO* BattleCounter; // 0x10
+			void* TimeGameStart; // 0x18
+			void* ThisTurnAnimEvents; // 0x20
+			void* LastTurnSnapshot; // 0x28
+			void* _OwnerBattleInstanceRef; // 0x30
+			void* _AssistantAvatarEntity; // 0x38
+			void* _CurrentMVPEntity; // 0x40
+			void* _LastZombie; // 0x48
+			void* _LastKillCaster; // 0x50
+			void* _LastKillSkill; // 0x58
+			void* _LastKillTargetList; // 0x60
+			void* _CurrentTurnOwnerEntity; // 0x68
+			void* _PrepareAbility; // 0x70
+			void* _StageBattleEventMgr; // 0x78
+			void* _BattleChangeAvatarManager; // 0x80
+			void* _StageGORoot; // 0x88
+			void* _ActionBarMgr; // 0x90
+			void* _SkillAddBuffPerformList; // 0x98
+			void* MonsterWaveTextInfo; // 0xA0
+			void* _BattleEventInitedData; // 0xA8
+			void* LastSummonMonsterList; // 0xB0
+			void* _TurnStateFSM; // 0xB8
+			void* _ActionEntityListSnapshot; // 0xC0
+			void* _ActionEntityList; // 0xC8
+			void* _ActionEntityListAfterSkillUsed; // 0xD0
+			void* _CurrentTurnActionEntity; // 0xD8
+			void* _CurrentTurnTargetEntity; // 0xE0
+			void* _CurrentSkillCharacter; // 0xE8
+			void* _PhaseModifierList; // 0xF0
+			void* _InsertAbilityList; // 0xF8
+			void* _WaitingAbilityList; // 0x100
+			void* _InsertUltraSkillParamsQueue; // 0x108
+			void* _LastBreakMonster; // 0x110
+			void* _ReplayData; // 0x118
+			void* _LimboEntities; // 0x120
+			void* _LimboEntitiesSkipSettlement; // 0x128
+			void* _LimboEntitiesWaitAbilityFinish; // 0x130
+			void* _LimboRevivableEntities; // 0x138
+			void* _LinkTeammateList; // 0x140
+			void* _LevelLockedFeatureSet; // 0x148
+			void* _ModifierPerformCamerContext; // 0x150
+			void* _SomatoModifierPerforms; // 0x158
+			void* _AidDetail; // 0x160
+			void* _UnselectableEntities; // 0x168
+			void* _ActionDelayOrderTrigger; // 0x170
+			void* _ActionDelayLinkMgr; // 0x178
+			void* _performParam; // 0x180
+			void* _AvatarChangeParam; // 0x188
+			void* _allowQuitStates; // 0x190
+			void* _EventProcessor; // 0x198
+			void* _MechanismBarSys; // 0x1A0
+			void* _CommonSkillPoolNames; // 0x1A8
+			void* _TurnActionDelayCostRatio; // 0x1B0
+			void* _ElapsedActionDelay; // 0x1B8
+			int _CurrentModeState; // 0x1C0
+			float _RealTimeCounter; // 0x1C4
+			int ThisTurnAnimEventCount; // 0x1C8
+			int _PauseState; // 0x1CC
+			int _ShowCutinUIState; // 0x1D0
+			float _StanceCountDownSPChangeValue; // 0x1D4
+			int _WaveMonsterMaxCount; // 0x1D8
+			int _ChallengeTurnLimitType; // 0x1DC
+			unsigned int _ChallengeTurnLimit; // 0x1E0
+			int BattleFinishReason; // 0x1E4
+			unsigned int _CurrentWaveIndexInStage; // 0x1E8
+			unsigned int _CurrentWaveStageID; // 0x1EC
+			int _PrevTickModeState; // 0x1F0
+			unsigned int CurrentRegisterActionDelayChangeVersion; // 0x1F4
+			unsigned int _TurnCounter; // 0x1F8
+			int _WaveMonsterCurrentCount; // 0x1FC
+			unsigned int _LightTeamTurnCount; // 0x200
+			unsigned int _DarkTeamTurnCount; // 0x204
+			unsigned int _OperationCounter; // 0x208
+			unsigned int _DamageCounter; // 0x20C
+			unsigned int _ChallengeTurnAcc; // 0x210
+			int _CurrentTurnTeam; // 0x214
+			int _NextModifierIndex; // 0x218
+			float _ModifierPerformTimeTotal; // 0x21C
+			float _ModifierPerformTimerTotal; // 0x220
+			float _ModifierEndingPerformRemainedTime; // 0x224
+			int _NextAbilityIndex; // 0x228
+			unsigned int _DeathVersion; // 0x22C
+			float _HitPerformMinTimer; // 0x230
+			float _ModifierPerformTimeScale; // 0x234
+			int _SkillExecutionEventState; // 0x238
+			unsigned int _HoldFrameForCapture; // 0x23C
+			void* _BattleResultState; // 0x240
+			bool _OverrideAILocked; // 0x248
+			bool _SkipDeathHandle; // 0x249
+			bool _IsActionOrder1UsedTBSkill; // 0x24A
+			bool ForbidAI; // 0x24B
+			bool _LastKillFinish; // 0x24C
+			bool _CertainlyLoseInAdvance; // 0x24D
+			bool _CertainlyWinInAdvance; // 0x24E
+			bool WinFlag; // 0x24F
+			bool TurnEndKeep; // 0x250
+			bool IsManualExitBattle; // 0x251
+			bool IsManualRetryExitBattle; // 0x252
+			bool _NeedUpdateTurnOwner; // 0x253
+			bool _PrepareAbilityFinish; // 0x254
+			bool GamePauseFlag; // 0x255
+			bool IsLastKillTriggered; // 0x256
+			bool _PendingMonsterToWave; // 0x257
+			bool AutoInsertUltraSkill; // 0x258
+			bool IsUseSkillOneMore; // 0x259
+			bool _LastReplayAutoBattle; // 0x25A
+			bool MuteLastKillTriggered; // 0x25B
+			bool _AutoBattle; // 0x25C
+			bool _IsCreatingNewWave; // 0x25D
+			bool _ActionEntityListInited; // 0x25E
+			bool _CurrentTurnActionEntitySkipActionFlag; // 0x25F
+			bool _IsReplayBeingSaved; // 0x260
+			bool _RequireMakeLimboEntitiesDie; // 0x261
+			bool _IsModifierPerformCameraSet; // 0x262
+			bool _HoldFrameForCaptureFlag; // 0x263
+			void* _LocalWinFlag; // 0x264
+
+			FN(Tick, void, (void* _this, float fElapsedTimeInSec), il2cpp_base + 0x3F197A0);
+
+			FN(GetCurrenTurnActionEntity, void*, (void* _this), TURNBASEDGAMEMODE_GETCURRENTURNACTIONENTITY);
+		};
+
+		struct BattleInstance {
+			FN(get_TurnBasedGameModeRef, RPG::GameCore::TurnBasedGameMode*, (void* _this), BATTLEINSTANCE_GET_TURNBASEDGAMEMODEREF);
+			FN(IsStageForbidAutoBattle, bool, (void* _this), BATTLEINSTANCE_ISSTAGEFORBIDAUTOBATTLE);
+		};
+	}
 }
 
 namespace XLua
@@ -970,7 +1234,8 @@ namespace Engine
 {
 	System::Collections::Generic::List<RPG::GameCore::GameEntity*>* GetWorldEntityList();
 
-	void* GetTurnBasedGameMode();
+	RPG::GameCore::TurnBasedGameMode* GetTurnBasedGameMode();
+	RPG::GameCore::TurnBasedGameMode* GetTurnBasedGameMode(RPG::Client::MDCGJBLKAPI* lpMDCGJBLKAPI);
 	void* GetPropComponent(System::Collections::Generic::List<Base::Actor*>* lpComponentList);
 
 	bool GetResolutionScale(Vector2* lpResolution, Vector2* lpResolutionScale);

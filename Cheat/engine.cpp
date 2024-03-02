@@ -17,7 +17,7 @@ namespace Engine
 		return lpWorld->EntityList;
 	}
 
-	void* GetTurnBasedGameMode()
+	RPG::GameCore::TurnBasedGameMode* GetTurnBasedGameMode()
 	{
 		PVOID lpEntityManager = RPG::GameCore::AdventureStatic::GetEntityManager();
 
@@ -30,6 +30,21 @@ namespace Engine
 			return NULL;
 
 		PVOID lpBattleInstance = lpWorld->_BattleInstanceRef;
+
+		if (!lpBattleInstance)
+			return NULL;
+
+		return RPG::GameCore::BattleInstance::get_TurnBasedGameModeRef(lpBattleInstance);
+	}
+
+	RPG::GameCore::TurnBasedGameMode* GetTurnBasedGameMode(RPG::Client::MDCGJBLKAPI* lpMDCGJBLKAPI)
+	{
+		RPG::Client::BattleGamePhase* lpBattleGamePhase = lpMDCGJBLKAPI->KDHABOGLJKC;
+
+		if (!lpBattleGamePhase)
+			return NULL;
+
+		PVOID lpBattleInstance = lpBattleGamePhase->_BattleInstance;
 
 		if (!lpBattleInstance)
 			return NULL;
@@ -162,7 +177,7 @@ namespace Engine
 
 		return *(PVOID*)((PBYTE)(*lpGlobalVars) + GLOBALVARS_UICAMERA_OFFSET);
 	}
-	
+
 	void* GetBetaHintDialogContext()
 	{
 		if (!*lpGlobalVars)

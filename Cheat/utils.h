@@ -20,3 +20,5 @@ namespace ImGui
 
 	ImVec2 CalcCenterPosition(ImVec2* lpPosition, LPCSTR lpName);
 }
+
+float RandomFloat(float min, float max);

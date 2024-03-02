@@ -1,4 +1,5 @@
 #include "auto_chat.h"
+
 #include "engine.h"
 #include "globals.h"
 #include "hooks.h"

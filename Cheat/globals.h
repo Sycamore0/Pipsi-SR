@@ -44,8 +44,8 @@ struct OPTIONS
 	float flFov;
 
 	bool bBattleSpeed;
-	float flBattleDarkTeamSpeed;
-	float flBattleLightTeamSpeed;
+	bool bBattleSpeedDisableDelay;
+	float flBattleSpeed;
 
 	bool bAutoTalk;
 	unsigned int dwAutoTalkKey;
@@ -108,8 +108,8 @@ struct OPTIONS
 		bFov(FALSE),
 		flFov(100.f),
 		bBattleSpeed(FALSE),
-		flBattleDarkTeamSpeed(5.f),
-		flBattleLightTeamSpeed(2.f),
+		bBattleSpeedDisableDelay(FALSE),
+		flBattleSpeed(5.f),
 		bAutoTalk(FALSE),
 		dwAutoTalkKey(FALSE),
 		bAutoTalkDisableDelay(FALSE),
